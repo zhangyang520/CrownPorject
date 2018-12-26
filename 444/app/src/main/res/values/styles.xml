@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!--依赖的父布局-->
+    <style name="layout_mm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_wm">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_mw">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--
+        文本的格式 的style
+     -->
+
+
+    <style name="txt_48px_white" parent="layout_ww">
+        <item name="android:textSize">@dimen/txt_48px</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="txt_36px" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_36px</item>
+         <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
+    <style name="txt_36px_mine" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_36px</item>
+        <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
+    <style name="txt_30px_mine" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_30px</item>
+        <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
+    <style name="txt_30px" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_30px</item>
+        <item name="android:textColor">@color/mine_cash_name</item>
+    </style>
+
+    <style name="txt_25px" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_25px</item>
+        <item name="android:textColor">@color/mine_cash_name</item>
+    </style>
+    <style name="txt_20px" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_20px</item>
+        <item name="android:textColor">@color/mine_cash_name</item>
+    </style>
+
+
+    <!--window 的样式-->
+    <style
+            name="Transparent_Dialog"
+            parent="@android:style/Theme.Dialog"
+      >
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Implicit_Dialog"
+            parent="@android:style/Theme.Dialog">
+            <item name="android:alpha">1</item>
+           <item name="android:background">@color/implicit_color</item>
+            <item name="android:windowBackground">@color/implicit_color</item>
+    </style>
+</resources>

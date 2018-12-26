@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 支付方式的选择 -->
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/implicit_color"
+        android:alpha="0.9"
+        android:layout_height="match_parent">
+
+    <View
+            android:id="@+id/view_blank"
+            app:layout_constraintBottom_toTopOf="@+id/cl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="511.3dp"></View>
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="186.9dp"
+            android:background="#f7f7f7"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+      >
+        <!-- 取消 和 确认 -->
+        <RelativeLayout
+                android:id="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:background="@color/title_bg_color"
+                android:layout_height="@dimen/first_item_height">
+
+            <TextView
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    style="@style/layout_ww"
+                    android:id="@+id/tv_cacel"
+                    android:text="取消"
+                    android:textColor="@color/mine_cash_name"
+            />
+
+            <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    style="@style/layout_ww"
+                    android:text="选择提现方式"
+                    android:textColor="@color/mine_text_color"
+            />
+
+            <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    style="@style/layout_ww"
+                    android:id="@+id/tv_ok"
+                    android:text="确认"
+                    android:textColor="#f6525d"
+            />
+        </RelativeLayout>
+
+        <Button
+                android:id="@+id/btn_alipay"
+                app:layout_constraintTop_toBottomOf="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:text="支付宝"
+                android:textSize="@dimen/txt_30px"
+                android:layout_marginTop="15.3dp"
+                android:gravity="center"
+                android:background="@mipmap/iv_mine_rect_gray_cash"
+                android:layout_height="@dimen/third_item_height">
+        </Button>
+
+        <Button
+                app:layout_constraintTop_toBottomOf="@+id/btn_alipay"
+                android:layout_width="match_parent"
+                android:text="微信"
+                android:textSize="@dimen/txt_30px"
+                android:layout_marginTop="15.3dp"
+                android:gravity="center"
+                android:background="@mipmap/iv_mine_rect_white_cash"
+                android:layout_height="@dimen/third_item_height">
+        </Button>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

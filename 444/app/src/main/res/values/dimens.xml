@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--bottomnavigationbar config-->
+    <dimen name="fixed_height">62dp</dimen>
+    <dimen name="fixed_height_bottom_padding">7dp</dimen>
+    <dimen name="fixed_height_top_padding">7dp</dimen>
+    <dimen name="fixed_label_active">13sp</dimen>
+    <dimen name="fixed_label_inactive">13sp</dimen>
+    <dimen name="fixed_icon_grid">24dp</dimen>
+    <dimen name="fixed_height_top_padding_inactive">8dp</dimen>
+    <dimen name="fixed_height_top_padding_active">8dp</dimen>
+    <dimen name="bottom_navigation_elevation">8dp</dimen>
+    <dimen name="bottom_navigation_height">62dp</dimen>
+    <dimen name="bottom_navigation_padded_height">62dp</dimen>
+    <item name="fixed_label_active_to_inactive_ratio" format="float" type="dimen">1</item>
+
+
+    <!-- zhangyang 3.0-->
+    <!--首页-->
+    <dimen name="huanyipi_height">19.6dp</dimen>
+    <dimen name="huanyipi_width">65.4dp</dimen>
+
+    <dimen name="iv_title_height">20.36dp</dimen>
+    <dimen name="iv_title_width">89.4dp</dimen>
+    <dimen name="shouye_type_name_height">24dp</dimen>
+    <dimen name="shouye_type_name_width">93.8dp</dimen>
+
+    <!--标题栏的高度-->
+    <dimen name="title_height">48dp</dimen>
+    <!--一级条目的高度-->
+    <dimen name="first_item_height">43.6dp</dimen>
+
+    <dimen name="sec_item_height">36.4dp</dimen>
+
+    <dimen name="third_item_height">32.7dp</dimen>
+
+    <dimen name="mine_item_height">45.8dp</dimen>
+
+
+    <!--以及的margin_left-->
+    <dimen name="first_margin_left">14.5dp</dimen>
+    <!--二级的margin_left-->
+    <dimen name="second_margin_left">18.2dp</dimen>
+    <dimen name="margin_left_65px">23.63dp</dimen>
+
+    <!--一级的margin_top-->
+    <dimen name="margin_top_35px">12.73dp</dimen>
+    <dimen name="margin_top_40px">15.63dp</dimen>
+    <dimen name="margin_top_15px">4.26dp</dimen>
+    <dimen name="margin_top_20px">7.27dp</dimen>
+
+    <dimen name="first_margin_top">8.72dp</dimen>
+    <dimen name="double_first_margin_top">17.44dp</dimen>
+
+    <dimen name="margin_top">10.9dp</dimen>
+
+    <dimen name="third_margin_top">7dp</dimen>
+    <dimen name="forth_margin_top">3dp</dimen>
+     <!-- 文本的字体大小-->
+    <dimen name="txt_36px">13.09sp</dimen>
+    <dimen name="txt_48px">17.45sp</dimen>
+    <dimen name="txt_30px">10.9sp</dimen>
+    <dimen name="txt_20px">7.3sp</dimen>
+    <dimen name="txt_25px">9.1sp</dimen>
+
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:text="精品"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:text="香蕉影视"
+            android:textColor="@color/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ScrollView
+        android:background="@mipmap/c2"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+
+    <com.recker.flybanner.FlyBanner
+        android:id="@+id/banner_quality"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:descendantFocusability="blocksDescendants"
+        android:id="@+id/recycler_quality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
+
+    </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+    <ImageView
+        android:clickable="true"
+        android:id="@+id/home_iv"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg1"
+        android:visibility="gone"
+        />
+</FrameLayout>

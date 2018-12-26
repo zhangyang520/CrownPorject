@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_bar"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:paddingTop="20dp"
+    android:background="@color/mainColor"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp">
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:clickable="true"
+            android:onClick="onClick"
+            android:id="@+id/back_buton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@color/mainColor"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/barbuttonicon_back"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/navigation_title"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:text="@string/app_name"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/navigation_right"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"/>
+        <ImageButton
+            android:clickable="true"
+            android:id="@+id/navigation_right_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@color/mainColor"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/barbuttonicon_more"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

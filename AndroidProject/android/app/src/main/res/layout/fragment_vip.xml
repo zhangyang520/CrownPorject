@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jh.lottery.view.CustomScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorf3f5f5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_marginTop="10dp"
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/userInfoItem"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/avatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/def_header"
+                android:layout_marginRight="15dp"
+                app:riv_corner_radius="25dp"
+                app:riv_mutate_background="true"/>
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/name"
+                    android:text="尚未登录"
+                    android:textColor="#444"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/score"
+                    android:textSize="10sp"
+                    android:text="用户积分：80"
+                    android:layout_below="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/vipLevelLayout"
+                    android:visibility="visible"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/score"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:progress="1"
+                        android:max="5"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:progressDrawable="@drawable/progress_bar"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="150dp"
+                        android:layout_height="2dp" />
+                    <TextView
+                        android:id="@+id/level"
+                        android:text="用户等级"
+                        android:textColor="#f00"
+                        android:textSize="10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:src="@mipmap/detail_arrow_press"
+                android:layout_width="10dp"
+                android:layout_height="15dp" />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_marginBottom="10dp"
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <View
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/message"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <ImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/message"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:text="站内信息"
+                android:textColor="#444"
+                android:textSize="14sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@mipmap/detail_arrow_press"
+                android:layout_width="10dp"
+                android:layout_height="15dp" />
+        </LinearLayout>
+        <View
+            android:background="#ddd"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/about"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <ImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/about"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:text="关于我们"
+                android:textColor="#444"
+                android:textSize="14sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@mipmap/detail_arrow_press"
+                android:layout_width="10dp"
+                android:layout_height="15dp" />
+        </LinearLayout>
+        <View
+            android:layout_marginBottom="10dp"
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <View
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <TextView
+            android:id="@+id/loginOrOutBtn"
+            android:background="@color/colorWhite"
+            android:text="用户登录"
+            android:textColor="@color/mainColor"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+        <View
+            android:layout_marginBottom="10dp"
+            android:background="#ddd"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+</com.jh.lottery.view.CustomScrollView>

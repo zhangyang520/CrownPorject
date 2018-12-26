@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/ali_header_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ali_header_logo_padding"
+        android:layout_marginRight="@dimen/ali_header_logo_padding"
+        android:adjustViewBounds="true"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:id="@+id/ali_frame"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ali_frame_height"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:id="@+id/ali_header_progressbar"
+            android:layout_width="@dimen/ali_header_progressbar"
+            android:layout_height="@dimen/ali_header_progressbar"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ali_header_text"
+            android:layout_toStartOf="@+id/ali_header_text"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/ali_header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ali_header_progressbar"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ali_header_text"
+            android:layout_toStartOf="@+id/ali_header_text"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:id="@+id/ali_header_text"
+            android:layout_width="@dimen/ali_header_logo_padding"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ali_header_text_padding"
+            android:gravity="left"
+            android:textSize="@dimen/default_text_size"
+            android:textColor="@color/springview_text_color"
+            android:text="@string/ali_header_text" />
+    </RelativeLayout>
+
+</LinearLayout>

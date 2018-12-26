@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/main_bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:background="@color/title_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+        <ImageView
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="@dimen/first_margin_left"
+                android:id="@+id/iv_setting"
+               android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                 android:layout_width="21.1dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/iv_mine_setting"
+        />
+        <ImageView
+                android:src="@mipmap/iv_shouye_title"
+                android:textColor="@color/black"
+                android:textSize="15.2sp"
+                android:text="系统设置"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:layout_width="@dimen/iv_title_width"
+                android:layout_height="@dimen/iv_title_height"/>
+    </RelativeLayout>
+
+
+    <!-- 头像的内容 -->
+    <RelativeLayout
+            android:background="@color/title_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:id="@+id/iv"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="196.36dp" />
+
+        <ImageView
+                android:id="@+id/iv_head"
+                android:scaleType="fitXY"
+                android:layout_marginTop="138.2dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/iv_mine_head"
+                android:layout_width="72.7dp"
+                android:layout_height="72.7dp" />
+
+        <ImageView
+                android:id="@+id/iv_make_money"
+                android:scaleType="fitXY"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="138.2dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/iv_mine_make_money"
+                android:layout_width="98.9dp"
+                android:layout_height="82.1dp" />
+
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv"
+                android:text="游客"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="15.27sp"
+                android:textColor="@color/black"
+        />
+
+
+        <ImageView
+                android:layout_below="@+id/name"
+                android:id="@+id/login_register"
+                android:layout_marginTop="11dp"
+                android:layout_width="144.72dp"
+                android:layout_height="32.72dp"
+                android:src="@mipmap/iv_mine_register"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:layout_marginBottom="14.5dp"
+        />
+
+        <include
+                layout="@layout/item_cash_wtihdraw"
+                android:layout_below="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="14.5dp"
+                android:layout_marginTop="11dp"
+
+        ></include>
+        <!--<ImageView-->
+                <!--android:src="@mipmap/shichang"-->
+                <!--android:id="@+id/banner"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="32.72dp"-->
+        <!--/>-->
+    </RelativeLayout>
+
+
+
+<!--<RelativeLayout
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <ImageView
+      android:layout_centerVertical="true"
+        android:src="@mipmap/hongbao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/back_right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="领红包"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_centerVertical="true"
+        android:drawableRight="@mipmap/yuan"
+        android:drawablePadding="5dp"
+        />
+</RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:background="@color/line"
+        />-->
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!--分享推广-->
+                <RelativeLayout
+                        android:id="@+id/rl_share"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/first_margin_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mine_item_height">
+
+                    <ImageView
+                            android:id="@+id/iv_share"
+                            android:layout_width="21.8dp"
+                            android:layout_height="21.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/second_margin_left"
+                            android:src="@mipmap/iv_extendition_left"/>
+                    <TextView
+                            android:id="@+id/et_phone"
+                            android:textSize="15.3sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_share"
+                            android:hint="分享推广"/>
+
+                    <TextView
+                            android:textSize="15.3sp"
+                            android:textColor="@color/mine_text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/iv_share_go"
+                            android:paddingLeft="@dimen/first_margin_left"
+                            android:layout_marginRight="10dp"
+                            android:text="邀请得现金"
+                            />
+
+                    <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/first_margin_left"
+                            android:id="@+id/iv_share_go"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/iv_goto"
+                    />
+                </RelativeLayout>
+
+                <!--提现申请-->
+                <RelativeLayout
+                        android:id="@+id/rl_cash_shenqing"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/first_margin_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mine_item_height">
+
+                    <ImageView
+                            android:id="@+id/iv_cash"
+                            android:layout_width="21.8dp"
+                            android:layout_height="21.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/second_margin_left"
+                            android:src="@mipmap/iv_cash_left"/>
+                    <TextView
+                            android:id="@+id/tv_cash_shenqing"
+                            android:textSize="15.3sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_cash"
+                            android:hint="提现申请"/>
+
+                    <TextView
+                            android:textSize="15.3sp"
+                            android:textColor="@color/mine_text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_toLeftOf="@+id/iv_cash_go"
+                            android:paddingLeft="@dimen/first_margin_left"
+                            android:layout_marginRight="10dp"
+                            android:text="邀请得现金"
+                    />
+
+                    <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/first_margin_left"
+                            android:id="@+id/iv_cash_go"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/iv_goto"
+                    />
+                </RelativeLayout>
+
+                <!--安全密码-->
+                <RelativeLayout
+                        android:id="@+id/rl_safety_pwd"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/first_margin_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mine_item_height">
+
+                    <ImageView
+                            android:id="@+id/iv_safety_pwd"
+                            android:layout_width="21.8dp"
+                            android:layout_height="21.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/second_margin_left"
+                            android:src="@mipmap/iv_safety_left"/>
+                    <TextView
+                            android:id="@+id/tv_safety_pwd"
+                            android:textSize="15.3sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_safety_pwd"
+                            android:hint="安全密码"/>
+
+                    <TextView
+                            android:textSize="15.3sp"
+                            android:textColor="@color/mine_text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_toLeftOf="@+id/iv_safety_pwd_go"
+                            android:paddingLeft="@dimen/first_margin_left"
+                            android:layout_marginRight="10dp"
+                            android:text="邀请得现金"
+                    />
+
+                    <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/first_margin_left"
+                            android:id="@+id/iv_safety_pwd_go"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/iv_goto"
+                    />
+                </RelativeLayout>
+
+
+                <!--输入推广码-->
+                <RelativeLayout
+                        android:id="@+id/rl_extension"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/first_margin_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mine_item_height">
+
+                    <ImageView
+                            android:id="@+id/iv_extension"
+                            android:layout_width="21.8dp"
+                            android:layout_height="21.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/second_margin_left"
+                            android:src="@mipmap/iv_recommend_left"/>
+                    <TextView
+                            android:id="@+id/tv_extension"
+                            android:textSize="15.3sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_extension"
+                            android:hint="输入推广码"/>
+
+                    <TextView
+                            android:textSize="15.3sp"
+                            android:textColor="@color/mine_text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/iv_extension_go"
+                            android:paddingLeft="@dimen/first_margin_left"
+                            android:layout_marginRight="10dp"
+                            android:text="新用户取得现金"
+                    />
+
+                    <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/first_margin_left"
+                            android:id="@+id/iv_extension_go"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/iv_goto"
+                    />
+                </RelativeLayout>
+
+
+                <!--应用推荐-->
+                <RelativeLayout
+                        android:layout_marginBottom="@dimen/first_margin_top"
+                        android:id="@+id/rl_app_recommend"
+                        android:gravity="center_vertical"
+                        android:background="@color/white"
+                        android:layout_marginTop="@dimen/first_margin_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/mine_item_height">
+
+                    <ImageView
+                            android:id="@+id/iv_app_recommend"
+                            android:layout_width="21.8dp"
+                            android:layout_height="21.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/second_margin_left"
+                            android:src="@mipmap/iv_recommend_left"/>
+                    <TextView
+                            android:id="@+id/tv_app_recommend"
+                            android:textSize="15.3sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13.8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/iv_app_recommend"
+                            android:hint="应用推荐"/>
+
+                    <TextView
+                            android:textSize="15.3sp"
+                            android:textColor="@color/mine_text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/iv_app_recommend_go"
+                            android:paddingLeft="@dimen/first_margin_left"
+                            android:layout_marginRight="10dp"
+                            android:text="更对免费赚钱应用"
+                    />
+
+                    <ImageView
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/first_margin_left"
+                            android:id="@+id/iv_app_recommend_go"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/iv_goto"
+                    />
+                </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/yingyong"-->
+        <!--android:layout_marginLeft="12dp"-->
+        <!--android:layout_marginRight="12dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="40dp">-->
+
+        <!--<ImageView-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@mipmap/yingyong"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/back_right"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="更多免费应用"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
+
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginRight="12dp"-->
+        <!--android:layout_marginLeft="12dp"-->
+        <!--android:background="@color/line"-->
+        <!--android:visibility="gone"-->
+        <!--/>-->
+
+</LinearLayout>

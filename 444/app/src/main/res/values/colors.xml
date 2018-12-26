@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#fafafa</color>
+    <color name="gay_15">#ffababab</color>
+    <color name="gay_6">#ff666666</color>
+    <color name="gay_3">#ff333333</color>
+    <color name="transparent">#00000000</color>
+    <color name="gay_14">#ffdddddd</color>
+    <color name="lightgold">#b9a06e</color>
+    <color name="gray">#ff666666</color>
+    <color name="login_bg_title">#EFEFF4</color>
+    <color name="login_btn_text">#009DDA</color>
+    <color name="bg_gray">#d6d7dc</color>
+    <color name="bg_white">#fafafa</color>
+    <color name="pay_credits_orange">#ec7404</color>
+    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="pickerview_wheelview_textcolor_center">#323232</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <color name="pickerview_timebtn_nor">#ec7404</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="font_gray">#646464</color>
+    <color name="font_hint">#b4b4b4</color>
+    <color name="font_black">#323232</color>
+    <color name="red">#a20b0b</color>
+    <color name="bg_et_pwd">#75B9F0</color>
+    <color name="head_gray">#F7F7F7</color>
+    <color name="divider">#ffd2d2d2</color>
+    <!--内框线（短）颜色-->
+    <color name="bg_gray2">#e1e1e1</color>
+    <!--粗线颜色-->
+    <color name="big_line">#efeff4</color>
+    <!--外框线颜色-->
+    <color name="line">#d6d7dc</color>
+    <!--覆盖颜色-->
+    <color name="bgColor_overlay">#60000000</color>
+    <!--Edit左边的文字颜色-->
+    <color name="EditLeft">#232323</color>
+    <!--酒红-->
+    <color name="red_wine">#a20b0b</color>
+
+    <!--灰度字体-->
+    <color name="gray_text1">#646464</color>
+    <!--橘红-->
+    <color name="orange">#ec7404</color>
+
+    <color name="blue">#00BFFF</color>
+
+
+    <!--==============吾云2.0 color================-->
+    <!--提示背景-橙色-->
+    <color name="orange_bg">#ffe8d7</color>
+
+    <!--提示文字-橙色-->
+    <color name="orange_font">#f3791f</color>
+
+    <!--时间-灰色-->
+    <color name="gray_time">#a1a6bb</color>
+    <!--背景-灰色-->
+    <color name="gray_bg">#F1F2F7</color>
+    <!--文字-灰色-->
+    <color name="gray_font">#909090</color>
+    <color name="color_eff2f7">#EFF2F7</color>
+    <color name="black_font_tit">#333333</color>
+    <color name="gray_light">#EBEDF0</color>
+    <color name="yellow">#FFD200</color>
+
+    <!-- 3.0 -->
+    <color name="main_bg_color">#f0f0f0</color>
+    <color name="seconde_gg_color">#f5f5f5</color>
+    <color name="title_bg_color">#ffffff</color>
+
+
+    <color name="mine_text_color">#141414</color>
+    <color name="mine_cash_name">#8d8d8d</color>
+    <color name="implicit_color">#4c4c4c</color>
+</resources>

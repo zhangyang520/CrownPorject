@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@color/title_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="影院"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:id="@+id/back"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/share"
+            android:src="@mipmap/share"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            />
+
+    </RelativeLayout>
+
+    <cn.jzvd.JzvdStd
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:id="@+id/player"
+    />
+
+    <TextView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/move_title"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:gravity="center_vertical"
+            android:text="影片名称"
+            android:textSize="13.1sp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+    />
+    <ScrollView
+        android:overScrollMode="never"
+        android:background="@color/main_bg_color"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/media_image"
+                android:layout_width="match_parent"
+                android:layout_height="87.2dp" />
+
+                <RelativeLayout
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <ImageView
+                            android:layout_marginLeft="15dp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="93.8dp"
+                            android:layout_height="24dp"
+                            android:src="@mipmap/iv_jingpin_tuijian"
+                    />
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        android:id="@+id/change9"
+                        android:layout_width="65.4dp"
+                        android:layout_height="19.6dp"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        />
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/play_recycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:clickable="true"
+                            android:id="@+id/home_iv"
+                           android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/no_data"
+                            android:visibility="gone"
+                            />
+                </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

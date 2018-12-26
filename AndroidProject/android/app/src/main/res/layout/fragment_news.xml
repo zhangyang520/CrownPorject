@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jh.lottery.view.springview.SpringView
+        android:visibility="gone"
+        android:id="@+id/springView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.jh.lottery.view.springview.SpringView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminateDrawable="@drawable/loading_progress_bar"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+</LinearLayout>

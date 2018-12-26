@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--提交申请的提示框-->
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:layout_height="match_parent">
+
+       <TextView
+               android:id="@+id/tv_title"
+               style="@style/txt_30px"
+               android:layout_width="match_parent"
+               android:text="您的提现申请已提交，我们将在三个工作日内\n将款项打入您的账号,请注意查收！"
+               android:layout_marginTop="10dp"
+               android:layout_marginLeft="5dp"
+               android:layout_marginRight="5dp"
+               android:lineSpacingExtra="5dp"
+               android:gravity="center_horizontal"
+               android:textColor="@color/black"
+               app:layout_constraintTop_toTopOf="parent"
+       />
+
+
+
+    <Button
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            android:id="@+id/btn_ok"
+            android:textSize="@dimen/txt_30px"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_width="70dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="确认"
+            android:background="@drawable/shape_login"
+            android:layout_height="23.6dp"/>
+</android.support.constraint.ConstraintLayout>

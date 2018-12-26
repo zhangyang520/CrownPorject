@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.administrator.chengnian444.activity.MakeMoneyActivity">
+
+
+    <RelativeLayout
+            android:background="@color/title_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+
+        <ImageView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/back"
+        />
+        <TextView
+                android:textColor="@color/black"
+                android:textSize="15.2sp"
+                android:text="赚钱攻略"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!--top的简单 散步走-->
+    <TextView
+            android:text="简单三步走，现金收到手"
+            android:textSize="13.09sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@color/main_bg_color"
+            android:textColor="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/first_item_height"/>
+
+    <TextView
+       style="@style/txt_25px"
+       android:layout_height="36.4dp"
+       android:gravity="center"
+       android:text="按下面流程,收益超轻松"
+    />
+
+    <!-- 对应的微信 的相关内容-->
+    <LinearLayout
+            android:orientation="horizontal"
+            style="@style/layout_mw">
+
+            <!-- 高度 对应的mathc-->
+            <RelativeLayout style="@style/layout_mw"
+                            android:layout_width="107.3dp"
+              >
+                <ImageView
+                        android:id="@+id/iv_wechat"
+                        android:src="@mipmap/iv_mine_wechat"
+                        android:layout_width="72.4dp"
+                        android:scaleType="centerCrop"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="84dp" android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
+
+                  <TextView
+                          android:layout_below="@+id/iv_wechat"
+                          style="@style/txt_30px_mine"
+                          android:layout_width="96dp"
+                          android:layout_marginTop="10dp"
+                          android:gravity="center"
+                          android:layout_centerHorizontal="true"
+                          android:text="点击按钮或截图分享给好友"
+                  />
+            </RelativeLayout>
+
+        <RelativeLayout style="@style/layout_mw"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+        >
+            <ImageView
+                    android:id="@+id/iv_go1"
+                    android:src="@mipmap/iv_mine_dash"
+                    android:layout_width="52.36dp"
+                    android:layout_marginTop="36dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="11dp"/>
+
+            <ImageView
+                    android:id="@+id/iv_link"
+                    android:src="@mipmap/iv_mine_link"
+                    android:layout_width="58.90dp"
+                    android:layout_toRightOf="@+id/iv_go1"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="84dp"/>
+
+            <TextView
+                    android:layout_below="@+id/iv_link"
+                    style="@style/txt_30px_mine"
+                    android:layout_width="105dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="36dp"
+                    android:gravity="center"
+                    android:text="好友打开链接下载安装并成功注册"
+            />
+
+            <ImageView
+                    android:id="@+id/iv_go2"
+                    android:layout_toRightOf="@+id/iv_link"
+                    android:src="@mipmap/iv_mine_dash"
+                    android:layout_width="52.36dp"
+                    android:layout_marginTop="36dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="11dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/layout_mw"
+                        android:layout_marginLeft="5dp"
+        >
+            <ImageView
+                    android:id="@+id/iv_cash"
+                    android:src="@mipmap/iv_mine_cash"
+                    android:layout_width="78.6dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="84dp"/>
+
+            <TextView
+                    android:layout_below="@+id/iv_cash"
+                    style="@style/txt_30px_mine"
+                    android:layout_width="94dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="好友输入推广码您获取现金"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!-- 推广邀请小攻略-->
+    <!--top的简单 散步走-->
+    <TextView
+            android:layout_marginTop="10dp"
+            android:text="推广邀请小攻略"
+            android:textSize="13.09sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@color/main_bg_color"
+            android:textColor="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/first_item_height"/>
+
+    <TextView
+            style="@style/txt_25px"
+            android:layout_height="36.4dp"
+            android:gravity="center"
+            android:text="邀请成功率提升200%"
+    />
+
+    <!-- 邀请的方式 -->
+    <LinearLayout
+            android:orientation="vertical"
+            style="@style/layout_mw">
+
+           <LinearLayout
+                   android:layout_marginLeft="24.9dp"
+                   android:orientation="horizontal"
+                   style="@style/layout_mw">
+                
+               <TextView
+                       android:text="1"
+                       android:textColor="@color/white"
+                       android:gravity="center"
+                       android:textSize="@dimen/txt_25px"
+                       android:background="@drawable/shape_rectangle_number"
+                       android:layout_width="11.63dp"
+                       android:layout_height="11.63dp"/>
+
+               <TextView
+                       android:layout_marginLeft="10dp"
+                       android:text="邀请您的好友、同学、同事、死党、基友"
+                       style="@style/txt_36px"
+                       android:layout_width="wrap_content"
+               />
+
+               <TextView
+                       android:text="成功率更高"
+                       style="@style/txt_36px"
+                       android:textColor="#ff6672"
+               />
+           </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="24.9dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                style="@style/layout_mw">
+
+            <TextView
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="@dimen/txt_25px"
+                    android:background="@drawable/shape_rectangle_number"
+                    android:layout_width="11.63dp"
+                    android:layout_height="11.63dp"/>
+
+            <TextView
+                    android:layout_marginLeft="10dp"
+                    android:text="同时分享到三个以上微信/QQ群,成功率提升"
+                    style="@style/txt_36px"
+                    android:layout_width="wrap_content"
+            />
+
+            <TextView
+                    android:text="200%"
+                    style="@style/txt_36px"
+                    android:textColor="#ff6672"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="24.9dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                style="@style/layout_mw">
+
+            <TextView
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="@dimen/txt_25px"
+                    android:background="@drawable/shape_rectangle_number"
+                    android:layout_width="11.63dp"
+                    android:layout_height="11.63dp"/>
+
+            <TextView
+                    android:layout_marginLeft="10dp"
+                    android:text="告诉朋友,成功注册后推广人数可分级"
+                    style="@style/txt_36px"
+                    android:layout_width="wrap_content"
+            />
+
+            <TextView
+                    android:text="赚钱提现,收益丰厚"
+                    style="@style/txt_36px"
+                    android:textColor="#ff6672"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="24.9dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                style="@style/layout_mw">
+
+            <TextView
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="@dimen/txt_25px"
+                    android:background="@drawable/shape_rectangle_number"
+                    android:layout_width="11.63dp"
+                    android:layout_height="11.63dp"/>
+
+            <TextView
+                    android:layout_marginLeft="10dp"
+                    android:text="告诉朋友,成功注册后"
+                    style="@style/txt_36px"
+                    android:layout_width="wrap_content"
+            />
+
+            <TextView
+                    android:text="永久免费无限制观影"
+                    style="@style/txt_36px"
+                    android:textColor="#ff6672"
+            />
+            />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <ImageView
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/iv_mine_money"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="220.4dp"
+            android:layout_height="158.5dp"/>
+</LinearLayout>

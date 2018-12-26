@@ -1,0 +1,11 @@
+include ':app', ':rnandroidsdk'
+include ':react-native-sound'
+project(':react-native-sound').projectDir = new File(rootProject.projectDir, '../android_node_modules/react-native-sound/android')
+include ':react-native-shake-event'
+project(':react-native-shake-event').projectDir = new File(rootProject.projectDir, '../android_node_modules/react-native-shake-event/android')
+include ':react-native-toast'
+project(':react-native-toast').projectDir = new File(settingsDir, '../android_node_modules/react-native-toast/android')
+include ':react-native-view-shot'
+project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../android_node_modules/react-native-view-shot/android')
+include  ':react-native-code-push'
+project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../android_node_modules/react-native-code-push/android/app')

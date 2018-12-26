@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--bottomnavigationbar config-->
+    <dimen name="fixed_height">62dp</dimen>
+    <dimen name="fixed_height_bottom_padding">7dp</dimen>
+    <dimen name="fixed_height_top_padding">7dp</dimen>
+    <dimen name="fixed_label_active">13sp</dimen>
+    <dimen name="fixed_label_inactive">13sp</dimen>
+    <dimen name="fixed_icon_grid">24dp</dimen>
+    <dimen name="fixed_height_top_padding_inactive">8dp</dimen>
+    <dimen name="fixed_height_top_padding_active">8dp</dimen>
+    <dimen name="bottom_navigation_elevation">8dp</dimen>
+    <dimen name="bottom_navigation_height">62dp</dimen>
+    <dimen name="bottom_navigation_padded_height">62dp</dimen>
+    <item name="fixed_label_active_to_inactive_ratio" format="float" type="dimen">1</item>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rnandroidsdk">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+        <activity
+            android:name=".webview.JXWebView"
+            android:theme="@style/AnimationActivity"/>
+        <activity
+            android:name=".webview.JXGameWebView"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:process=":game" />
+    </application>
+
+</manifest>

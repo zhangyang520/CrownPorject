@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:paddingBottom="10dp"
+        android:paddingTop="1dp"
+        android:paddingRight="1dp"
+        android:paddingLeft="1dp"
+        android:background="@drawable/shape_topic_header"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="5dp"
+            android:background="@color/colorf3f5f5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/def_header"
+                android:layout_marginRight="10dp"
+                app:riv_corner_radius="20dp"
+                app:riv_mutate_background="true"/>
+            <TextView
+                android:id="@+id/name"
+                android:textSize="14sp"
+                android:layout_toRightOf="@id/avatar"
+                android:textColor="@color/color444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/timer"
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/avatar"
+                android:layout_below="@id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:padding="10dp"
+            android:background="@color/colorWhite"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
