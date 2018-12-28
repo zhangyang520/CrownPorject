@@ -19,9 +19,11 @@ import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.bean.LoginBean;
 import com.example.administrator.chengnian444.bean.RegisterIsOpen;
+import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -89,7 +91,7 @@ public class LoginActivity extends BaseActivity {
                                 register.setVisibility(View.VISIBLE);
                             }
                         }else {
-                            Toast.makeText(LoginActivity.this,registerIsOpen.getMessage(),Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(LoginActivity.this,registerIsOpen.getMessage());
                         }
                     }
                 });
@@ -99,10 +101,11 @@ public class LoginActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login:
-                String phone = etPhone.getText().toString().trim();
-                String pwd = etPwd.getText().toString().trim();
-                httpLogin(phone, pwd);
-
+                if(verifyLogin()){
+                    String phone = etPhone.getText().toString().trim();
+                    String pwd = etPwd.getText().toString().trim();
+                    httpLogin(phone, pwd);
+                }
                 break;
             case R.id.register:
                 startActivity(new Intent(this, RegisterActivity.class));
@@ -116,6 +119,43 @@ public class LoginActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    /**
+     * 验证登录的信息
+     * @return
+     */
+    private boolean verifyLogin() {
+        //先进行判断 是否为空
+        if(!etPhone.getText().toString().equals("") &&
+                     !etPwd.getText().toString().equals("")){
+             //都不为空
+            if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                return false;
+            }
+
+            //验证 输入密码格式的正确性
+            if(!etPwd.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PWD_FORMATE_ERROR);
+                return false;
+            }
+            return true;
+        }else{
+            //输入的信息不完整
+            if(etPhone.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPhone.getHint().toString());
+                return false;
+            }
+            //输入的信息不完整
+            if(etPwd.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPwd.getHint().toString());
+                return false;
+            }
+        }
+        return true;
     }
 
     private void httpLogin(String phone, String pwd) {
@@ -146,7 +186,7 @@ public class LoginActivity extends BaseActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(LoginActivity.this,message);
                         }
                     }
                 });

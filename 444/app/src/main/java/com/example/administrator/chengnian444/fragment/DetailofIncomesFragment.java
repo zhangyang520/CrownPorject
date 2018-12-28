@@ -24,6 +24,7 @@ import com.example.administrator.chengnian444.bean.InComeBean;
 import com.example.administrator.chengnian444.bean.PresentationBalanceBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -139,7 +140,7 @@ public class DetailofIncomesFragment extends Fragment {
 //
 //                            bannerMove.setImagesUrl(images1);
                         } else {
-                            Toast.makeText(getActivity(), bannerBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
                         }
                     }
                 });

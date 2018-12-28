@@ -30,6 +30,7 @@ import com.example.administrator.chengnian444.bean.ShareBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -213,7 +214,7 @@ public class MediaActivity extends BaseActivity {
                             exitDialog();
                             finish();
                         }else {
-                            Toast.makeText(MediaActivity.this, homeBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(MediaActivity.this,homeBean.getMessage());
                         }
                     }
                 });
@@ -312,7 +313,7 @@ public class MediaActivity extends BaseActivity {
                             ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                             // 将文本内容放到系统剪贴板里。
                             cm.setText(shareBean.getData().getShareContent());
-                            Toast.makeText(MediaActivity.this, "链接复制成功，可以发给朋友们了。", Toast.LENGTH_LONG).show();
+                            ToastUtils.showToast(MediaActivity.this, "链接复制成功，可以发给朋友们了。");
                         }else if (shareBean.getCode()==301){
                             exitDialog();
                             finish();

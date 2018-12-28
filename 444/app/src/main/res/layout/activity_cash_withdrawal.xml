@@ -248,7 +248,7 @@
 
     <!--安全密码-->
     <android.support.constraint.ConstraintLayout
-            app:layout_constraintTop_toBottomOf="@+id/cl_alipay_name"
+            app:layout_constraintTop_toBottomOf="@+id/cl_cash_withdraw"
             android:id="@+id/cl_safety_pass"
             android:layout_width="match_parent"
             android:paddingLeft="15dp"

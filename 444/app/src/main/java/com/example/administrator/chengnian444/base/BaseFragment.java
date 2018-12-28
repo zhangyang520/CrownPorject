@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
@@ -93,6 +94,6 @@ public abstract class BaseFragment extends Fragment {
         dialog.show();*/
         SPUtils.getInstance(getActivity()).put("isLogin",false);
         SPUtils.getInstance(getActivity()).put("loginToken","");
-        Toast.makeText(getActivity(),"当前账号在其他设备登录",Toast.LENGTH_LONG).show();
+        ToastUtils.showToast(getActivity(),"当前账号在其他设备登录");
     }
 }

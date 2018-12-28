@@ -18,7 +18,6 @@ import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.utils.PopupUtils;
 
-
 /**
   *    提现申请的界面
      * @Title:

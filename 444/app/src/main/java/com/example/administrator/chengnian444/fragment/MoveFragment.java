@@ -17,6 +17,7 @@ import com.example.administrator.chengnian444.bean.BannerBean;
 import com.example.administrator.chengnian444.bean.MoveQuality;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.recker.flybanner.FlyBanner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -87,7 +88,7 @@ public class MoveFragment extends BaseFragment {
                             }
                             bannerQuality.setImagesUrl(images);
                         } else {
-                            Toast.makeText(getActivity(), bannerBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(),bannerBean.getMessage());
                         }
                     }
                 });
@@ -124,7 +125,7 @@ public class MoveFragment extends BaseFragment {
                         } else if (moveQuality.getCode() == 301){
                             exitDialog();
                         }else {
-                            Toast.makeText(getActivity(), moveQuality.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), moveQuality.getMessage());
                         }
                     }
                 });

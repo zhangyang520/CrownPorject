@@ -14,9 +14,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -52,11 +54,15 @@ public class UpdateActivity extends BaseActivity {
             case R.id.back:
                 finish();
                 break;
+
+
             case R.id.btn_update:
-                String phone = etPhone.getText().toString().trim();
-                String oldPwd = etPwd.getText().toString().trim();
-                String newPwd = etPwdNew.getText().toString().trim();
-                updateHttp(phone,oldPwd,newPwd);
+                if(verifyForgetPwd()){
+                    String phone = etPhone.getText().toString().trim();
+                    String oldPwd = etPwd.getText().toString().trim();
+                    String newPwd = etPwdNew.getText().toString().trim();
+                    updateHttp(phone,oldPwd,newPwd);
+                }
                 break;
         }
     }
@@ -81,20 +87,76 @@ public class UpdateActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.d("hcy",response.toString());
-                        JSONObject jsonObject = JSON.parseObject(response);
-                        int code = (int) jsonObject.get("code");
-                        String message = (String) jsonObject.get("message");
-                        if (code == 200){
-                            Toast.makeText(UpdateActivity.this,message,Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(UpdateActivity.this,LoginActivity.class));
-                            finish();
-                        }else if (code==301){
-                            exitDialog();
-                        }else {
-                            Toast.makeText(UpdateActivity.this,message,Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONObject jsonObject = JSON.parseObject(response);
+                            int code = (int) jsonObject.get("code");
+                            String message = (String) jsonObject.get("message");
+                            if (code == 200){
+                                ToastUtils.showToast(UpdateActivity.this,message);
+                                startActivity(new Intent(UpdateActivity.this,LoginActivity.class));
+                                finish();
+                            }else if (code==301){
+                                exitDialog();
+                            }else {
+                                ToastUtils.showToast(UpdateActivity.this,message);
+                            }
+                        } catch (Exception e) {
+                            ToastUtils.showToast(UpdateActivity.this,"未知错误");
                         }
                     }
                 });
-
     }
+
+
+    /**
+     * 验证忘记密码 的信息
+     * @return
+     */
+    private boolean verifyForgetPwd() {
+        //先进行判断 是否为空
+        if(!etPhone.getText().toString().equals("") &&
+                !etPwd.getText().toString().equals("") &&
+                !etPwdNew.getText().toString().equals("")){
+            //都不为空
+            if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                return false;
+            }
+
+            //验证 输入密码格式的正确性
+            if(!etPwd.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.OLD_PWD_FORMATE_ERROR);
+                return false;
+            }
+
+            //验证 输入密码格式的正确性
+            if(!etPwdNew.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.NEW_PWD_FORMATE_ERROR);
+                return false;
+            }
+            return true;
+        }else{
+            //输入的信息不完整
+            if(etPhone.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPhone.getHint().toString());
+                return false;
+            }
+            //输入的信息不完整
+            if(etPwd.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPwd.getHint().toString());
+                return false;
+            }
+
+            //输入的信息不完整
+            if(etPwdNew.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPwdNew.getHint().toString());
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

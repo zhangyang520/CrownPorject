@@ -25,6 +25,7 @@ import com.example.administrator.chengnian444.bean.OneBannerBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.example.administrator.chengnian444.view.SonnyJackDragView;
 import com.recker.flybanner.FlyBanner;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -326,7 +327,7 @@ public class HomeFragment extends BaseFragment {
                         } else if (homeBean.getCode()==301){
                             exitDialog();
                         }else {
-                            Toast.makeText(getActivity(), homeBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), homeBean.getMessage());
                         }
                     }
                 });
@@ -359,7 +360,7 @@ public class HomeFragment extends BaseFragment {
                             }
                             homeBanner.setImagesUrl(images);
                         } else {
-                            Toast.makeText(getActivity(), bannerBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
                         }
                     }
                 });
@@ -527,7 +528,7 @@ public class HomeFragment extends BaseFragment {
                         } else if (homeBean.getCode() == 301){
                             exitDialog();
                         }else {
-                            Toast.makeText(getActivity(), homeBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), homeBean.getMessage());
                         }
                     }
                 });

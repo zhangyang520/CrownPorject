@@ -23,6 +23,7 @@ import com.example.administrator.chengnian444.bean.BannerBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.TabUtils;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.example.administrator.chengnian444.view.JudgeNestedScrollView;
 import com.recker.flybanner.FlyBanner;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -209,7 +210,7 @@ public class LoanFragment extends BaseFragment {
 
                             bannerMove.setImagesUrl(images1);
                         } else {
-                            Toast.makeText(getActivity(), bannerBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
                         }
                     }
                 });

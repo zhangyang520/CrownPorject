@@ -15,9 +15,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.example.administrator.chengnian444.utils.Validator;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,7 +29,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-
+   /**
+     * 忘记密码界面
+     * @Title:
+     * @ProjectName
+     * @Description: TODO
+     * @author zhangyang
+     * @date
+     */
 public class ForgetPwdActivity extends BaseActivity {
     @Bind(R.id.back)
     ImageView back;
@@ -60,81 +69,149 @@ public class ForgetPwdActivity extends BaseActivity {
                 break;
             case R.id.get_code:
                 //获取短信验证码
-                String et_code = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(et_code)){
-                    Toast.makeText(this,"请输入手机号码",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (Validator.isMobile(et_code)){
+                if(verifyCode()){
+                    String et_code = etPhone.getText().toString().trim();
                     OkHttpUtils.post().
-                            url(Constant.GETCODE)
-                            .addHeader("Content-Type","application/json")
-                            .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
-                            .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
-                            .addParams("account",et_code)
-                            .addParams("type","2")
-                            .build().execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Log.d("hcy",e.toString());
-                        }
-
-                        @Override
-                        public void onResponse(String response, int id) {
-                            Log.d("hcy",response);
-                            JSONObject jsonObject = JSON.parseObject(response);
-                            String message = (String) jsonObject.get("message");
-                            Toast.makeText(ForgetPwdActivity.this,message,Toast.LENGTH_SHORT).show();
-                            int code = (int) jsonObject.get("code");
-                            if (code==301){
-                                exitDialog();
-                            }
-                        }
-                    });
-                }
-                TimeCount timeCount = new TimeCount(60000, 1000);
-                timeCount.start();
-                break;
-            case R.id.btn_register:
-                String phone = etPhone.getText().toString().trim();
-                final String code = etPwd.getText().toString().trim();
-                String pwd1 = password.getText().toString().trim();
-
-
-                if (TextUtils.isEmpty(pwd1)){
-                    Toast.makeText(this,"请输入密码",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                OkHttpUtils.post().url(Constant.UPDATAPASSWORD)
-                        .addHeader("Content-Type","application/json")
-                        .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
-                        .addParams("account",phone)
-                        .addParams("newPassword",pwd1)
-                        .addParams("code",code)
-                        .build()
-                        .execute(new StringCallback() {
+                                url(Constant.GETCODE)
+                                .addHeader("Content-Type","application/json")
+                                .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                                .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
+                                .addParams("account",et_code)
+                                .addParams("type","2")
+                                .build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-
+                                Log.d("hcy",e.toString());
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
+                                Log.d("hcy",response);
                                 JSONObject jsonObject = JSON.parseObject(response);
-                                int code1 = (int) jsonObject.get("code");
                                 String message = (String) jsonObject.get("message");
-                                if (code1== 200){
-                                 Toast.makeText(ForgetPwdActivity.this,message,Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(ForgetPwdActivity.this,message,Toast.LENGTH_SHORT).show();
+                                ToastUtils.showToast(ForgetPwdActivity.this,message);
+                                int code = (int) jsonObject.get("code");
+                                if (code==301){
+                                    exitDialog();
                                 }
                             }
                         });
+                    TimeCount timeCount = new TimeCount(60000, 1000);
+                    timeCount.start();
+                }
+                break;
+
+
+            case R.id.btn_register:
+                if(verifyForgetPwd()){
+                    String phone = etPhone.getText().toString().trim();
+                    final String code = etPwd.getText().toString().trim();
+                    String pwd1 = password.getText().toString().trim();
+                    OkHttpUtils.post().url(Constant.UPDATAPASSWORD)
+                            .addHeader("Content-Type","application/json")
+                            .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                            .addParams("account",phone)
+                            .addParams("newPassword",pwd1)
+                            .addParams("code",code)
+                            .build()
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+
+                                }
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    JSONObject jsonObject = JSON.parseObject(response);
+                                    int code1 = (int) jsonObject.get("code");
+                                    String message = (String) jsonObject.get("message");
+                                    if (code1== 200){
+                                        ToastUtils.showToast(ForgetPwdActivity.this,message);
+                                    }else {
+                                        ToastUtils.showToast(ForgetPwdActivity.this,message);
+                                    }
+                                }
+                            });
+                }
                 break;
         }
     }
+
+       /**
+        * 验证忘记密码 的信息
+        * @return
+        */
+       private boolean verifyForgetPwd() {
+           //先进行判断 是否为空
+           if(!etPhone.getText().toString().equals("") &&
+                   !password.getText().toString().equals("") &&
+                   !etPwd.getText().toString().equals("")){
+               //都不为空
+               if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                   //如果手机号 不满足格式
+                   ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                   return false;
+               }
+
+               //验证 输入密码格式的正确性
+               if(!password.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+                   //如果手机号 不满足格式
+                   ToastUtils.showToast(this,ConstantTips.PWD_FORMATE_ERROR);
+                   return false;
+               }
+
+               //验证 输入密码格式的正确性
+               if(!etPwd.getText().toString().matches(ConstantTips.VERIFY_CODE_REGEX)){
+                   //如果手机号 不满足格式
+                   ToastUtils.showToast(this,ConstantTips.VERIFY_CDOE_ERROR);
+                   return false;
+               }
+               return true;
+           }else{
+               //输入的信息不完整
+               if(etPhone.getText().toString().trim().equals("")){
+                   ToastUtils.showToast(this,etPhone.getHint().toString());
+                   return false;
+               }
+               //输入的信息不完整
+               if(password.getText().toString().trim().equals("")){
+                   ToastUtils.showToast(this,password.getHint().toString());
+                   return false;
+               }
+
+               //输入的信息不完整
+               if(etPwd.getText().toString().trim().equals("")){
+                   ToastUtils.showToast(this,etPwd.getHint().toString());
+                   return false;
+               }
+           }
+           return true;
+       }
+
+
+       /**
+        * 验证 输入的手机号
+        */
+       public boolean  verifyCode(){
+           //先进行判断 是否为空
+           if(!etPhone.getText().toString().equals("")){
+               //都不为空
+               if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                   //如果手机号 不满足格式
+                   ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                   return false;
+               }
+               return true;
+           }else{
+               //输入的信息不完整
+               if(etPhone.getText().toString().trim().equals("")){
+                   ToastUtils.showToast(this,etPhone.getHint().toString());
+                   return false;
+               }
+           }
+           return true;
+       }
+
 
     class TimeCount extends CountDownTimer {
 

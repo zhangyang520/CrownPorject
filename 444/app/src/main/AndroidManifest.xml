@@ -40,44 +40,84 @@
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.WebViewActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.MoveListActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.YingYongActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.SettingActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
+
         <activity
                 android:name=".activity.UpdateActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.MoveSeriesActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
+
         <activity
                 android:name=".activity.WebActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
+
         <activity
                 android:name=".activity.ForgetPwdActivity"
+                android:launchMode="singleTop"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".activity.GuideActivity"
                 android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MakeMoneyActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.MakeMoneyActivity">
         </activity>
-        <activity android:name=".activity.ShareExtensionActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.ShareExtensionActivity">
         </activity>
-        <activity android:name=".activity.ExtenditionIncomeAcActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.ExtenditionIncomeAcActivity">
         </activity>
-        <activity android:name=".activity.CashWithdrawalActivity">
+
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.CashWithdrawalActivity">
         </activity>
-        <activity android:name=".activity.DetailofBalanceActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.DetailofBalanceActivity">
         </activity>
-        <activity android:name=".activity.SafetyPwdActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.SafetyPwdActivity">
         </activity>
-        <activity android:name=".activity.ResetPwdActivity">
+
+        <activity
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop"
+                android:name=".activity.ResetPwdActivity">
         </activity>
     </application>
 

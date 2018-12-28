@@ -18,9 +18,11 @@ import com.example.administrator.chengnian444.MainActivity;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.bean.MessageCodeBean;
+import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.example.administrator.chengnian444.utils.Validator;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -63,13 +65,8 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.get_code:
                 //获取短信验证码
-                String et_code = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(et_code)){
-                    Toast.makeText(this,"请输入手机号码",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (Validator.isMobile(et_code)){
+                if(verifyCode()){
+                    String et_code = etPhone.getText().toString().trim();
                     OkHttpUtils.post().
                             url(Constant.GETCODE)
                             .addHeader("Content-Type","application/json")
@@ -88,64 +85,136 @@ public class RegisterActivity extends BaseActivity {
                             Log.d("hcy",response);
                             JSONObject jsonObject = JSON.parseObject(response);
                             String message = (String) jsonObject.get("message");
-                            Toast.makeText(RegisterActivity.this,message,Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(RegisterActivity.this,message);
                             int code = (int) jsonObject.get("code");
                             if (code==301){
                                 exitDialog();
                             }
                         }
                     });
+
+                    //时间的定时器
+                    TimeCount timeCount = new TimeCount(60000, 1000);
+                    timeCount.start();
                 }
-                TimeCount timeCount = new TimeCount(60000, 1000);
-                timeCount.start();
                 break;
+
             case R.id.btn_register:
-                phone = etPhone.getText().toString().trim();
-                String code = etPwd.getText().toString().trim();
-                String pwd1 = password.getText().toString().trim();
+                //点击 注册 按钮
+                if(verifyRegister()){
+                        phone = etPhone.getText().toString().trim();
+                        String code = etPwd.getText().toString().trim();
+                        String pwd1 = password.getText().toString().trim();
 
+                        OkHttpUtils.post().url(Constant.REGISTER)
+                                .addHeader("Content-Type","application/json")
+                                .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                                .addParams("account", phone)
+                                .addParams("password",pwd1)
+                                .addParams("code",code)
+                                .addParams("appType","001")
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
 
-                if (TextUtils.isEmpty(pwd1)){
-                    Toast.makeText(this,"请输入密码",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                                    }
 
-                OkHttpUtils.post().url(Constant.REGISTER)
-                        .addHeader("Content-Type","application/json")
-                        .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
-                        .addParams("account", phone)
-                        .addParams("password",pwd1)
-                        .addParams("code",code)
-                        .addParams("appType","001")
-                        .build()
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onError(Call call, Exception e, int id) {
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        Log.d("hcy",response);
+                                        MessageCodeBean messageCodeBean = JSON.parseObject(response, MessageCodeBean.class);
+                                        if (messageCodeBean.getCode()==200){
+                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
+                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
 
-                            }
-
-                            @Override
-                            public void onResponse(String response, int id) {
-                                Log.d("hcy",response);
-                                MessageCodeBean messageCodeBean = JSON.parseObject(response, MessageCodeBean.class);
-                                if (messageCodeBean.getCode()==200){
-                                    SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
-                                    SPUtils.getInstance(RegisterActivity.this).put("name", phone);
-
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                    finish();
-                                }else {
-                                    Toast.makeText(RegisterActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
-                                }
-
-
-                            }
-                        });
+                                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                            finish();
+                                        }else {
+                                            ToastUtils.showToast(RegisterActivity.this,"注册失败");
+                                        }
+                                    }
+                                });
+                      }
                 break;
         }
     }
 
 
+    /**
+     * 验证登录的信息
+     * @return
+     */
+    private boolean verifyRegister() {
+        //先进行判断 是否为空
+        if(!etPhone.getText().toString().equals("") &&
+                !password.getText().toString().equals("") &&
+                        !etPwd.getText().toString().equals("")){
+            //都不为空
+            if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                return false;
+            }
+
+            //验证 输入密码格式的正确性
+            if(!password.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PWD_FORMATE_ERROR);
+                return false;
+            }
+
+            //验证 输入密码格式的正确性
+            if(!etPwd.getText().toString().matches(ConstantTips.VERIFY_CODE_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.VERIFY_CDOE_ERROR);
+                return false;
+            }
+            return true;
+        }else{
+            //输入的信息不完整
+            if(etPhone.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPhone.getHint().toString());
+                return false;
+            }
+            //输入的信息不完整
+            if(password.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,password.getHint().toString());
+                return false;
+            }
+
+            //输入的信息不完整
+            if(etPwd.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPwd.getHint().toString());
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * 验证 输入的手机号
+     */
+    public boolean  verifyCode(){
+        //先进行判断 是否为空
+        if(!etPhone.getText().toString().equals("")){
+            //都不为空
+            if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+                //如果手机号 不满足格式
+                ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                return false;
+            }
+            return true;
+        }else{
+            //输入的信息不完整
+            if(etPhone.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPhone.getHint().toString());
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * 倒计时从新获取验证码
      */

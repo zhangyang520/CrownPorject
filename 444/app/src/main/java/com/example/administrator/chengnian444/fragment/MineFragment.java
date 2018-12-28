@@ -17,6 +17,7 @@ import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCom
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 
 public class MineFragment extends BaseFragment {
 
@@ -59,7 +60,11 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.rl_app_recommend:
-                startActivity(new Intent(getActivity(), YingYongActivity.class));
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(), YingYongActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
             case R.id.iv_setting:
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
@@ -74,54 +79,70 @@ public class MineFragment extends BaseFragment {
                 break;
 
             case R.id.rl_share:
-                startActivity(new Intent(getActivity(), ShareExtensionActivity.class));
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(), ShareExtensionActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_cash_shenqing:
-                startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_safety_pwd:
-                startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_extension:
-                //修改密码 弹出对应的对话框
-                View contentView=View.inflate(getActivity(),R.layout.dialog_generalization_code,null);
-                final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    //修改密码 弹出对应的对话框
+                    View contentView=View.inflate(getActivity(),R.layout.dialog_generalization_code,null);
+                    final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
 
-                AppCompatImageView iv_mine_cancel=contentView.findViewById(R.id.iv_mine_cancel);
-                iv_mine_cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-                    }
-                });
-                Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
-                btn_cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-                    }
-                });
-
-                final EditText ed_original_safe_pwd=contentView.findViewById(R.id.ed_original_safe_pwd);
-
-                Button btn_ok=contentView.findViewById(R.id.btn_ok);
-                btn_ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
-                            //如果不为空
-                            Toast.makeText(getActivity(),"",Toast.LENGTH_SHORT).show();
+                    AppCompatImageView iv_mine_cancel=contentView.findViewById(R.id.iv_mine_cancel);
+                    iv_mine_cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
                             alertDialog.dismiss();
-                        }else{
-                            Toast.makeText(getActivity(),"请输入邀请人推广码",Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
-                alertDialog.setCancelable(false);
-                alertDialog.show();
+                    });
+                    Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
+                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            alertDialog.dismiss();
+                        }
+                    });
+
+                    final EditText ed_original_safe_pwd=contentView.findViewById(R.id.ed_original_safe_pwd);
+
+                    Button btn_ok=contentView.findViewById(R.id.btn_ok);
+                    btn_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
+                                //如果不为空
+                                ToastUtils.showToast(getActivity(), "");
+                                alertDialog.dismiss();
+                            }else{
+                                ToastUtils.showToast(getActivity(),"请输入邀请人推广码");
+                            }
+                        }
+                    });
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
         }
     }

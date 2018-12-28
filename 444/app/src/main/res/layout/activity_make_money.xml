@@ -56,16 +56,18 @@
 
             <!-- 高度 对应的mathc-->
             <RelativeLayout style="@style/layout_mw"
-                            android:layout_width="107.3dp"
+                            android:layout_width="102.3dp"
+                            android:paddingRight="5dp"
               >
                 <ImageView
                         android:id="@+id/iv_wechat"
                         android:src="@mipmap/iv_mine_wechat"
                         android:layout_width="72.4dp"
                         android:scaleType="centerCrop"
-                        android:layout_marginRight="10dp"
-                        android:layout_height="84dp" android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
+                        android:layout_height="84dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"/>
 
                   <TextView
                           android:layout_below="@+id/iv_wechat"
@@ -79,7 +81,6 @@
             </RelativeLayout>
 
         <RelativeLayout style="@style/layout_mw"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
         >
             <ImageView

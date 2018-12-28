@@ -14,9 +14,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 
 
- /**
+/**
   *    安全密码界面
      * @Title:
      * @ProjectName
@@ -79,9 +80,9 @@ public class SafetyPwdActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
                             //如果不为空
-                            Toast.makeText(SafetyPwdActivity.this,"输入安全吗",Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(SafetyPwdActivity.this,"输入安全吗");
                         }else{
-                            Toast.makeText(SafetyPwdActivity.this,"请输入安全吗",Toast.LENGTH_SHORT).show();
+                            ToastUtils.showToast(SafetyPwdActivity.this,"请输入安全吗");
                         }
                     }
                 });

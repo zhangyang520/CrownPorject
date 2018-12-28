@@ -65,6 +65,7 @@
                        android:id="@+id/tv1"
                        android:layout_width="@dimen/shouye_type_name_width"
                        android:layout_height="@dimen/shouye_type_name_height"
+                       android:layout_centerVertical="true"
                        android:layout_marginLeft="12dp"
                        />
 
@@ -72,6 +73,7 @@
                        android:id="@+id/change1"
                        android:layout_width="@dimen/huanyipi_width"
                        android:layout_height="@dimen/huanyipi_height"
+                       android:layout_centerVertical="true"
                        android:src="@mipmap/iv_shouye_huanyipi"
                        android:layout_alignParentRight="true"
                        android:layout_marginRight="12dp"
@@ -116,6 +118,7 @@
                 android:id="@+id/tv2"
                 android:layout_width="@dimen/shouye_type_name_width"
                 android:layout_height="@dimen/shouye_type_name_height"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="12dp"
                 />
 
@@ -124,6 +127,7 @@
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
                 android:src="@mipmap/iv_shouye_huanyipi"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
                 />
@@ -161,6 +165,7 @@
             <ImageView
                 android:id="@+id/tv3"
                 android:layout_width="@dimen/shouye_type_name_width"
+                android:layout_centerVertical="true"
                 android:layout_height="@dimen/shouye_type_name_height"
                 android:layout_marginLeft="12dp"
                 />
@@ -169,6 +174,7 @@
                 android:id="@+id/change3"
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
@@ -208,12 +214,14 @@
                     android:layout_width="@dimen/shouye_type_name_width"
                     android:layout_height="@dimen/shouye_type_name_height"
                     android:layout_marginLeft="12dp"
+                    android:layout_centerVertical="true"
             />
 
             <ImageView
                 android:id="@+id/change4"
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
@@ -255,6 +263,7 @@
                     android:id="@+id/tv5"
                     android:layout_width="@dimen/shouye_type_name_width"
                     android:layout_height="@dimen/shouye_type_name_height"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
             />
 
@@ -262,6 +271,7 @@
                 android:id="@+id/change5"
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
@@ -303,12 +313,14 @@
                     android:id="@+id/tv6"
                     android:layout_width="@dimen/shouye_type_name_width"
                     android:layout_height="@dimen/shouye_type_name_height"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
             />
 
             <ImageView
                 android:id="@+id/change6"
                 android:layout_width="@dimen/huanyipi_width"
+                android:layout_centerVertical="true"
                 android:layout_height="@dimen/huanyipi_height"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
@@ -349,12 +361,14 @@
                     android:id="@+id/tv7"
                     android:layout_width="@dimen/shouye_type_name_width"
                     android:layout_height="@dimen/shouye_type_name_height"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
             />
             <ImageView
                 android:id="@+id/change7"
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
@@ -391,6 +405,7 @@
                     android:id="@+id/tv8"
                     android:layout_width="@dimen/shouye_type_name_width"
                     android:layout_height="@dimen/shouye_type_name_height"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
             />
 
@@ -398,6 +413,7 @@
                 android:id="@+id/change8"
                 android:layout_width="@dimen/huanyipi_width"
                 android:layout_height="@dimen/huanyipi_height"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/iv_shouye_huanyipi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="12dp"
