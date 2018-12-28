@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 
 /**
@@ -37,6 +38,7 @@ public class ShareExtensionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_share_extention);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.black));
         ButterKnife.bind(this);
         Glide.with(this).load(R.mipmap.iv_mine_share_bg).into(iv_bg);
     }

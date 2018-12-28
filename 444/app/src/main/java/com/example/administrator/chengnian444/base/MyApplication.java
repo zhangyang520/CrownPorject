@@ -5,6 +5,10 @@ import android.content.Context;
 import android.os.Handler;
 
 
+import com.example.administrator.chengnian444.bean.UserBean;
+import com.example.administrator.chengnian444.constant.ConstantTips;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -21,6 +25,7 @@ public class MyApplication extends Application {
     public static Handler handler;
     public static Thread mainThread;
     public static int mainThreadId;
+    public static DbUtils dbUtils;
 
     @Override
     public void onCreate() {
@@ -32,6 +37,33 @@ public class MyApplication extends Application {
         //当前线程ID
         mainThreadId = android.os.Process.myTid();
         initOkHttpClient();
+        //初始化数据库的设置
+        initDataBase();
+    }
+
+
+    /**
+     * 初始化数据库的设置
+     */
+    private void initDataBase() {
+        //
+        DbUtils.DaoConfig daoConfig=new DbUtils.DaoConfig(this);
+        daoConfig.setDbName("baTv.db");
+        daoConfig.setDbVersion(ConstantTips.dbVersion);
+        daoConfig.setDbUpgradeListener(new DbUtils.DbUpgradeListener(){
+            @Override
+            public void onUpgrade(DbUtils dbUtils, int i, int i1) {
+
+            }
+        });
+        //创建 dbUtils
+        dbUtils= DbUtils.create(daoConfig);
+        try {
+            dbUtils.createTableIfNotExist(UserBean.class);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        dbUtils.configDebug(true);
     }
 
     private void initOkHttpClient() {

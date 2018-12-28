@@ -13,6 +13,7 @@ import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.utils.FileCacheUtils;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 
 public class MakeMoneyActivity  extends BaseActivity {
 
@@ -23,6 +24,7 @@ public class MakeMoneyActivity  extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_money);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.black));
         ButterKnife.bind(this);
     }
 

@@ -16,7 +16,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.constant.ConstantTips;
+import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.utils.PopupUtils;
+import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 
 /**
   *    提现申请的界面
@@ -34,10 +39,31 @@ public class CashWithdrawalActivity extends AppCompatActivity {
     @Bind(R.id.tv_balance_detail)
     TextView tv_balance_detail;
 
+    @Bind(R.id.tv_cash_type)
+    TextView tv_cash_type;
+
+    //对应的名称
+    @Bind(R.id.tv_cash_user_name)
+    TextView tv_cash_user_name;
+
+    //账号的输入框
+    @Bind(R.id.ed_alipay_name)
+    EditText ed_alipay_name;
+
+    //提现金额输入框
+    @Bind(R.id.ed_cash_withdraw)
+    EditText ed_cash_withdraw;
+
+    //安全密码的输入框
+    @Bind(R.id.ed_safety_pass)
+    EditText ed_safety_pass;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash_withdrawal);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.black));
         ButterKnife.bind(this);
 
     }
@@ -51,17 +77,34 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                 break;
 
             case R.id.rl_pay_type:
+                int type=0;
+                if(tv_cash_type.getText().equals("支付宝")){
+                    //为支付宝的提现方式
+                    type=0;
+                }else{
+                    //否则为微信 的提现方式
+                    type=1;
+                }
                 PopupUtils.showPayType(this, new PopupUtils.ClickOnListener() {
                     @Override
-                    public void onOk() {
-
+                    public void onOk(int currentCashType) {
+                        //如果为支付宝
+                        if(currentCashType==0){
+                            tv_cash_type.setText("支付宝");
+                            tv_cash_user_name.setText("支付宝账号");
+                            ed_alipay_name.setHint("请输入支付宝账号");
+                        }else{
+                            tv_cash_type.setText("微信");
+                            tv_cash_user_name.setText("微信账号");
+                            ed_alipay_name.setHint("请输入微信宝账号");
+                        }
                     }
 
                     @Override
                     public void onCancel() {
 
                     }
-                },constraintLayout);
+                },constraintLayout,type);
                 break;
 
             case R.id.tv_balance_detail:
@@ -118,4 +161,37 @@ public class CashWithdrawalActivity extends AppCompatActivity {
          alertDialog.setCancelable(false);
          alertDialog.show();
      }
+
+    /**
+     * 校验其中的内容
+     */
+    public boolean  verifySubmit(){
+
+        //对应的数据的 是否为空判断
+        //先进行判断 是否为空
+        if(!ed_alipay_name.getText().toString().equals("") &&
+                !ed_cash_withdraw.getText().toString().equals("") &&
+                            !ed_safety_pass.getText().toString().equals("")){
+            //不为空的请求 ok
+            //以下判断 数据的有效性:
+
+            //判断 用户的余额是否大于100
+            // 提现金额 不能大于 用户的余额
+            //提现的金额必须是100的倍数
+
+            return true;
+        }else{
+            //输入的信息不完整
+            if(etPhone.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPhone.getHint().toString());
+                return false;
+            }
+            //输入的信息不完整
+            if(etPwd.getText().toString().trim().equals("")){
+                ToastUtils.showToast(this,etPwd.getHint().toString());
+                return false;
+            }
+        }
+        return true;
+    }
 }

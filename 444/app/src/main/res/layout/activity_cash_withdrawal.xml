@@ -98,6 +98,7 @@
                 style="@style/layout_ww">
 
             <TextView
+                    android:id="@+id/tv_cash_type"
                     android:layout_toLeftOf="@+id/iv_arrrow"
                     style="@style/txt_30px_mine"
                     android:text="支付宝"
@@ -176,6 +177,7 @@
                 style="@style/txt_30px_mine"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入收款人姓名"
+                android:gravity="right"
                 android:background="@null"
                 android:layout_width="wrap_content"
         />
@@ -194,6 +196,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
+                android:id="@+id/tv_cash_user_name"
                 style="@style/txt_30px"
                 android:text="支付宝账号"
                 app:layout_constraintTop_toTopOf="parent"
@@ -209,6 +212,7 @@
                 style="@style/txt_30px_mine"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入支付宝账号"
+                android:gravity="right"
                 android:background="@null"
                 android:layout_width="wrap_content"
         />
@@ -241,6 +245,7 @@
                 style="@style/txt_30px_mine"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入提现金额"
+                android:gravity="right"
                 android:background="@null"
                 android:layout_width="wrap_content"
         />
@@ -272,7 +277,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 style="@style/txt_30px_mine"
                 android:textColorHint="@color/mine_cash_name"
-                android:hint="请输入提现金额"
+                android:hint="请输入安全密码"
+                android:gravity="right"
                 android:background="@null"
                 android:layout_width="wrap_content"
         />

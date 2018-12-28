@@ -39,7 +39,7 @@ public class YingYongActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuijian);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.black));
         downRecylce.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));
         httpYingyongList();
 

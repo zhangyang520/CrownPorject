@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.activity.*;
 import com.example.administrator.chengnian444.base.BaseFragment;
+import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 
@@ -88,7 +89,14 @@ public class MineFragment extends BaseFragment {
 
             case R.id.rl_cash_shenqing:
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-                    startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                    //判断 是否 已经设置 了安全密码
+                    if(SPUtils.getInstance(getActivity()).getBoolean(ConstantTips.isSettingSafePwd)){
+                        //如果已经设置
+                        startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                    }else{
+                        //如果sp文件中没有 进行请求网络 请求网络成功后 将状态 设置到 sp文件中
+                        showNotSettingSafePwd();
+                    }
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -167,5 +175,41 @@ public class MineFragment extends BaseFragment {
         if (!hidden) {
             HomeFragment.imageView.setVisibility(View.GONE);
         }
+    }
+
+
+    /**
+     * 提示 请先设置 安全密码的提示框
+     */
+    public void showNotSettingSafePwd(){
+        //修改密码 弹出对应的对话框
+        View contentView=View.inflate(getActivity(),R.layout.dialog_first_setting_safepwd,null);
+        final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
+        Button btn_ok=contentView.findViewById(R.id.btn_ok);
+        Button btn_cancel=contentView.findViewById(R.id.btn_cancel);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                //点击确定 跳转到 设置安全密码界面
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    //todo  以后要修改！
+                    SPUtils.getInstance(getActivity()).put(ConstantTips.isSettingSafePwd,true);
+
+                    startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setCancelable(false);
+        alertDialog.show();
     }
 }

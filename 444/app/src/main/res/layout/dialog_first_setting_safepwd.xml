@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--提交申请的提示框-->
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="wrap_content">
+
+       <TextView
+               android:id="@+id/tv_title"
+               style="@style/txt_30px"
+               android:layout_width="wrap_content"
+               android:text="请先设置安全密码"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               android:layout_marginTop="10dp"
+               android:textColor="@color/black"
+               app:layout_constraintTop_toTopOf="parent"
+       />
+
+
+
+    <Button
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            android:id="@+id/btn_cancel"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/txt_30px"
+            android:textColor="@color/black"
+            android:background="@drawable/shape_rectangle_white_stroke_yellow"
+            android:layout_width="70dp"
+            app:layout_constraintRight_toLeftOf="@+id/btn_ok"
+            android:layout_marginRight="20dp"
+            android:text="取消"
+            android:layout_height="23.6dp"/>
+
+    <Button
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            android:id="@+id/btn_ok"
+            android:textSize="@dimen/txt_30px"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_width="70dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="确认"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/shape_login"
+            android:layout_height="23.6dp"/>
+</android.support.constraint.ConstraintLayout>

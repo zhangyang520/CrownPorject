@@ -35,4 +35,11 @@ public class ConstantTips {
 
     //验证码的regex的字符串
     public static final String VERIFY_CODE_REGEX="\\d{4,6}";
+
+
+    //一些的键 特定字符串
+    public static final String isSettingSafePwd="isSettingSafePwd";
+
+    //数据库的版本号
+    public static int dbVersion=1;
 }

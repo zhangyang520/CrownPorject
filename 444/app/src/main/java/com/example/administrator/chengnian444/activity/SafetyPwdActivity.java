@@ -14,6 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 
 
@@ -35,6 +36,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety_pwd);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.black));
         ButterKnife.bind(this);
     }
 
