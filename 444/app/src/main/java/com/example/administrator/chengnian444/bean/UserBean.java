@@ -16,26 +16,47 @@ import com.lidroid.xutils.db.annotation.Table;
 public class UserBean {
 
     @Id
-    public int id;
+    public String loginToken;
 
     //余额的总数
     public  double totalBalance;
 
-    //昨日的收益
-    double yesterdayCash;
     //总金额
-    double totalCash;
+    public double totalCash;
+
     //推广人数
-    int extensitionCount;
+    public int extensitionCount;
+
+    //一级推广收益
+    public double firstPromotionBenfits;
+
+    //二级推广收益
+    public double secondPormotionBenfits;
+
+    //三级推广收益
+    public double thirdPromotionBenfits;
+
     //用户名
-    String userName;
+    public  String userName;
+
     //密码
-    String pwd;
+    public String pwd;
     //是否登录
     public boolean isLocalUser;// 是否为本地用户
 
     //安全密码
-    String  safePwd;
+    public String  safePwd;
+
+    //安全密码是否绑定
+    public boolean isSafeLocked;
+
     //推广码
-    String extendistinCode;
+    public  String extendistinCode;
+
+    //对应的推广的二维码图片的路径
+    public String zcodeImgUrl;
+
+    //你输入的 推广码 是否已经被绑定
+    public boolean isExtendistionState;
+
 }

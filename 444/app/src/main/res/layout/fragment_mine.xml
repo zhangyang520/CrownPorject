@@ -54,15 +54,6 @@
                 android:layout_width="72.7dp"
                 android:layout_height="72.7dp" />
 
-        <ImageView
-                android:id="@+id/iv_make_money"
-                android:scaleType="fitXY"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="138.2dp"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/iv_mine_make_money"
-                android:layout_width="98.9dp"
-                android:layout_height="82.1dp" />
 
         <TextView
                 android:id="@+id/name"
@@ -90,14 +81,24 @@
         />
 
         <include
-                layout="@layout/item_cash_wtihdraw"
+                layout="@layout/item_mine_cash"
                 android:layout_below="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginBottom="14.5dp"
                 android:layout_marginTop="11dp"
+                android:visibility="visible"
 
         ></include>
+
+        <ImageView
+                android:id="@+id/iv_make_money"
+                android:scaleType="fitXY"
+                android:layout_marginLeft="20dp"
+                android:layout_alignTop="@+id/name"
+                android:src="@mipmap/iv_mine_make_money"
+                android:layout_width="98.9dp"
+                android:layout_height="82.1dp" />
         <!--<ImageView-->
                 <!--android:src="@mipmap/shichang"-->
                 <!--android:id="@+id/banner"-->
@@ -184,11 +185,11 @@
                             android:layout_marginLeft="13.8dp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_share"
-                            android:hint="分享推广"/>
+                            android:text="分享推广"/>
 
                     <TextView
                             android:textSize="15.3sp"
-                            android:textColor="@color/mine_text_color"
+                            android:textColor="@color/mine_cash_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -234,11 +235,11 @@
                             android:layout_marginLeft="13.8dp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_cash"
-                            android:hint="提现申请"/>
+                            android:text="提现申请"/>
 
                     <TextView
                             android:textSize="15.3sp"
-                            android:textColor="@color/mine_text_color"
+                            android:textColor="@color/mine_cash_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -285,11 +286,11 @@
                             android:layout_marginLeft="13.8dp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_safety_pwd"
-                            android:hint="安全密码"/>
+                            android:text="安全密码"/>
 
                     <TextView
                             android:textSize="15.3sp"
-                            android:textColor="@color/mine_text_color"
+                            android:textColor="@color/mine_cash_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -337,18 +338,19 @@
                             android:layout_marginLeft="13.8dp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_extension"
-                            android:hint="输入推广码"/>
+                            android:text="输入推广码"/>
 
                     <TextView
+                            android:id="@+id/tv_extendition_tips"
                             android:textSize="15.3sp"
-                            android:textColor="@color/mine_text_color"
+                            android:textColor="@color/mine_cash_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/iv_extension_go"
                             android:paddingLeft="@dimen/first_margin_left"
                             android:layout_marginRight="10dp"
-                            android:text="新用户取得现金"
+                            android:text="新用户即得现金"
                     />
 
                     <ImageView
@@ -389,18 +391,18 @@
                             android:layout_marginLeft="13.8dp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_app_recommend"
-                            android:hint="应用推荐"/>
+                            android:text="应用推荐"/>
 
                     <TextView
                             android:textSize="15.3sp"
-                            android:textColor="@color/mine_text_color"
+                            android:textColor="@color/mine_cash_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/iv_app_recommend_go"
                             android:paddingLeft="@dimen/first_margin_left"
                             android:layout_marginRight="10dp"
-                            android:text="更对免费赚钱应用"
+                            android:text="更多免费赚钱应用"
                     />
 
                     <ImageView
@@ -415,48 +417,4 @@
                 </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/yingyong"-->
-        <!--android:layout_marginLeft="12dp"-->
-        <!--android:layout_marginRight="12dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:visibility="gone"-->
-        <!--android:layout_height="40dp">-->
-
-        <!--<ImageView-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:src="@mipmap/yingyong"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/back_right"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="更多免费应用"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--/>-->
-    <!--</RelativeLayout>-->
-
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.5dp"-->
-        <!--android:layout_marginRight="12dp"-->
-        <!--android:layout_marginLeft="12dp"-->
-        <!--android:background="@color/line"-->
-        <!--android:visibility="gone"-->
-        <!--/>-->
-
 </LinearLayout>

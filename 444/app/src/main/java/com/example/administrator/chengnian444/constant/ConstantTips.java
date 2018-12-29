@@ -22,6 +22,12 @@ public class ConstantTips {
 
     //验证码 的格式错误的提示语
     public static final String VERIFY_CDOE_ERROR="验证码必须是4-6位数字";
+
+
+    //固定的提示语
+
+    //用户暂未登录
+    public static final String  USER_NO_LOGIN="用户暂未登录!";
     /**
      *
      *   格式化的字符串
@@ -36,6 +42,8 @@ public class ConstantTips {
     //验证码的regex的字符串
     public static final String VERIFY_CODE_REGEX="\\d{4,6}";
 
+    //安全密码的验证
+    public static final String SAFE_PWD_VERIFY = "\\d{4}";
 
     //一些的键 特定字符串
     public static final String isSettingSafePwd="isSettingSafePwd";

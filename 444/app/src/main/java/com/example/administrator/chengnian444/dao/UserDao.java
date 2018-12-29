@@ -22,7 +22,7 @@ public class UserDao {
      * 获取所有的用户
      * @return
      */
-    public List<UserBean> getAllUser() throws ContentException {
+    public static  List<UserBean> getAllUser() throws ContentException {
         try {
             List<UserBean> datss=MyApplication.dbUtils.findAll(Selector.from(UserBean.class));
             if(datss!=null && datss.size()>0){
@@ -57,7 +57,7 @@ public class UserDao {
     /**
      * 删除 对象
      */
-    public void  deleteUser(UserBean user) {
+    public static void  deleteUser(UserBean user) {
         try {
             MyApplication.dbUtils.delete(user);
         } catch (DbException e) {
@@ -68,7 +68,7 @@ public class UserDao {
      * 保存所有数据
      * @param user
      */
-    public void  saveAll(UserBean user) {
+    public static void  saveAll(UserBean user) {
         try {
             MyApplication.dbUtils.save(user);
         } catch ( DbException e) {
@@ -81,7 +81,7 @@ public class UserDao {
      * 保存更新数据
      * @param user
      */
-    public void  saveUpDate(UserBean user) {
+    public static void  saveUpDate(UserBean user) {
         try {
             MyApplication.dbUtils.saveOrUpdate(user);
         } catch (DbException e) {
@@ -94,7 +94,7 @@ public class UserDao {
      * @param userId
      * @return
      */
-    public UserBean getUserId(String userId) throws ContentException{
+    public static UserBean getUserId(String userId) throws ContentException{
         try {
             List<UserBean> datas = MyApplication.dbUtils.findAll(Selector.from(UserBean.class).where("id", "=", userId));
             if (datas != null && datas.size() > 0) {
@@ -108,10 +108,28 @@ public class UserDao {
     }
 
     /**
+     * 得到User对象的UserId
+     * @param userToken
+     * @return
+     */
+    public static UserBean getUserToken(String userToken) throws ContentException{
+        try {
+            List<UserBean> datas = MyApplication.dbUtils.findAll(Selector.from(UserBean.class).where("loginToken", "=", userToken));
+            if (datas != null && datas.size() > 0) {
+                return datas.get(0);
+            }
+            throw new ContentException("");
+        } catch (DbException e) {
+            e.printStackTrace();
+            throw new ContentException("");
+        }
+    }
+
+    /**
      * 进行更新所有用户的本地身份状态
      * @param flag
      */
-    public void  updateAllUserLocalState(Boolean flag) {
+    public static void  updateAllUserLocalState(Boolean flag) {
         try {
             List<UserBean> userList = getAllUser();
             for (UserBean user:userList) {
@@ -130,11 +148,11 @@ public class UserDao {
      * 进行更新除了该用户所有用户的本地身份状态
      * @param flag
      */
-    public void  updateExceptUserLocalState(int userId, Boolean flag) {
+    public void  updateExceptUserLocalState(String userToken, Boolean flag) {
         try {
             List<UserBean> userList = getAllUser();
             for (UserBean user: userList) {
-                if (!(user.id ==(userId))) {
+                if (!(user.loginToken.equals(userToken))) {
                     //设置其他用户为false
                     user.isLocalUser = false;
                 } else {
@@ -150,4 +168,27 @@ public class UserDao {
         }
     }
 
+    /**
+     * 进行更新除了该用户所有用户的本地身份状态
+     * @param flag
+     */
+    public void  updateExceptUserLocalState(int userId, Boolean flag) {
+//        try {
+//            List<UserBean> userList = getAllUser();
+//            for (UserBean user: userList) {
+//                if (!(user.id ==(userId))) {
+//                    //设置其他用户为false
+//                    user.isLocalUser = false;
+//                } else {
+//                    //对应的userId用户为flag
+//                    user.isLocalUser = flag;
+//                }
+//            }
+//            MyApplication.dbUtils.updateAll(userList);
+//        } catch (ContentException e) {
+//            //没有用户
+//            e.printStackTrace();
+//        } catch (DbException e) {
+//        }
+    }
 }

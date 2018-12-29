@@ -71,7 +71,7 @@ public class SettingActivity extends BaseActivity {
             case R.id.btn_exit:
                 SPUtils.getInstance(this).put("isLogin",false);
                 startActivity(new Intent(this, MainActivity.class));
-
+                finish();
                 break;
         }
     }
