@@ -187,42 +187,42 @@ public class LoginActivity extends BaseActivity {
                             SPUtils.getInstance(LoginActivity.this).put("name", loginBean.getData().getAccount());
                             SPUtils.getInstance(LoginActivity.this).put("loginToken", loginBean.getData().getLoginToken());
 
-//                            try {
-//
-//                                UserBean userBean=UserDao.getUserToken(loginBean.getData().getLoginToken());
-//                                userBean.isLocalUser=true;
-//                                userBean.totalBalance=1000;
-//                                userBean.extendistinCode="123456";
-//                                userBean.extensitionCount=56;
-//                                userBean.firstPromotionBenfits=200;
-//                                userBean.secondPormotionBenfits=300;
-//                                userBean.thirdPromotionBenfits=400;
-//                                userBean.loginToken=loginBean.getData().getLoginToken();
-//                                userBean.safePwd="1234567";
-//                                //总金额
-//                                userBean.totalCash=2000;
-//                                userBean.userName=loginBean.getData().getAccount();
-//                                UserDao.updateAllUserLocalState(false);
-//                                UserDao.saveUpDate(userBean);
-//                            } catch (ContentException e) {
-//                                e.printStackTrace();
-//                                UserBean userBean=new UserBean();
-//                                //余额
-//                                userBean.isLocalUser=true;
-//                                userBean.totalBalance=1000;
-//                                userBean.extendistinCode="123456";
-//                                userBean.extensitionCount=56;
-//                                userBean.firstPromotionBenfits=200;
-//                                userBean.secondPormotionBenfits=300;
-//                                userBean.thirdPromotionBenfits=400;
-//                                userBean.loginToken=loginBean.getData().getLoginToken();
-//                                userBean.safePwd="1234567";
-//                                //总金额
-//                                userBean.totalCash=2000;
-//                                userBean.userName=loginBean.getData().getAccount();
-//                                UserDao.updateAllUserLocalState(false);
-//                                UserDao.saveUpDate(userBean);
-//                            }
+                            try {
+
+                                UserBean userBean=UserDao.getUserToken(loginBean.getData().getLoginToken());
+                                userBean.totalBalance=1000;
+                                userBean.extendistinCode="123456";
+                                userBean.extensitionCount=56;
+                                userBean.firstPromotionBenfits=200;
+                                userBean.secondPormotionBenfits=300;
+                                userBean.thirdPromotionBenfits=400;
+                                userBean.loginToken=loginBean.getData().getLoginToken();
+                                userBean.safePwd="1234567";
+                                //总金额
+                                userBean.totalCash=2000;
+                                userBean.userName=loginBean.getData().getAccount();
+                                UserDao.updateAllUserLocalState(false);
+                                userBean.isLocalUser=true;
+                                UserDao.saveUpDate(userBean);
+                            } catch (ContentException e) {
+                                e.printStackTrace();
+                                UserBean userBean=new UserBean();
+                                //余额
+                                userBean.totalBalance=1000;
+                                userBean.extendistinCode="123456";
+                                userBean.extensitionCount=56;
+                                userBean.firstPromotionBenfits=200;
+                                userBean.secondPormotionBenfits=300;
+                                userBean.thirdPromotionBenfits=400;
+                                userBean.loginToken=loginBean.getData().getLoginToken();
+                                userBean.safePwd="1234567";
+                                //总金额
+                                userBean.totalCash=2000;
+                                userBean.userName=loginBean.getData().getAccount();
+                                UserDao.updateAllUserLocalState(false);
+                                userBean.isLocalUser=true;
+                                UserDao.saveUpDate(userBean);
+                            }
                             //首先进行判断 该用户的token 是否存在
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

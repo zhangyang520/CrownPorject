@@ -116,95 +116,91 @@ public class MineFragment extends BaseFragment {
                 break;
 
             case R.id.rl_share:
-                ToastUtils.showToast(getActivity(),"开发中,敬请期待");
-//                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-//                    startActivity(new Intent(getActivity(), ShareExtensionActivity.class));
-//                }else {
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
-//                }
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(), ShareExtensionActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_cash_shenqing:
-                ToastUtils.showToast(getActivity(),"开发中,敬请期待");
-//                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-//                    //判断 是否 已经设置 了安全密码
-//                    //TODO 此时 调用 接口 判断 安全密码是否设置
-//                    if(SPUtils.getInstance(getActivity()).getBoolean(ConstantTips.isSettingSafePwd)){
-//                        //如果已经设置
-//                        startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
-//                    }else{
-//                        //如果sp文件中没有 进行请求网络 请求网络成功后 将状态 设置到 sp文件中
-//                        showNotSettingSafePwd();
-//                    }
-//                }else {
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
-//                }
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    //判断 是否 已经设置 了安全密码
+                    //TODO 此时 调用 接口 判断 安全密码是否设置
+                    if(SPUtils.getInstance(getActivity()).getBoolean(ConstantTips.isSettingSafePwd)){
+                        //如果已经设置
+                        startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                    }else{
+                        //如果sp文件中没有 进行请求网络 请求网络成功后 将状态 设置到 sp文件中
+                        showNotSettingSafePwd();
+                    }
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_safety_pwd:
-                ToastUtils.showToast(getActivity(),"开发中,敬请期待");
-//                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-//                    startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
-//                }else {
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
-//                }
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
 
             case R.id.rl_extension:
-                ToastUtils.showToast(getActivity(),"开发中,敬请期待");
-//                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-//                    //修改密码 弹出对应的对话框
-//                    try {
-//                        //初始化用户
-//                        UserBean userBean=UserDao.getLocalUser();
-//
-//                        if(!userBean.isExtendistionState){
-//                            View contentView=View.inflate(getActivity(),R.layout.dialog_generalization_code,null);
-//                            final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
-//
-//                            AppCompatImageView iv_mine_cancel=contentView.findViewById(R.id.iv_mine_cancel);
-//                            iv_mine_cancel.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    alertDialog.dismiss();
-//                                }
-//                            });
-//                            Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
-//                            btn_cancel.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    alertDialog.dismiss();
-//                                }
-//                            });
-//
-//                            final EditText ed_original_safe_pwd=contentView.findViewById(R.id.ed_original_safe_pwd);
-//
-//                            Button btn_ok=contentView.findViewById(R.id.btn_ok);
-//                            btn_ok.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
-//                                        //如果不为空
-//                                        ToastUtils.showToast(getActivity(), "");
-//                                        alertDialog.dismiss();
-//                                    }else{
-//                                        ToastUtils.showToast(getActivity(),"请输入邀请人推广码");
-//                                    }
-//                                }
-//                            });
-//                            alertDialog.setCancelable(false);
-//                            alertDialog.show();
-//                        }else{
-//                           ToastUtils.showToast(getActivity(),"已绑定推广码");
-//                        }
-//                    } catch (ContentException e) {
-//                        e.printStackTrace();
-//                        //初始化用户
-//                        ToastUtils.showToast(getActivity(),ConstantTips.USER_NO_LOGIN);
-//                    }
-//                }else {
-//                    startActivity(new Intent(getActivity(), LoginActivity.class));
-//                }
+                if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
+                    //修改密码 弹出对应的对话框
+                    try {
+                        //初始化用户
+                        UserBean userBean=UserDao.getLocalUser();
+
+                        if(!userBean.isExtendistionState){
+                            View contentView=View.inflate(getActivity(),R.layout.dialog_generalization_code,null);
+                            final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
+
+                            AppCompatImageView iv_mine_cancel=contentView.findViewById(R.id.iv_mine_cancel);
+                            iv_mine_cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
+                            btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+                            final EditText ed_original_safe_pwd=contentView.findViewById(R.id.ed_original_safe_pwd);
+
+                            Button btn_ok=contentView.findViewById(R.id.btn_ok);
+                            btn_ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
+                                        //如果不为空
+                                        ToastUtils.showToast(getActivity(), "");
+                                        alertDialog.dismiss();
+                                    }else{
+                                        ToastUtils.showToast(getActivity(),"请输入邀请人推广码");
+                                    }
+                                }
+                            });
+                            alertDialog.setCancelable(false);
+                            alertDialog.show();
+                        }else{
+                           ToastUtils.showToast(getActivity(),"已绑定推广码");
+                        }
+                    } catch (ContentException e) {
+                        e.printStackTrace();
+                        //初始化用户
+                        ToastUtils.showToast(getActivity(),ConstantTips.USER_NO_LOGIN);
+                    }
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
         }
     }

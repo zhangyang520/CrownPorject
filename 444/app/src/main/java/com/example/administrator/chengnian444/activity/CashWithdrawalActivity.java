@@ -207,7 +207,6 @@ public class CashWithdrawalActivity extends AppCompatActivity {
 
         try {
             UserBean userBean=UserDao.getLocalUser();
-
             //对应的数据的 是否为空判断
             //先进行判断 是否为空
             if(!ed_alipay_name.getText().toString().equals("") &&
@@ -215,7 +214,7 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                                 !ed_safety_pass.getText().toString().equals("")){
                 //不为空的请求 ok
                 //以下判断 数据的有效性:
-                if (!ed_cash_withdraw.getText().toString().matches("\\d")) {
+                if (!ed_cash_withdraw.getText().toString().matches("\\d*.*\\d*")) {
                     ToastUtils.showToast(this,"提现金额必须是数字");
                     return false;
                 }
@@ -225,12 +224,20 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                     return false;
                 }
                 // 提现金额 不能大于 用户的余额
-                if(Double.parseDouble(ed_cash_withdraw.getText().toString())<userBean.totalBalance){
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())>userBean.totalBalance){
                     ToastUtils.showToast(this,"提现金额不能大于用户的余额");
                     return false;
                 }
+
+
                 //提现的金额必须是100的倍数
-                if(Double.parseDouble(ed_cash_withdraw.getText().toString())%100==0){
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())<100){
+                    ToastUtils.showToast(this,"提现金额必须大于100");
+                    return false;
+                }
+
+                //提现的金额必须是100的倍数
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())%100!=0){
                     ToastUtils.showToast(this,"提现金额必须是100的整数倍");
                     return false;
                 }

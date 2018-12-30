@@ -38,7 +38,7 @@ public class MyApplication extends Application {
         mainThreadId = android.os.Process.myTid();
         initOkHttpClient();
         //初始化数据库的设置
-//        initDataBase();
+        initDataBase();
     }
 
 
