@@ -54,6 +54,28 @@ public class UserDao {
         }
     }
 
+
+    /**
+     * 通过用户名 查询 对应的 信息实体
+     * @param userName
+     * @return
+     * @throws ContentException
+     */
+    public static UserBean getUser(String userName) throws ContentException
+    {
+        try {
+            List<UserBean> datas = MyApplication.dbUtils.findAll(Selector.from(UserBean.class)
+                    .where("userName", "=", userName));
+            if (datas != null && datas.size() > 0) {
+                return datas.get(0);
+            } else {
+                throw new ContentException("");
+            }
+        } catch (DbException e) {
+            throw new  ContentException("");
+        }
+    }
+
     /**
      * 删除 对象
      */

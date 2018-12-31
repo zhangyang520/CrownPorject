@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import butterknife.BindInt;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.MainActivity;
@@ -44,6 +45,8 @@ public class RegisterActivity extends BaseActivity {
     Button getCode;
     @Bind(R.id.password)
     EditText password;
+    @Bind(R.id.ed_extendition_code)
+    EditText ed_extendition_code;
 
     @Bind(R.id.btn_register)
     Button btnRegister;
@@ -170,6 +173,15 @@ public class RegisterActivity extends BaseActivity {
                 ToastUtils.showToast(this,ConstantTips.VERIFY_CDOE_ERROR);
                 return false;
             }
+
+            if(!ed_extendition_code.getText().toString().equals("")){
+                //如果注册时候的推广码 不为空 需要判断 格式
+                if (!ed_extendition_code.getText().toString()
+                        .matches(ConstantTips.EXTENDITION_CODE_REGEX)) {
+                    ToastUtils.showToast(this,"推广码必须是6位数字");
+                    return false;
+                }
+            }
             return true;
         }else{
             //输入的信息不完整
@@ -215,6 +227,8 @@ public class RegisterActivity extends BaseActivity {
         }
         return true;
     }
+
+
     /**
      * 倒计时从新获取验证码
      */

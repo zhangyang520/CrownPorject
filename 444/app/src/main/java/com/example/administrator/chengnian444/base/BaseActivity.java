@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
@@ -66,6 +67,8 @@ public class BaseActivity extends AppCompatActivity {
     dialog.show();*/
         SPUtils.getInstance(BaseActivity.this).put("isLogin",false);
         SPUtils.getInstance(BaseActivity.this).put("loginToken","");
+        //更新所有的 用户的状态为false
+        UserDao.updateAllUserLocalState(false);
         Toast.makeText(this,"当前账号在其他设备登录",Toast.LENGTH_LONG).show();
 
     }

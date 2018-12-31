@@ -8,20 +8,28 @@ import android.view.View;
 import android.widget.*;
 
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.activity.*;
 import com.example.administrator.chengnian444.base.BaseFragment;
+import com.example.administrator.chengnian444.bean.IsLockSafetyPwdResponse;
+import com.example.administrator.chengnian444.bean.OneBannerBean;
 import com.example.administrator.chengnian444.bean.UserBean;
+import com.example.administrator.chengnian444.bean.UserInfoResponse;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
+import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import okhttp3.Call;
 
 public class MineFragment extends BaseFragment {
 
@@ -126,13 +134,18 @@ public class MineFragment extends BaseFragment {
             case R.id.rl_cash_shenqing:
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
                     //判断 是否 已经设置 了安全密码
-                    //TODO 此时 调用 接口 判断 安全密码是否设置
-                    if(SPUtils.getInstance(getActivity()).getBoolean(ConstantTips.isSettingSafePwd)){
-                        //如果已经设置
-                        startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
-                    }else{
-                        //如果sp文件中没有 进行请求网络 请求网络成功后 将状态 设置到 sp文件中
-                        showNotSettingSafePwd();
+                    try {
+                        UserBean userBean=UserDao.getLocalUser();
+                        if(userBean.isSafeLocked){
+                            //如果已经设置
+                            startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                        }else{
+                            //如果sp文件中没有 进行请求网络 请求网络成功后 将状态 设置到 sp文件中
+                            //TODO 此时 调用 接口 判断 安全密码是否设置
+                            validateSecurityPassword(userBean.userName);
+                        }
+                    } catch (ContentException e) {
+                        e.printStackTrace();
                     }
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -152,8 +165,7 @@ public class MineFragment extends BaseFragment {
                     //修改密码 弹出对应的对话框
                     try {
                         //初始化用户
-                        UserBean userBean=UserDao.getLocalUser();
-
+                        final UserBean userBean=UserDao.getLocalUser();
                         if(!userBean.isExtendistionState){
                             View contentView=View.inflate(getActivity(),R.layout.dialog_generalization_code,null);
                             final AlertDialog alertDialog=new AlertDialog.Builder(getActivity()).setView(contentView).create();
@@ -181,8 +193,13 @@ public class MineFragment extends BaseFragment {
                                 public void onClick(View view) {
                                     if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
                                         //如果不为空
-                                        ToastUtils.showToast(getActivity(), "");
-                                        alertDialog.dismiss();
+                                        if(ed_original_safe_pwd.getText().toString()
+                                                        .matches(ConstantTips.EXTENDITION_CODE_REGEX)){
+                                                //满足条件
+                                            verifyPromoteCode(userBean.userName,ed_original_safe_pwd.getText().toString(),alertDialog);
+                                        }else {
+                                            ToastUtils.showToast(getActivity(), "推广码必须是6位数字");
+                                        }
                                     }else{
                                         ToastUtils.showToast(getActivity(),"请输入邀请人推广码");
                                     }
@@ -205,6 +222,96 @@ public class MineFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 验证 推广码接口
+     * @param userName
+     * @param safepwd
+     * @param alertDialog
+     */
+    private void   verifyPromoteCode(String userName, String safepwd, final AlertDialog alertDialog){
+        OkHttpUtils.post().url(Constant.verifyPromoteCode)
+                .addHeader("ContentType", "application/json")
+                .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
+                .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
+                .addParams("promoteCode",safepwd)
+                .addParams("account",userName).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtils.showToast(getActivity(),"提交推广码失败!");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    IsLockSafetyPwdResponse isLockSafetyPwdResponse=
+                            JSON.parseObject(response,IsLockSafetyPwdResponse.class);
+                    if(isLockSafetyPwdResponse.getCode()==200){
+                        ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
+                        if(isLockSafetyPwdResponse.isData()){
+                            //安全密码已经设置
+                            UserBean userBean=UserDao.getLocalUser();
+                            userBean.isExtendistionState=true;
+                            UserDao.saveUpDate(userBean);
+                            alertDialog.dismiss();
+                        }else{
+                            UserBean userBean=UserDao.getLocalUser();
+                            userBean.isExtendistionState=false;
+                            UserDao.saveUpDate(userBean);
+                        }
+                    }else{
+                        ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
+                    }
+                } catch (Exception e) {
+                    ToastUtils.showToast(getActivity(),"提交推广码失败!");
+                }
+            }
+        });
+    }
+    /**
+     * 访问  是否绑定安全密码
+     * @param userName
+     */
+    private void validateSecurityPassword(String userName) {
+        OkHttpUtils.post().url(Constant.validateSecurityPwd)
+                .addHeader("ContentType", "application/json")
+                .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
+                .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
+                .addParams("account",userName).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtils.showToast(getActivity(),"请求验证码失败!");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    IsLockSafetyPwdResponse isLockSafetyPwdResponse=
+                            JSON.parseObject(response,IsLockSafetyPwdResponse.class);
+                    if(isLockSafetyPwdResponse.getCode()==200){
+                        ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
+                        if(isLockSafetyPwdResponse.isData()){
+                            //安全密码已经设置
+                            UserBean userBean=UserDao.getLocalUser();
+                            userBean.isSafeLocked=true;
+                            UserDao.saveUpDate(userBean);
+                            startActivity(new Intent(getActivity(),CashWithdrawalActivity.class));
+                        }else{
+                            UserBean userBean=UserDao.getLocalUser();
+                            userBean.isSafeLocked=false;
+                            UserDao.saveUpDate(userBean);
+                            showNotSettingSafePwd();
+                        }
+                    }else{
+                        ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
+                    }
+                } catch (Exception e) {
+                    ToastUtils.showToast(getActivity(),"请求验证码失败!");
+                }
+            }
+        });
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -212,15 +319,66 @@ public class MineFragment extends BaseFragment {
         if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")) {
             name.setText(SPUtils.getInstance(getActivity()).getString("name"));
             //对应的初始化数据
-//            initData();
+            initData();
             loginRegister.setVisibility(View.GONE);
             ll_mine_cash.setVisibility(View.VISIBLE);
+
+            //进行访问网络
+            getPromoteInfo();
         } else {
             name.setText("游客");
             ll_mine_cash.setVisibility(View.GONE);
             loginRegister.setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * 获取推广信息接口
+     */
+    private void getPromoteInfo() {
+        try {
+            OkHttpUtils.post()
+                    .url(Constant.ACCOUNT_INFO)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
+                    .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))
+                    .addParams("account", UserDao.getLocalUser().userName)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            UserInfoResponse oneBannerBean = JSON.parseObject(response, UserInfoResponse.class);
+                            if (oneBannerBean.getCode() == 200) {
+                                //为 200的响应码
+                                float balance=oneBannerBean.getData().getBalance();
+                                String promoteNum=oneBannerBean.getData().getPromoteNum();
+                                String eqCodeUrl=oneBannerBean.getData().getEqCodeUrl();
+                                boolean lockStatus=oneBannerBean.getData().getLockStatus().equals("1")?true:false;
+                                try {
+                                    UserBean userBean=UserDao.getLocalUser();
+                                    userBean.totalBalance=balance;
+                                    userBean.zcodeImgUrl=eqCodeUrl;
+                                    userBean.isExtendistionState=lockStatus;
+                                    userBean.extensitionCount=Integer.parseInt(promoteNum);
+                                    UserDao.saveUpDate(userBean);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                //重新初始化数据
+                                initData();
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);

@@ -15,6 +15,16 @@
             android:roundIcon="@mipmap/icon_2"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <!-- 接口的前缀 url-->
+        <meta-data android:name="url" android:value="${interface_url}"></meta-data>
+
+        <!-- 渠道号-->
+        <meta-data android:name="channel_id" android:value="${channel_id}"></meta-data>
+
+        <!-- 平台-->
+       <meta-data android:name="platform_id" android:value="${platformId}"></meta-data>
+
         <activity
                 android:name=".activity.SplashActivity"
                 android:screenOrientation="portrait">

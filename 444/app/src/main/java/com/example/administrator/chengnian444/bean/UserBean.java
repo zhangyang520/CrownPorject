@@ -25,7 +25,7 @@ public class UserBean {
     public double totalCash;
 
     //推广人数
-    public int extensitionCount;
+    public int extensitionCount=0;
 
     //一级推广收益
     public double firstPromotionBenfits;
@@ -36,7 +36,7 @@ public class UserBean {
     //三级推广收益
     public double thirdPromotionBenfits;
 
-    //用户名
+    //用户名  对应的可能是手机号 或者 后端 分配的账号
     public  String userName;
 
     //密码
@@ -51,12 +51,15 @@ public class UserBean {
     public boolean isSafeLocked;
 
     //推广码
-    public  String extendistinCode;
+    public  String extendistinCode="";
 
     //对应的推广的二维码图片的路径
     public String zcodeImgUrl;
 
     //你输入的 推广码 是否已经被绑定
     public boolean isExtendistionState;
+
+    //下载的链接  分享下载链接地址
+    public String  url;
 
 }

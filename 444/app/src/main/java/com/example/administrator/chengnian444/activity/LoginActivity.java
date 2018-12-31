@@ -133,9 +133,9 @@ public class LoginActivity extends BaseActivity {
         if(!etPhone.getText().toString().equals("") &&
                      !etPwd.getText().toString().equals("")){
              //都不为空
-            if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
+            if(!etPhone.getText().toString().matches(ConstantTips.LOGIN_USER_NAME_REGEX)){
                 //如果手机号 不满足格式
-                ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);
+                ToastUtils.showToast(this,"登录的账号不能为空");
                 return false;
             }
 

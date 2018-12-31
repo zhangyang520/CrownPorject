@@ -125,7 +125,30 @@
     </RelativeLayout>
 
 
+    <LinearLayout
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/first_margin_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/first_item_height">
 
+        <ImageView
+                android:layout_marginLeft="@dimen/second_margin_left"
+                android:layout_width="10.9dp"
+                android:layout_height="15.2dp"
+                android:src="@mipmap/iv_mine_register_excode"/>
+        <EditText
+                android:minLines="6"
+                android:maxLength="12"
+                android:id="@+id/ed_extendition_code"
+                android:textSize="13.0sp"
+                android:paddingLeft="@dimen/first_margin_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="请输入邀请人推广码（非必填）"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_register"

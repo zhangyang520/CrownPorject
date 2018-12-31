@@ -4,7 +4,12 @@ public class Constant {
     public static final String HOST = "app.ldtx365.com";
     //public static final String HOST = "192.168.0.66:8082";
    //public static final String HOST = "203.189.234.147:8082";
-    public static final String BASEURL = "http://" + HOST;
+    public static  String BASEURL = "http://" + HOST;
+
+    //渠道的id
+    public static String channel_id="";
+    //平台的id
+    public static String platform_id="";
 
     //图片地址
     public static final String IMG ="http://47.244.13.89:8080/images/";
@@ -58,6 +63,30 @@ public class Constant {
 
     //注册的显示隐藏
     public static  final String REGISTERISOPEN =BASEURL+"/qsMovie/isOpen";
- //获取版本信息
- public static  final String VERSIONBYTYPE =BASEURL+"/qsMovie/versionByType";
+   //获取版本信息
+   public static  final String VERSIONBYTYPE =BASEURL+"/qsMovie/versionByType";
+
+   //获取 分享推广信息链接
+    public static final String PROMOTION_INFO=BASEURL+"/reder/getPromoteCode";
+
+    //获取用户的信息
+    public static final String ACCOUNT_INFO="/reder/getAccountInfo";
+
+    //设置安全密码
+    public static final String setSecurityPassword="/reder/setSecurityPassword";
+
+    //重置安全密码
+    public static final String resetSafetyPwd="/reder/resetSecurityPassword";
+
+    //是否绑定安全密码
+    public static final String validateSecurityPwd="/reder/validateSecurityPassword";
+
+    //推广码验证的接口
+    public static final String  verifyPromoteCode="/reder/verifyPromoteCode";
+
+    //申请提现的验证
+    public static final String validateCashWithdraw="/reder/validateCashWithdraw";
+
+    //提交 申请接口
+    public static final String cashWithdraw="/reder/cashWithdraw";
 }

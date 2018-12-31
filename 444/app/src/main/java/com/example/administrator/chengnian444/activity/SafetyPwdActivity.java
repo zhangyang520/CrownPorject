@@ -13,20 +13,30 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.bean.SettingSafetyPwdResponse;
+import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
+import com.example.administrator.chengnian444.dao.UserDao;
+import com.example.administrator.chengnian444.exception.ContentException;
+import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import okhttp3.Call;
 
 
 /**
-  *    安全密码界面
-     * @Title:
-     * @ProjectName
-     * @Description: TODO
-     * @author zhangyang
-     * @date
-     */
+ *  安全密码界面
+ * @Title:
+ * @ProjectName
+ * @Description: TODO
+ * @author zhangyang
+ * @date
+ */
 public class SafetyPwdActivity extends AppCompatActivity {
 
 
@@ -52,6 +62,15 @@ public class SafetyPwdActivity extends AppCompatActivity {
         //这边传递一个安全密码 是否绑定类型
         isSafetyPwd=getIntent().getBooleanExtra("isSafetyPwd",false);
 
+        //初始化数据
+        initData();
+    }
+
+
+    /**
+     * 初始化数据
+     */
+    private void initData(){
         if(!isSafetyPwd){
             //如果安全密码已经绑定
             btn_ok_safe_pwd.setVisibility(View.VISIBLE);
@@ -83,7 +102,8 @@ public class SafetyPwdActivity extends AppCompatActivity {
                 finish();
                 break;
 
-            case R.id.tv_edit_pwd:
+
+            case R.id.tv_edit_pwd:  //暂时 消失
                 //修改密码 弹出对应的对话框
                 View contentView=View.inflate(this,R.layout.dialog_original_security_pwd,null);
                 final AlertDialog alertDialog=new AlertDialog.Builder(this).setView(contentView).create();
@@ -127,6 +147,43 @@ public class SafetyPwdActivity extends AppCompatActivity {
                 if(verifyOK()){
                      //进行业务的处理
                     //todo 增加请求过程
+                    try {
+                        OkHttpUtils.post().url(Constant.setSecurityPassword)
+                                  .addHeader("Content-Type","application/json")
+                                  .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
+                                  .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
+                                  .addParams("securityPassword",et_safety_pwd.getText().toString())
+                                  .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                ToastUtils.showToast(SafetyPwdActivity.this,"安全密码设置失败");
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                //成功的请求
+                                SettingSafetyPwdResponse settingSafetyPwdResponse=JSON.parseObject(response,SettingSafetyPwdResponse.class);
+                                if(settingSafetyPwdResponse.getCode() == 200 && settingSafetyPwdResponse.isData()){
+                                    //如果设置成功
+                                    try {
+                                        UserBean userBean=UserDao.getLocalUser();
+                                        userBean.isSafeLocked=true;
+                                        userBean.safePwd=et_safety_pwd.getText().toString();
+                                        UserDao.saveUpDate(userBean);
+                                        isSafetyPwd=true;
+                                        initData();
+                                    } catch (ContentException e) {
+                                        e.printStackTrace();
+                                    }
+                                }else{
+                                    //如果安全密码 设置 失败
+                                    ToastUtils.showToast(SafetyPwdActivity.this,settingSafetyPwdResponse.getMessage());
+                                }
+                            }
+                        });
+                    } catch (ContentException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }

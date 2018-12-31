@@ -32,7 +32,7 @@ public class ConstantTips {
      *
      *   格式化的字符串
      */
-
+    public static final String LOGIN_USER_NAME_REGEX=".+";
     //手机号的 regex的字符串  \d||\w{1,11}  "\\d{11}"
     public static final String PHONE_REGEX = "\\d||\\w{1,11}";
 
@@ -43,7 +43,10 @@ public class ConstantTips {
     public static final String VERIFY_CODE_REGEX="\\d{4,6}";
 
     //安全密码的验证
-    public static final String SAFE_PWD_VERIFY = "\\d{4}";
+    public static final String SAFE_PWD_VERIFY = "\\d||\\w{6}";
+
+    //推广码的验证
+    public static final String EXTENDITION_CODE_REGEX="\\d{6}";
 
     //一些的键 特定字符串
     public static final String isSettingSafePwd="isSettingSafePwd";

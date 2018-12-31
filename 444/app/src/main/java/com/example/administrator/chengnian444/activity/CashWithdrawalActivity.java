@@ -15,15 +15,21 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.bean.IsLockSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
+import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.PopupUtils;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import okhttp3.Call;
 
 /**
   *    提现申请的界面
@@ -72,6 +78,8 @@ public class CashWithdrawalActivity extends AppCompatActivity {
     @Bind(R.id.tv_third_benfit)
     TextView tv_third_benfit;
 
+    @Bind(R.id.tv_rate)
+    TextView tv_rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +112,9 @@ public class CashWithdrawalActivity extends AppCompatActivity {
 
     }
 
+    //支付类型 0:微信提现  1:支付宝提现
+    int type=1;
+
     @OnClick({R.id.back,R.id.rl_pay_type,R.id.tv_balance_detail,R.id.btn_submit})
      public void onClick(View view) {
 
@@ -113,19 +124,19 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                 break;
 
             case R.id.rl_pay_type:
-                int type=0;
+                 type=1;
                 if(tv_cash_type.getText().equals("支付宝")){
                     //为支付宝的提现方式
-                    type=0;
+                    type=1;
                 }else{
                     //否则为微信 的提现方式
-                    type=1;
+                    type=0;
                 }
                 PopupUtils.showPayType(this, new PopupUtils.ClickOnListener() {
                     @Override
                     public void onOk(int currentCashType) {
                         //如果为支付宝
-                        if(currentCashType==0){
+                        if(currentCashType==1){
                             tv_cash_type.setText("支付宝");
                             tv_cash_user_name.setText("支付宝账号");
                             ed_alipay_name.setHint("请输入支付宝账号");
@@ -150,35 +161,144 @@ public class CashWithdrawalActivity extends AppCompatActivity {
             case R.id.btn_submit:
                 //点击提交
                 if(verifySubmit()){
-                        //修改密码 弹出对应的对话框
-                        View contentView=View.inflate(this,R.layout.dialog_application_submission,null);
-                        final AlertDialog alertDialog=new AlertDialog.Builder(this).setView(contentView).create();
-                        Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
-                        btn_cancel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
-                        final TextView tv_content=contentView.findViewById(R.id.tv_content);
-                        //todo  tv_content 设置账号
-                        Button btn_ok=contentView.findViewById(R.id.btn_ok);
-                        btn_ok.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                alertDialog.dismiss();
-
-                                showTipsDialog();
-                                //
-                            }
-                        });
-                        alertDialog.setCancelable(false);
-                        alertDialog.show();
+                        //验证接口 validateCashWithdraw
+                    validateCashWithdraw();
                 }
                 break;
         }
      }
+
+
+    /**
+     * 是否确定提现到对应的账户上
+     */
+    private  void showOkSubmit(){
+            //修改密码 弹出对应的对话框
+            View contentView=View.inflate(this,R.layout.dialog_application_submission,null);
+            final AlertDialog alertDialog=new AlertDialog.Builder(this).setView(contentView).create();
+            Button btn_cancel = contentView.findViewById(R.id.btn_cancel);
+            btn_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
+            final TextView tv_content=contentView.findViewById(R.id.tv_content);
+            if(type==1){
+                //支付宝
+                tv_content.setText("支付宝账号:"+ed_alipay_name.getText().toString());
+            }else{
+                //微信
+                tv_content.setText("微信账号:"+ed_alipay_name.getText().toString());
+            }
+            Button btn_ok=contentView.findViewById(R.id.btn_ok);
+            btn_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //提交接口
+                    cashWithdraw(alertDialog);
+                }
+            });
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+    }
+
+    /**
+     * 提交 申请接口
+     * @param alertDialog
+     */
+    private void cashWithdraw(final AlertDialog alertDialog){
+        try {
+            OkHttpUtils.post().url(Constant.cashWithdraw)
+                    .addHeader("ContentType", "application/json")
+                    .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
+                    .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
+                    .addParams("drawlWay",type+"")
+                    .addParams("drawlAccount",ed_alipay_name.getText().toString())
+                    .addParams("amount",ed_cash_withdraw.getText().toString())
+                    .addParams("securityPassword",ed_safety_pass.getText().toString())
+                    .addParams("rate",tv_rate.getText().toString())
+                    .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                }
+
+                @Override
+                public void onResponse(String response, int id) {
+                    try {
+                        IsLockSafetyPwdResponse isLockSafetyPwdResponse=
+                                JSON.parseObject(response,IsLockSafetyPwdResponse.class);
+                        if(isLockSafetyPwdResponse.getCode()==200){
+                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
+                            if(isLockSafetyPwdResponse.isData()){
+                                //安全密码 验证成功 提交成功
+                                alertDialog.dismiss();
+                                showTipsDialog();
+                            }else{
+                                //安全密码 验证失败
+                            }
+                        }else{
+                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
+                        }
+                    } catch (Exception e) {
+                        ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                    }
+                }
+            });
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * 提现的 验证接口
+     */
+    private void validateCashWithdraw() {
+        try {
+            OkHttpUtils.post().url(Constant.validateCashWithdraw)
+                    .addHeader("ContentType", "application/json")
+                    .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
+                    .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
+                    .addParams("drawlWay",type+"")
+                    .addParams("drawlAccount",ed_alipay_name.getText().toString())
+                    .addParams("amount",ed_cash_withdraw.getText().toString())
+                    .addParams("securityPassword",ed_safety_pass.getText().toString())
+                    .addParams("rate",tv_rate.getText().toString())
+                    .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                }
+
+                @Override
+                public void onResponse(String response, int id) {
+                    try {
+                        IsLockSafetyPwdResponse isLockSafetyPwdResponse=
+                                JSON.parseObject(response,IsLockSafetyPwdResponse.class);
+                        if(isLockSafetyPwdResponse.getCode()==200){
+                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
+                            if(isLockSafetyPwdResponse.isData()){
+                                //安全密码 验证成功
+                                showOkSubmit();
+                            }else{
+                               //安全密码 验证失败
+                            }
+                        }else{
+                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
+                        }
+                    } catch (Exception e) {
+                        ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                    }
+                }
+            });
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 弹出 提示框

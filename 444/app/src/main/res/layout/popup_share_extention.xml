@@ -69,7 +69,6 @@
             android:id="@+id/iv_zcode"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/tv_title"
-            android:src="@mipmap/iv_mine_zcode"
             android:layout_centerHorizontal="true"
             android:layout_width="196.4dp"
             android:layout_height="196.4dp"/>
@@ -88,6 +87,7 @@
              />
 
         <TextView
+                android:id="@+id/tv_my_code"
                 android:layout_marginTop="10dp"
                 style="@style/txt_48px_white"
                 android:text="123456"

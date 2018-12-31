@@ -70,7 +70,7 @@
                 android:paddingLeft="@dimen/first_margin_left"
                 android:background="@null"
                 android:maxLength="11"
-                android:hint="请输入11位手机号"/>
+                android:hint="请输入账号"/>
     </LinearLayout>
     <View
             android:id="@+id/line2"

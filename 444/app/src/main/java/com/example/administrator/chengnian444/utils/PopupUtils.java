@@ -62,8 +62,8 @@ public class PopupUtils {
          btn_alipay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentType=0;
-                if(currentType==0){
+                currentType=1;
+                if(currentType==1){
                     //支付宝
                     btn_alipay.setBackgroundResource(R.mipmap.iv_mine_rect_gray_cash);
                     btn_wechat.setBackgroundResource(R.mipmap.iv_mine_rect_white_cash);
@@ -80,8 +80,8 @@ public class PopupUtils {
         btn_wechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentType=1;
-                if(currentType==0){
+                currentType=0;
+                if(currentType==1){
                     //支付宝
                     btn_alipay.setBackgroundResource(R.mipmap.iv_mine_rect_gray_cash);
                     btn_wechat.setBackgroundResource(R.mipmap.iv_mine_rect_white_cash);
@@ -93,7 +93,7 @@ public class PopupUtils {
             }
         });
 
-        if(type==0){
+        if(type==1){
             //支付宝
             btn_alipay.setBackgroundResource(R.mipmap.iv_mine_rect_gray_cash);
             btn_wechat.setBackgroundResource(R.mipmap.iv_mine_rect_white_cash);
