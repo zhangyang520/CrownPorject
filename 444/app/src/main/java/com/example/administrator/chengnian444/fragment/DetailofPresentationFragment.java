@@ -16,10 +16,11 @@ import butterknife.ButterKnife;
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.adapter.PresentationRecylerviewAdapter;
-import com.example.administrator.chengnian444.bean.BannerBean;
-import com.example.administrator.chengnian444.bean.InComeBean;
-import com.example.administrator.chengnian444.bean.PresentationBalanceBean;
+import com.example.administrator.chengnian444.bean.*;
+import com.example.administrator.chengnian444.dao.UserDao;
+import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.utils.DateUtil;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -76,7 +77,7 @@ public class DetailofPresentationFragment extends Fragment {
         //进行初始化数据 也可以说 请求数据H
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        datas=getDatas();
+//        datas=getDatas();
         presentationRecylerviewAdapter = new PresentationRecylerviewAdapter(getContext(), datas);
         recycler.setLayoutManager(linearLayoutManager);
         recycler.setAdapter(presentationRecylerviewAdapter);
@@ -112,36 +113,52 @@ public class DetailofPresentationFragment extends Fragment {
      * http请求的数据
      */
     private void httpgetDate() {
-        OkHttpUtils.get()
-                .url(Constant.BANNER)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
-                .addParams("type", "10002")
-                .addParams("appType","001")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        BannerBean bannerBean = JSON.parseObject(response, BannerBean.class);
-                        if (bannerBean.getCode() == 200) {
-
-//                            bannerBeanData = bannerBean.getData();
-//                            for (int i = 0; i < bannerBeanData.size(); i++) {
-//                                String image = bannerBeanData.get(i).getImage();
-//                                images1.add(image);
-//                            }
-//
-//                            bannerMove.setImagesUrl(images1);
-                        } else {
-                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+        try {
+            OkHttpUtils.get()
+                    .url(Constant.BASEURL+Constant.BANNER)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
+                    .addParams("account", UserDao.getLocalUser().userName)
+                    .addParams("appType",Constant.platform_id)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            ToastUtils.showToast(getActivity(),"查看提现明細失敗!");
                         }
-                    }
-                });
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                                WithdrawDetailResponse bannerBean = JSON.parseObject(response, WithdrawDetailResponse.class);
+                                if (bannerBean.getCode() == 200) {
+                                    //進行轉換
+                                    if(bannerBean.getData()!=null && bannerBean.getData().size()>0){
+                                        ArrayList<PresentationBalanceBean> inComeBeanArrayList=new ArrayList<PresentationBalanceBean>();
+                                        for (WithdrawDetailResponse.WithdrawDetail data : bannerBean.getData()) {
+                                            PresentationBalanceBean inComeBean=new PresentationBalanceBean();
+                                            inComeBean.setName(data.getBlanceName());
+                                            inComeBean.setBalance(data.getBalance());
+                                            inComeBean.setIncome(data.getMoneyCount());
+                                            inComeBean.setDate(DateUtil.getYearOrMonthOrDay(data.getCreateTime()));
+                                            inComeBeanArrayList.add(inComeBean);
+                                        }
+                                        if(page==1){
+                                            //進行刷訊
+                                            presentationRecylerviewAdapter.getIncomeBeans().clear();
+                                            presentationRecylerviewAdapter.getIncomeBeans().addAll(inComeBeanArrayList);
+                                        }else{
+                                            presentationRecylerviewAdapter.getIncomeBeans().addAll(inComeBeanArrayList);
+                                        }
+                                        presentationRecylerviewAdapter.notifyDataSetChanged();
+                                    }
+                                } else {
+                                    ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+                                }
+                        }
+                    });
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -96,7 +96,7 @@ public class ShareExtensionActivity extends AppCompatActivity {
     private void getUserExtenditionCode() {
         try {
             OkHttpUtils.post()
-                    .url(Constant.PROMOTION_INFO)
+                    .url(Constant.BASEURL+Constant.PROMOTION_INFO)
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

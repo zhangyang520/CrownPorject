@@ -96,7 +96,7 @@ public class MoveListActivity extends BaseActivity {
     private void httpgetDate() {
         dialogShow();
         OkHttpUtils.post()
-                .url(Constant.MOVELIST)
+                .url(Constant.BASEURL+Constant.MOVELIST)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

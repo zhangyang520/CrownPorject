@@ -70,7 +70,7 @@ public class MineFragment extends BaseFragment {
         StatusBarCompat.setStatusBarColor(getActivity(),getResources().getColor(R.color.black));
         //banner.setImageDrawable(getResources().getDrawable(R.mipmap.down));
         Glide.with(getActivity()).load(R.mipmap.login_bg).fitCenter().into(iv);
-
+        System.out.print(" MineFragment initView  1111");
     }
 
 
@@ -229,7 +229,7 @@ public class MineFragment extends BaseFragment {
      * @param alertDialog
      */
     private void   verifyPromoteCode(String userName, String safepwd, final AlertDialog alertDialog){
-        OkHttpUtils.post().url(Constant.verifyPromoteCode)
+        OkHttpUtils.post().url(Constant.BASEURL+Constant.verifyPromoteCode)
                 .addHeader("ContentType", "application/json")
                 .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
@@ -253,6 +253,8 @@ public class MineFragment extends BaseFragment {
                             userBean.isExtendistionState=true;
                             UserDao.saveUpDate(userBean);
                             alertDialog.dismiss();
+                            //展示 数据
+                            showData();
                         }else{
                             UserBean userBean=UserDao.getLocalUser();
                             userBean.isExtendistionState=false;
@@ -272,7 +274,7 @@ public class MineFragment extends BaseFragment {
      * @param userName
      */
     private void validateSecurityPassword(String userName) {
-        OkHttpUtils.post().url(Constant.validateSecurityPwd)
+        OkHttpUtils.post().url(Constant.BASEURL+Constant.validateSecurityPwd)
                 .addHeader("ContentType", "application/json")
                 .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
@@ -315,6 +317,14 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        showData();
+        System.out.print(" MineFragment onResume  1111 is login:"+SPUtils.getInstance(getActivity()).getBoolean("isLogin"));
+    }
+
+    /**
+     * 初始化数据
+     */
+    public  void showData(){
         HomeFragment.imageView.setVisibility(View.GONE);
         if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")) {
             name.setText(SPUtils.getInstance(getActivity()).getString("name"));
@@ -331,14 +341,13 @@ public class MineFragment extends BaseFragment {
             loginRegister.setVisibility(View.VISIBLE);
         }
     }
-
     /**
      * 获取推广信息接口
      */
     private void getPromoteInfo() {
         try {
             OkHttpUtils.post()
-                    .url(Constant.ACCOUNT_INFO)
+                    .url(Constant.BASEURL+Constant.ACCOUNT_INFO)
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                     .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))

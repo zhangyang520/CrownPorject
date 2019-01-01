@@ -34,7 +34,7 @@ public class TextAdapter extends BaseQuickAdapter<HomeBean.DataBean.LiveMoviesBe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MediaActivity.class);
-                intent.putExtra("id",item.getId());
+                intent.putExtra("id",item.getId()+"");
                 intent.putExtra("moveUrl",item.getUrl());
                 intent.putExtra("image",item.getBigimage());
                 intent.putExtra("typenum",item.getTypenum()+"");

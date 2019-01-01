@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     private void getHttpVersion() {
         OkHttpUtils.post()
-                .url(Constant.VERSIONBYTYPE)
+                .url(Constant.BASEURL+Constant.VERSIONBYTYPE)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("type","001android")
@@ -175,6 +175,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         }
         if (hasAddedFragment.contains(fragment)) {
             mTransaction.show(fragment);
+            if(fragment instanceof  MineFragment){
+                ((MineFragment)(fragment)).showData();
+            }
+
+            if(fragment instanceof HomeFragment){
+                ((HomeFragment)fragment).getHomeList();
+            }
         } else {
             mTransaction.add(R.id.main_fragment_container, fragment);
             hasAddedFragment.add(fragment);

@@ -80,9 +80,8 @@ public class TestFragment extends BaseFragment {
 
     private void httpgetDate() {
         dialogShow();
-        OkHttpUtils.get()
-                .url(Constant.MOVELIST)
-                .addHeader("Content-Type", "application/json")
+        OkHttpUtils.post()
+                .url(Constant.BASEURL+Constant.MOVELIST)
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))
                 .addParams("typeNum", type)

@@ -7,10 +7,23 @@ public class MessageCodeBean {
      * msg : OK
      * data : 短信发送成功!
      */
-
     private int code;
     private String message;
-    private String data;
+    private String data="";
+
+    public MessageCodeBean() {
+    }
+
+    public MessageCodeBean(int code, String message, String data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public MessageCodeBean(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     public int getCode() {
         return code;

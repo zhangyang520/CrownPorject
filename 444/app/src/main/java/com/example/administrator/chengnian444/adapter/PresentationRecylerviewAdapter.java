@@ -46,6 +46,14 @@ public class PresentationRecylerviewAdapter extends RecyclerView.Adapter <Presen
         return 0;
     }
 
+    public List<PresentationBalanceBean> getIncomeBeans() {
+        return incomeBeans;
+    }
+
+    public void setIncomeBeans(List<PresentationBalanceBean> incomeBeans) {
+        this.incomeBeans = incomeBeans;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull IncomeViewHolder incomeViewHolder, int i) {
         incomeViewHolder.tv_balance.setText("余额："+incomeBeans.get(i).getBalance().toString());

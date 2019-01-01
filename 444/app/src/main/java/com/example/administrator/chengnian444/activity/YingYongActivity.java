@@ -47,7 +47,7 @@ public class YingYongActivity extends BaseActivity {
 
     private void httpYingyongList() {
         OkHttpUtils.post()
-                .url(Constant.YINGYONGLIST)
+                .url(Constant.BASEURL+Constant.YINGYONGLIST)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

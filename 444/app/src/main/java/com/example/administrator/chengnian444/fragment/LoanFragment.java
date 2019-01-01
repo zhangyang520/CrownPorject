@@ -20,6 +20,7 @@ import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.activity.WebActivity;
 import com.example.administrator.chengnian444.base.BaseFragment;
 import com.example.administrator.chengnian444.bean.BannerBean;
+import com.example.administrator.chengnian444.bean.LiveTypesResponseInfo;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.TabUtils;
@@ -64,6 +65,7 @@ public class LoanFragment extends BaseFragment {
 //    JudgeNestedScrollView scrollView;
     private List<BannerBean.DataBean> bannerBeanData;
 
+    private List<LiveTypesResponseInfo.LiveTypesResponse> liveTypesResponses;
     @Override
     protected int getContentLayoutRes() {
         return R.layout.fragment_loan;
@@ -74,62 +76,24 @@ public class LoanFragment extends BaseFragment {
         //获取电影类型
         getBannerMove();
 
-        list.add("中文有碼");
-        list.add("中文無碼");
-        list.add("日本有碼");
-        list.add("日本無碼");
-        list.add("歐美無碼");
-        list.add("三級劇情");
-        list.add("卡通動漫");
-        list.add("偷拍自拍");
-        list1.add("6");
-        list1.add("5");
-        list1.add("7");
-        list1.add("8");
-        list1.add("4");
-        list1.add("1");
-        list1.add("2");
-        list1.add("3");
-
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
-        vp.setAdapter(myPagerAdapter);
-
-        CommonNavigator commonNavigator = new CommonNavigator(getContext());
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-
-            @Override
-            public int getCount() {
-                return list == null ? 0 : list.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-                colorTransitionPagerTitleView.setNormalColor(Color.parseColor("#bebebe"));
-                colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
-                colorTransitionPagerTitleView.setText(list.get(index));
-                colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        vp.setCurrentItem(index);
-                    }
-                });
-                return colorTransitionPagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(context.getResources().getColor(R.color.yellow));
-                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
-                //设置indicator的宽度
-                indicator.setLineWidth(TabUtils.Dp2Px(context,29));
-                indicator.setLineHeight(TabUtils.Dp2Px(context,4));
-                return indicator;
-            }
-        });
-        magic_indicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(magic_indicator,vp);
+        //獲取 類型數據
+        getTypeList();
+//        list.add("中文有碼");
+//        list.add("中文無碼");
+//        list.add("日本有碼");
+//        list.add("日本無碼");
+//        list.add("歐美無碼");
+//        list.add("三級劇情");
+//        list.add("卡通動漫");
+//        list.add("偷拍自拍");
+//        list1.add("6");
+//        list1.add("5");
+//        list1.add("7");
+//        list1.add("8");
+//        list1.add("4");
+//        list1.add("1");
+//        list1.add("2");
+//        list1.add("3");
 
         bannerMove.setOnItemClickListener(new FlyBanner.OnItemClickListener() {
             @Override
@@ -182,11 +146,45 @@ public class LoanFragment extends BaseFragment {
 
     }
 
+    /**
+     * 獲取 類型的數據
+     */
+    private void getTypeList() {
+        OkHttpUtils.post()
+                .url(Constant.BASEURL+Constant.MOVETYPE)
+                .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
+                .addParams("type", "10002")
+                .addParams("appType",Constant.platform_id)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        LiveTypesResponseInfo bannerBean = JSON.parseObject(response,  LiveTypesResponseInfo.class);
+                        if (bannerBean.getCode() == 200) {
+
+                            liveTypesResponses = bannerBean.getData();
+                            for (int i = 0; i < liveTypesResponses.size(); i++) {
+                                list.add(liveTypesResponses.get(i).getType());
+                                list1.add(liveTypesResponses.get(i).getTypeNum());
+                            }
+
+                            initData();
+                        } else {
+                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+                        }
+                    }
+                });
+    }
+
     private void getBannerMove() {
 
-        OkHttpUtils.get()
-                .url(Constant.BANNER)
-                .addHeader("Content-Type", "application/json")
+        OkHttpUtils.post()
+                .url(Constant.BASEURL+Constant.BANNER)
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("type", "10002")
                 .addParams("appType","001")
@@ -216,6 +214,51 @@ public class LoanFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * 初始化 數據
+     */
+    private void initData(){
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
+        vp.setAdapter(myPagerAdapter);
+
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return list == null ? 0 : list.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
+                colorTransitionPagerTitleView.setNormalColor(Color.parseColor("#bebebe"));
+                colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
+                colorTransitionPagerTitleView.setText(list.get(index));
+                colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        vp.setCurrentItem(index);
+                    }
+                });
+                return colorTransitionPagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setColors(context.getResources().getColor(R.color.yellow));
+                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                //设置indicator的宽度
+                indicator.setLineWidth(TabUtils.Dp2Px(context,29));
+                indicator.setLineHeight(TabUtils.Dp2Px(context,4));
+                return indicator;
+            }
+        });
+        magic_indicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(magic_indicator,vp);
+
+    }
     class MyPagerAdapter extends FragmentPagerAdapter {
 
         public MyPagerAdapter(FragmentManager fm) {

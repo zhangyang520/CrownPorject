@@ -73,7 +73,7 @@ public class ResetPwdActivity extends BaseActivity {
                 if (verifyOk()){
                     //进行请求数据
                     //todo 增加请求过程
-                        OkHttpUtils.post().url(Constant.resetSafetyPwd)
+                        OkHttpUtils.post().url(Constant.BASEURL+Constant.resetSafetyPwd)
                                 .addHeader("Content-Type","application/json")
                                 .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                                 .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
@@ -114,7 +114,7 @@ public class ResetPwdActivity extends BaseActivity {
                  if(verifyCode()){
                      String et_code = et_phone.getText().toString().trim();
                      OkHttpUtils.post().
-                             url(Constant.GETCODE)
+                             url(Constant.BASEURL+Constant.GETCODE)
                              .addHeader("Content-Type","application/json")
                              .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                              .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

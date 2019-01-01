@@ -72,7 +72,7 @@ public class ForgetPwdActivity extends BaseActivity {
                 if(verifyCode()){
                     String et_code = etPhone.getText().toString().trim();
                     OkHttpUtils.post().
-                                url(Constant.GETCODE)
+                                url(Constant.BASEURL+Constant.GETCODE)
                                 .addHeader("Content-Type","application/json")
                                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
@@ -107,7 +107,7 @@ public class ForgetPwdActivity extends BaseActivity {
                     String phone = etPhone.getText().toString().trim();
                     final String code = etPwd.getText().toString().trim();
                     String pwd1 = password.getText().toString().trim();
-                    OkHttpUtils.post().url(Constant.UPDATAPASSWORD)
+                    OkHttpUtils.post().url(Constant.BASEURL+Constant.UPDATAPASSWORD)
                             .addHeader("Content-Type","application/json")
                             .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                             .addParams("account",phone)

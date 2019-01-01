@@ -16,7 +16,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 /**
@@ -90,14 +92,17 @@ public class MyApplication extends Application {
     }
 
     private void initOkHttpClient() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(getInterceptor())
                       .connectTimeout(10000L, TimeUnit.MILLISECONDS) //链接超时
                     .readTimeout(10000L, TimeUnit.MILLISECONDS) //读取超时
                     .build(); //其他配置
-
              OkHttpUtils.initClient(okHttpClient);
             }
 
-
+    private Interceptor getInterceptor() {
+        HttpLoggingInterceptor interceptor= new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
+    }
 
 }

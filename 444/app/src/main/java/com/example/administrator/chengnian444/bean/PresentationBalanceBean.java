@@ -10,9 +10,9 @@ package com.example.administrator.chengnian444.bean;
  */
 public class PresentationBalanceBean {
     String name; //提现名称
-    Double balance; //余额
+    double balance; //余额
     String date; //日期
-    Double income;//收入
+    double income;//收入
 
     public PresentationBalanceBean(String name, Double balance, String date, Double income) {
         this.name = name;
@@ -36,7 +36,7 @@ public class PresentationBalanceBean {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -52,7 +52,7 @@ public class PresentationBalanceBean {
         return income;
     }
 
-    public void setIncome(Double income) {
+    public void setIncome(double income) {
         this.income = income;
     }
 

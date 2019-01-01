@@ -118,7 +118,7 @@ public class MediaActivity extends BaseActivity {
 
     private void getLookCount() {
         OkHttpUtils.post()
-                .url(Constant.REGISTERISOPEN)
+                .url(Constant.BASEURL+Constant.REGISTERISOPEN)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("appType","001")
@@ -155,7 +155,7 @@ public class MediaActivity extends BaseActivity {
     }
     private void getOneBannerHttp() {
         OkHttpUtils.post()
-                .url(Constant.GETONEBANNER)
+                .url(Constant.BASEURL+Constant.GETONEBANNER)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
@@ -172,9 +172,15 @@ public class MediaActivity extends BaseActivity {
                     public void onResponse(String response, int id) {
                         OneBannerBean oneBannerBean = JSON.parseObject(response, OneBannerBean.class);
                         if (oneBannerBean.getCode() == 200) {
-                            String image = oneBannerBean.getData().getImage();
-                            url1 = oneBannerBean.getData().getUrl();
-                            Glide.with(MediaActivity.this).load(image).placeholder(R.mipmap.zhanwei3).centerCrop().into(mediaImage);
+                            if(oneBannerBean.getData()!=null){
+                                String image = oneBannerBean.getData().getImage();
+                                url1 = oneBannerBean.getData().getUrl();
+                                Glide.with(MediaActivity.this).load(image).placeholder(R.mipmap.zhanwei3).centerCrop().into(mediaImage);
+                            }else{
+                                url1 ="";
+                                Glide.with(MediaActivity.this).load("").placeholder(R.mipmap.zhanwei3).centerCrop().into(mediaImage);
+                            }
+
                         }else if (oneBannerBean.getCode() == 301){
                             exitDialog();
                             finish();
@@ -187,7 +193,7 @@ public class MediaActivity extends BaseActivity {
     private void getMoveData(String typenum) {
         dialogShow();
         OkHttpUtils.post()
-                .url(Constant.HOMECHANGE)
+                .url(Constant.BASEURL+Constant.HOMECHANGE)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
@@ -294,7 +300,7 @@ public class MediaActivity extends BaseActivity {
 
     private void getShareContent() {
         OkHttpUtils.post()
-                .url(Constant.SHARE)
+                .url(Constant.BASEURL+Constant.SHARE)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

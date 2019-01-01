@@ -210,7 +210,7 @@ public class CashWithdrawalActivity extends AppCompatActivity {
      */
     private void cashWithdraw(final AlertDialog alertDialog){
         try {
-            OkHttpUtils.post().url(Constant.cashWithdraw)
+            OkHttpUtils.post().url(Constant.BASEURL+Constant.cashWithdraw)
                     .addHeader("ContentType", "application/json")
                     .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
@@ -259,7 +259,7 @@ public class CashWithdrawalActivity extends AppCompatActivity {
      */
     private void validateCashWithdraw() {
         try {
-            OkHttpUtils.post().url(Constant.validateCashWithdraw)
+            OkHttpUtils.post().url(Constant.BASEURL+Constant.validateCashWithdraw)
                     .addHeader("ContentType", "application/json")
                     .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))

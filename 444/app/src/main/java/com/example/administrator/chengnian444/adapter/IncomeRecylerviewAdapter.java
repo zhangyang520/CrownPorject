@@ -45,6 +45,14 @@ public class IncomeRecylerviewAdapter extends RecyclerView.Adapter <IncomeRecyle
         return 0;
     }
 
+    public List<InComeBean> getIncomeBeans() {
+        return incomeBeans;
+    }
+
+    public void setIncomeBeans(List<InComeBean> incomeBeans) {
+        this.incomeBeans = incomeBeans;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull IncomeViewHolder incomeViewHolder, int i) {
         incomeViewHolder.tv_balance.setText("余额："+incomeBeans.get(i).getBalance().toString());

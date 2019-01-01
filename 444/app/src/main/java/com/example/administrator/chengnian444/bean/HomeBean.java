@@ -39,6 +39,8 @@ public class HomeBean {
         private String type;
         private long createTime;
         private String url;
+        private String movieType; //电影类型code  1 三级剧情 2 卡通动漫 3 偷拍自拍 4 欧美无码 5 中文无码 6 中文有码 7 日本有码 8 日本无码
+        private String typeName;// 电影类型的名称
         private List<LiveMoviesBean> liveMovies;
 
         public int getId() {
@@ -85,6 +87,14 @@ public class HomeBean {
             return url;
         }
 
+        public String getMovieType() {
+            return movieType;
+        }
+
+        public void setMovieType(String movieType) {
+            this.movieType = movieType;
+        }
+
         public void setUrl(String url) {
             this.url = url;
         }
@@ -95,6 +105,14 @@ public class HomeBean {
 
         public void setLiveMovies(List<LiveMoviesBean> liveMovies) {
             this.liveMovies = liveMovies;
+        }
+
+        public String getTypeName() {
+            return typeName;
+        }
+
+        public void setTypeName(String typeName) {
+            this.typeName = typeName;
         }
 
         public static class LiveMoviesBean {

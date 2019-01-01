@@ -64,7 +64,7 @@ public class MoveFragment extends BaseFragment {
 
     private void getBannerData() {
         OkHttpUtils.post()
-                .url(Constant.BANNER)
+                .url(Constant.BASEURL+Constant.BANNER)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("type", "10003")
@@ -97,7 +97,7 @@ public class MoveFragment extends BaseFragment {
     private void getData() {
         dialogShow();
         OkHttpUtils.post()
-                .url(Constant.MOVEQUALITY)
+                .url(Constant.BASEURL+Constant.MOVEQUALITY)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))

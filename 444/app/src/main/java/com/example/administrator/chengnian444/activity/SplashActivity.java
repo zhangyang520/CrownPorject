@@ -45,7 +45,7 @@ public class SplashActivity extends BaseActivity {
 
     private void getHttpToken() {
         OkHttpUtils.post()
-                .url(Constant.TOKEN)
+                .url(Constant.BASEURL+Constant.TOKEN)
                 .addParams("userName", "admin")
                 .build()
                 .execute(new StringCallback() {

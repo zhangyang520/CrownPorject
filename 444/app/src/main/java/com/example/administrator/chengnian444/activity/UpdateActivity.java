@@ -70,7 +70,7 @@ public class UpdateActivity extends BaseActivity {
     private void updateHttp(String phone, String oldPwd, String newPwd) {
         Log.d("hcy","2222");
         OkHttpUtils.post()
-                .url(Constant.CHANGEPASSWORD)
+                .url(Constant.BASEURL+Constant.CHANGEPASSWORD)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))

@@ -148,7 +148,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
                      //进行业务的处理
                     //todo 增加请求过程
                     try {
-                        OkHttpUtils.post().url(Constant.setSecurityPassword)
+                        OkHttpUtils.post().url(Constant.BASEURL+Constant.setSecurityPassword)
                                   .addHeader("Content-Type","application/json")
                                   .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                                   .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))

@@ -1,7 +1,5 @@
 package com.example.administrator.chengnian444.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,8 +19,12 @@ import com.example.administrator.chengnian444.adapter.IncomeRecylerviewAdapter;
 import com.example.administrator.chengnian444.adapter.PresentationRecylerviewAdapter;
 import com.example.administrator.chengnian444.bean.BannerBean;
 import com.example.administrator.chengnian444.bean.InComeBean;
+import com.example.administrator.chengnian444.bean.IncomeDetailResponse;
 import com.example.administrator.chengnian444.bean.PresentationBalanceBean;
+import com.example.administrator.chengnian444.dao.UserDao;
+import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.utils.DateUtil;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -79,7 +81,7 @@ public class DetailofIncomesFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        datas=getDatas();
+//        datas=getDatas();
         presentationRecylerviewAdapter = new IncomeRecylerviewAdapter(getContext(), datas);
         recycler.setLayoutManager(linearLayoutManager);
         recycler.setAdapter(presentationRecylerviewAdapter);
@@ -114,36 +116,52 @@ public class DetailofIncomesFragment extends Fragment {
      */
     private void httpgetDate() {
 
-        OkHttpUtils.get()
-                .url(Constant.BANNER)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
-                .addParams("type", "10002")
-                .addParams("appType","001")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        BannerBean bannerBean = JSON.parseObject(response, BannerBean.class);
-                        if (bannerBean.getCode() == 200) {
-
-//                            bannerBeanData = bannerBean.getData();
-//                            for (int i = 0; i < bannerBeanData.size(); i++) {
-//                                String image = bannerBeanData.get(i).getImage();
-//                                images1.add(image);
-//                            }
-//
-//                            bannerMove.setImagesUrl(images1);
-                        } else {
-                            ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+        try {
+            OkHttpUtils.get()
+                    .url(Constant.BASEURL+Constant.incomeDetail)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
+                    .addParams("account", UserDao.getLocalUser().userName)
+                    .addParams("appType",Constant.platform_id)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            ToastUtils.showToast(getActivity(),"查看收益明細 失敗!");
                         }
-                    }
-                });
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            IncomeDetailResponse bannerBean = JSON.parseObject(response, IncomeDetailResponse.class);
+                            if (bannerBean.getCode() == 200) {
+                                //進行轉換
+                                if(bannerBean.getData()!=null && bannerBean.getData().size()>0){
+                                    ArrayList<InComeBean> inComeBeanArrayList=new ArrayList<InComeBean>();
+                                    for (IncomeDetailResponse.IncomeDetail data : bannerBean.getData()) {
+                                        InComeBean inComeBean=new InComeBean();
+                                        inComeBean.setName(data.getBlanceName());
+                                        inComeBean.setBalance(data.getBalance());
+                                        inComeBean.setIncome(data.getMoneyCount());
+                                        inComeBean.setDate(DateUtil.getYearOrMonthOrDay(data.getCreateTime()));
+                                        inComeBeanArrayList.add(inComeBean);
+                                    }
+                                    if(page==1){
+                                        //進行刷訊
+                                        presentationRecylerviewAdapter.getIncomeBeans().clear();
+                                        presentationRecylerviewAdapter.getIncomeBeans().addAll(inComeBeanArrayList);
+                                    }else{
+                                        presentationRecylerviewAdapter.getIncomeBeans().addAll(inComeBeanArrayList);
+                                    }
+                                    presentationRecylerviewAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+                            }
+                        }
+                    });
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
     }
 
 

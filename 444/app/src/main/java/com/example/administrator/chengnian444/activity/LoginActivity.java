@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity {
 
     private void httpIsOpen() {
         OkHttpUtils.post()
-                .url(Constant.REGISTERISOPEN)
+                .url(Constant.BASEURL+Constant.REGISTERISOPEN)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("appType","001")
@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity {
                 if(verifyLogin()){
                     String phone = etPhone.getText().toString().trim();
                     String pwd = etPwd.getText().toString().trim();
+                    login.setClickable(false);
                     httpLogin(phone, pwd);
                 }
                 break;
@@ -163,7 +164,7 @@ public class LoginActivity extends BaseActivity {
 
     private void httpLogin(String phone, String pwd) {
         OkHttpUtils.post()
-                .url(Constant.LOGIN)
+                .url(Constant.BASEURL+Constant.LOGIN)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("account", phone)
@@ -173,7 +174,7 @@ public class LoginActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        login.setClickable(true);
                     }
 
                     @Override

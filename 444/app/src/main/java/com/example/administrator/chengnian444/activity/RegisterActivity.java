@@ -19,6 +19,7 @@ import com.example.administrator.chengnian444.MainActivity;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.bean.MessageCodeBean;
+import com.example.administrator.chengnian444.bean.RegisterBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
@@ -71,11 +72,11 @@ public class RegisterActivity extends BaseActivity {
                 if(verifyCode()){
                     String et_code = etPhone.getText().toString().trim();
                     OkHttpUtils.post().
-                            url(Constant.GETCODE)
-                            .addHeader("Content-Type","application/json")
+                            url(Constant.BASEURL+Constant.GETCODE)
                             .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                             .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                             .addParams("account",et_code)
+                            .addParams("appType",Constant.platform_id)
                             .addParams("type","1")
                             .build().execute(new StringCallback() {
                         @Override
@@ -108,13 +109,21 @@ public class RegisterActivity extends BaseActivity {
                         phone = etPhone.getText().toString().trim();
                         String code = etPwd.getText().toString().trim();
                         String pwd1 = password.getText().toString().trim();
+                        Integer extentsionCode=0;
+                        if(ed_extendition_code.getText().toString().trim().equals("")){
+                            extentsionCode=0;
+                        }else{
+                            extentsionCode=Integer.parseInt(ed_extendition_code.getText().toString().trim());
+                        }
 
-                        OkHttpUtils.post().url(Constant.REGISTER)
+                        OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
                                 .addHeader("Content-Type","application/json")
                                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                                 .addParams("account", phone)
                                 .addParams("password",pwd1)
                                 .addParams("code",code)
+                                .addParams("preRememberId",extentsionCode+"")
+                                .addParams("channel",Constant.channel_id)
                                 .addParams("appType","001")
                                 .build()
                                 .execute(new StringCallback() {
@@ -126,15 +135,13 @@ public class RegisterActivity extends BaseActivity {
                                     @Override
                                     public void onResponse(String response, int id) {
                                         Log.d("hcy",response);
-                                        MessageCodeBean messageCodeBean = JSON.parseObject(response, MessageCodeBean.class);
+                                        RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
                                         if (messageCodeBean.getCode()==200){
-                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
-                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
-
-                                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+//                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
+//                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
                                             finish();
                                         }else {
-                                            ToastUtils.showToast(RegisterActivity.this,"注册失败");
+                                            ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());
                                         }
                                     }
                                 });
