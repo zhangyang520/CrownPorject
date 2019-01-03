@@ -1,6 +1,7 @@
 package com.example.administrator.chengnian444.bean;
 
 import com.lidroid.xutils.db.annotation.Id;
+import com.lidroid.xutils.db.annotation.NoAutoIncrement;
 import com.lidroid.xutils.db.annotation.Table;
 
 /**
@@ -14,8 +15,10 @@ import com.lidroid.xutils.db.annotation.Table;
  */
 @Table
 public class UserBean {
-
     @Id
+    @NoAutoIncrement
+    public int id;
+
     public String loginToken;
 
     //余额的总数

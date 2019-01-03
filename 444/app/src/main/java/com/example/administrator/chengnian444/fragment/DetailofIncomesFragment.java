@@ -117,9 +117,8 @@ public class DetailofIncomesFragment extends Fragment {
     private void httpgetDate() {
 
         try {
-            OkHttpUtils.get()
+            OkHttpUtils.post()
                     .url(Constant.BASEURL+Constant.incomeDetail)
-                    .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                     .addParams("account", UserDao.getLocalUser().userName)
                     .addParams("appType",Constant.platform_id)
@@ -153,6 +152,8 @@ public class DetailofIncomesFragment extends Fragment {
                                         presentationRecylerviewAdapter.getIncomeBeans().addAll(inComeBeanArrayList);
                                     }
                                     presentationRecylerviewAdapter.notifyDataSetChanged();
+                                }else{
+                                    ToastUtils.showToast(getActivity(),"暂无数据");
                                 }
                             } else {
                                 ToastUtils.showToast(getActivity(), bannerBean.getMessage());

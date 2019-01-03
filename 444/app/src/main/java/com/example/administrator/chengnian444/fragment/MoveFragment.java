@@ -36,7 +36,7 @@ public class MoveFragment extends BaseFragment {
     @Bind(R.id.home_iv)
     ImageView homeIv;
     private List<BannerBean.DataBean> bannerBeanData;
-
+    private boolean hasInternetData=false;
     @Override
     protected int getContentLayoutRes() {
         return R.layout.fragment_move;
@@ -62,6 +62,13 @@ public class MoveFragment extends BaseFragment {
 
     }
 
+    public void showData(){
+        if(!hasInternetData){
+            getBannerData();
+            getData();
+        }
+    }
+
     private void getBannerData() {
         OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.BANNER)
@@ -73,7 +80,7 @@ public class MoveFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        hasInternetData=false;
                     }
 
                     @Override
@@ -81,13 +88,17 @@ public class MoveFragment extends BaseFragment {
                         BannerBean bannerBean = JSON.parseObject(response, BannerBean.class);
                         if (bannerBean.getCode() == 200) {
                             List<String> images = new ArrayList<>();
-                            bannerBeanData = bannerBean.getData();
-                            for (int i = 0; i < bannerBeanData.size(); i++) {
-                                String image = bannerBeanData.get(i).getImage();
-                                images.add(image);
+                            if(bannerBean.getData()!=null){
+                                bannerBeanData = bannerBean.getData();
+                                for (int i = 0; i < bannerBeanData.size(); i++) {
+                                    String image = bannerBeanData.get(i).getImage();
+                                    images.add(image);
+                                }
+                                bannerQuality.setImagesUrl(images);
                             }
-                            bannerQuality.setImagesUrl(images);
+                            hasInternetData=true;
                         } else {
+                            hasInternetData=false;
                             ToastUtils.showToast(getActivity(),bannerBean.getMessage());
                         }
                     }
@@ -106,6 +117,7 @@ public class MoveFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         dialogDismiss();
+                        hasInternetData=false;
                     }
 
                     @Override
@@ -121,10 +133,12 @@ public class MoveFragment extends BaseFragment {
                                 QualityAdapter qualityAdapter = new QualityAdapter(R.layout.item_quality, dataList, getActivity());
                                 recyclerQuality.setAdapter(qualityAdapter);
                             }
-
+                            hasInternetData=true;
                         } else if (moveQuality.getCode() == 301){
                             exitDialog();
+                            hasInternetData=false;
                         }else {
+                            hasInternetData=false;
                             ToastUtils.showToast(getActivity(), moveQuality.getMessage());
                         }
                     }

@@ -74,11 +74,14 @@ public class SafetyPwdActivity extends AppCompatActivity {
         if(!isSafetyPwd){
             //如果安全密码已经绑定
             btn_ok_safe_pwd.setVisibility(View.VISIBLE);
+            et_safety_pwd.setEnabled(true);
             et_safety_pwd.setHint("请输入6位安全密码");
             et_safety_pwd.setHintTextColor(getResources().getColor(R.color.mine_cash_name));
         }else{
             //如果已经展现
             btn_ok_safe_pwd.setVisibility(View.GONE);
+            et_safety_pwd.setText("");
+            et_safety_pwd.setEnabled(false);
             et_safety_pwd.setHint("已设置安全密码");
             et_safety_pwd.setHintTextColor(getResources().getColor(R.color.black));
         }
@@ -149,10 +152,10 @@ public class SafetyPwdActivity extends AppCompatActivity {
                     //todo 增加请求过程
                     try {
                         OkHttpUtils.post().url(Constant.BASEURL+Constant.setSecurityPassword)
-                                  .addHeader("Content-Type","application/json")
                                   .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                                   .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
                                   .addParams("securityPassword",et_safety_pwd.getText().toString())
+                                  .addParams("appType",Constant.platform_id)
                                   .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
@@ -165,6 +168,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
                                 SettingSafetyPwdResponse settingSafetyPwdResponse=JSON.parseObject(response,SettingSafetyPwdResponse.class);
                                 if(settingSafetyPwdResponse.getCode() == 200 && settingSafetyPwdResponse.isData()){
                                     //如果设置成功
+                                    ToastUtils.showToast(SafetyPwdActivity.this,settingSafetyPwdResponse.getMessage());
                                     try {
                                         UserBean userBean=UserDao.getLocalUser();
                                         userBean.isSafeLocked=true;
@@ -196,7 +200,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
     private boolean verifyOK() {
         if(!et_safety_pwd.getText().toString().equals("")){
             if(!et_safety_pwd.getText().toString().matches(ConstantTips.SAFE_PWD_VERIFY)){
-                  ToastUtils.showToast(this,"安全密码必须是4位数字");
+                  ToastUtils.showToast(this,"安全密码必须是6位数字");
                   return false;
             }
             return true;

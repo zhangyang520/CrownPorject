@@ -101,6 +101,7 @@ public class ShareExtensionActivity extends AppCompatActivity {
                     .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                     .addParams("account", UserDao.getLocalUser().userName)
+                    .addParams("appType",Constant.platform_id)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -171,9 +172,18 @@ public class ShareExtensionActivity extends AppCompatActivity {
          if (clipboardManager == null) {
              clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
          }
-         ClipData clipData = ClipData.newPlainText("simple Text",
-                 "好多小姐姐在劈叉，快来快来睹一睹！我的推广码：123456，输入推广码即可获得现金奖励哦！http://779.sjxw365.com");
-         clipboardManager.setPrimaryClip(clipData);
-         ToastUtils.showToast(this,"复制成功！将链接粘贴发送给好友下载APP，好友注册后输入您的推广码可获得邀请现金");
+         try {
+             UserBean userBean=UserDao.getLocalUser();
+             String extenditionCode=userBean.extendistinCode;
+             String url=userBean.url;
+             ClipData clipData = ClipData.newPlainText("simple Text",
+                     "好多小姐姐在劈叉，快来快来睹一睹！我的推广码："+extenditionCode+"，输入推广码即可获得现金奖励哦！"+url);
+             clipboardManager.setPrimaryClip(clipData);
+             ToastUtils.showToast(this,"复制成功！将链接粘贴发送给好友下载APP，好友注册后输入您的推广码可获得邀请现金");
+         } catch (ContentException e) {
+             e.printStackTrace();
+         }
+
+
      }
 }

@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.bean.IsLockSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
+import com.example.administrator.chengnian444.bean.UserInfoResponse;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
@@ -96,7 +97,6 @@ public class CashWithdrawalActivity extends AppCompatActivity {
      * 初始化数据
      */
     private void initData() {
-
         try {
             //初始化用户
             UserBean userBean=UserDao.getLocalUser();
@@ -109,7 +109,6 @@ public class CashWithdrawalActivity extends AppCompatActivity {
             //初始化用户
             ToastUtils.showToast(this,ConstantTips.USER_NO_LOGIN);
         }
-
     }
 
     //支付类型 0:微信提现  1:支付宝提现
@@ -211,14 +210,14 @@ public class CashWithdrawalActivity extends AppCompatActivity {
     private void cashWithdraw(final AlertDialog alertDialog){
         try {
             OkHttpUtils.post().url(Constant.BASEURL+Constant.cashWithdraw)
-                    .addHeader("ContentType", "application/json")
                     .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
                     .addParams("drawlWay",type+"")
                     .addParams("drawlAccount",ed_alipay_name.getText().toString())
                     .addParams("amount",ed_cash_withdraw.getText().toString())
                     .addParams("securityPassword",ed_safety_pass.getText().toString())
-                    .addParams("rate",tv_rate.getText().toString())
+                    .addParams("rate",0.05+"")
+                    .addParams("appType",Constant.platform_id)
                     .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -231,13 +230,14 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                         IsLockSafetyPwdResponse isLockSafetyPwdResponse=
                                 JSON.parseObject(response,IsLockSafetyPwdResponse.class);
                         if(isLockSafetyPwdResponse.getCode()==200){
-                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
                             if(isLockSafetyPwdResponse.isData()){
                                 //安全密码 验证成功 提交成功
                                 alertDialog.dismiss();
+                                getPromoteInfo();//进行调用接口
                                 showTipsDialog();
                             }else{
                                 //安全密码 验证失败
+                                ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
                             }
                         }else{
                             ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
@@ -250,7 +250,6 @@ public class CashWithdrawalActivity extends AppCompatActivity {
         } catch (ContentException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -260,14 +259,14 @@ public class CashWithdrawalActivity extends AppCompatActivity {
     private void validateCashWithdraw() {
         try {
             OkHttpUtils.post().url(Constant.BASEURL+Constant.validateCashWithdraw)
-                    .addHeader("ContentType", "application/json")
                     .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                     .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
                     .addParams("drawlWay",type+"")
+                    .addParams("appType",Constant.platform_id)
                     .addParams("drawlAccount",ed_alipay_name.getText().toString())
                     .addParams("amount",ed_cash_withdraw.getText().toString())
                     .addParams("securityPassword",ed_safety_pass.getText().toString())
-                    .addParams("rate",tv_rate.getText().toString())
+                    .addParams("rate",0.05+"")
                     .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -280,12 +279,12 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                         IsLockSafetyPwdResponse isLockSafetyPwdResponse=
                                 JSON.parseObject(response,IsLockSafetyPwdResponse.class);
                         if(isLockSafetyPwdResponse.getCode()==200){
-                            ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
                             if(isLockSafetyPwdResponse.isData()){
                                 //安全密码 验证成功
                                 showOkSubmit();
                             }else{
                                //安全密码 验证失败
+                                ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
                             }
                         }else{
                             ToastUtils.showToast(CashWithdrawalActivity.this,isLockSafetyPwdResponse.getMessage());
@@ -320,6 +319,8 @@ public class CashWithdrawalActivity extends AppCompatActivity {
          alertDialog.show();
      }
 
+     //提现的临界金额
+     private final int withdrawCash=50;
     /**
      * 校验其中的内容
      */
@@ -339,8 +340,8 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                     return false;
                 }
                 //判断 用户的余额是否大于100
-                if (userBean.totalBalance < 100) {
-                    ToastUtils.showToast(this,"用户余额必须大于100");
+                if (userBean.totalBalance < withdrawCash) {
+                    ToastUtils.showToast(this,"用户余额必须大于"+withdrawCash);
                     return false;
                 }
                 // 提现金额 不能大于 用户的余额
@@ -351,13 +352,13 @@ public class CashWithdrawalActivity extends AppCompatActivity {
 
 
                 //提现的金额必须是100的倍数
-                if(Double.parseDouble(ed_cash_withdraw.getText().toString())<100){
-                    ToastUtils.showToast(this,"提现金额必须大于100");
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())<withdrawCash){
+                    ToastUtils.showToast(this,"提现金额必须大于"+withdrawCash);
                     return false;
                 }
 
                 //提现的金额必须是100的倍数
-                if(Double.parseDouble(ed_cash_withdraw.getText().toString())%100!=0){
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())%withdrawCash!=0){
                     ToastUtils.showToast(this,"提现金额必须是100的整数倍");
                     return false;
                 }
@@ -392,6 +393,59 @@ public class CashWithdrawalActivity extends AppCompatActivity {
             e.printStackTrace();
             ToastUtils.showToast(this,ConstantTips.USER_NO_LOGIN);
             return false;
+        }
+    }
+
+    /**
+     * 获取推广信息接口
+     */
+    private void getPromoteInfo() {
+        try {
+            OkHttpUtils.post()
+                    .url(Constant.BASEURL+Constant.ACCOUNT_INFO)
+                    .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                    .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
+                    .addParams("account", UserDao.getLocalUser().userName)
+                    .addParams("appType",Constant.platform_id)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            UserInfoResponse oneBannerBean = JSON.parseObject(response, UserInfoResponse.class);
+                            if (oneBannerBean.getCode() == 200 && oneBannerBean.getData()!=null) {
+                                //为 200的响应码
+                                float balance=oneBannerBean.getData().getBalance();
+                                String promoteNum=oneBannerBean.getData().getPromoteNum();
+                                String eqCodeUrl=oneBannerBean.getData().getEqCodeUrl();
+                                boolean lockStatus=oneBannerBean.getData().getLockStatus().equals("1")?true:false;
+                                try {
+                                    UserBean userBean=UserDao.getLocalUser();
+                                    userBean.totalBalance=balance;
+                                    userBean.zcodeImgUrl=eqCodeUrl;
+                                    userBean.isExtendistionState=lockStatus;
+                                    userBean.extensitionCount=Integer.parseInt(promoteNum);
+
+                                    //获取一级 和 二级推广收益
+                                    userBean.firstPromotionBenfits=10f;
+                                    userBean.secondPormotionBenfits=10f;
+                                    userBean.thirdPromotionBenfits=10f;
+
+                                    UserDao.saveUpDate(userBean);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                //重新初始化数据
+                                initData();
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
         }
     }
 }

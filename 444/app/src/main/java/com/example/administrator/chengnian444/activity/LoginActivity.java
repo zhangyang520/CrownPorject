@@ -71,9 +71,8 @@ public class LoginActivity extends BaseActivity {
     private void httpIsOpen() {
         OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.REGISTERISOPEN)
-                .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
-                .addParams("appType","001")
+                .addParams("appType",Constant.platform_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -169,7 +168,7 @@ public class LoginActivity extends BaseActivity {
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("account", phone)
                 .addParams("password", pwd)
-                .addParams("appType","001")
+                .addParams("appType",Constant.platform_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -189,18 +188,9 @@ public class LoginActivity extends BaseActivity {
                             SPUtils.getInstance(LoginActivity.this).put("loginToken", loginBean.getData().getLoginToken());
 
                             try {
-
-                                UserBean userBean=UserDao.getUserToken(loginBean.getData().getLoginToken());
-                                userBean.totalBalance=1000;
-                                userBean.extendistinCode="123456";
-                                userBean.extensitionCount=56;
-                                userBean.firstPromotionBenfits=200;
-                                userBean.secondPormotionBenfits=300;
-                                userBean.thirdPromotionBenfits=400;
+                                UserBean userBean=UserDao.getUserId(loginBean.getData().getId());
                                 userBean.loginToken=loginBean.getData().getLoginToken();
-                                userBean.safePwd="1234567";
-                                //总金额
-                                userBean.totalCash=2000;
+                                userBean.id=loginBean.getData().getId();
                                 userBean.userName=loginBean.getData().getAccount();
                                 UserDao.updateAllUserLocalState(false);
                                 userBean.isLocalUser=true;
@@ -209,16 +199,9 @@ public class LoginActivity extends BaseActivity {
                                 e.printStackTrace();
                                 UserBean userBean=new UserBean();
                                 //余额
-                                userBean.totalBalance=1000;
-                                userBean.extendistinCode="123456";
-                                userBean.extensitionCount=56;
-                                userBean.firstPromotionBenfits=200;
-                                userBean.secondPormotionBenfits=300;
-                                userBean.thirdPromotionBenfits=400;
+                                userBean.id=loginBean.getData().getId();
                                 userBean.loginToken=loginBean.getData().getLoginToken();
-                                userBean.safePwd="1234567";
                                 //总金额
-                                userBean.totalCash=2000;
                                 userBean.userName=loginBean.getData().getAccount();
                                 UserDao.updateAllUserLocalState(false);
                                 userBean.isLocalUser=true;

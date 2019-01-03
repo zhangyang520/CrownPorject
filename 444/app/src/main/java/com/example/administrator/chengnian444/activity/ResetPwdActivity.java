@@ -61,7 +61,7 @@ public class ResetPwdActivity extends BaseActivity {
     }
 
 
-     @OnClick({R.id.back})
+     @OnClick({R.id.back,R.id.get_code,R.id.btn_ok_reset})
      public void onClickView(View view) {
          switch (view.getId()) {
              case R.id.back:
@@ -74,11 +74,11 @@ public class ResetPwdActivity extends BaseActivity {
                     //进行请求数据
                     //todo 增加请求过程
                         OkHttpUtils.post().url(Constant.BASEURL+Constant.resetSafetyPwd)
-                                .addHeader("Content-Type","application/json")
                                 .addHeader("Authorization",SPUtils.getInstance(this).getString("token"))
                                 .addParams("loginToken",SPUtils.getInstance(this).getString("loginToken"))
                                 .addParams("newSecurityPassword",et_new_safety_pwd.getText().toString())
                                 .addParams("code",et_verify_code.getText().toString())
+                                .addParams("appType",Constant.platform_id)
                                 .addParams("account",et_phone.getText().toString()).build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
@@ -96,6 +96,8 @@ public class ResetPwdActivity extends BaseActivity {
                                         userBean.isSafeLocked=true;
                                         userBean.safePwd=et_new_safety_pwd.getText().toString();
                                         UserDao.saveUpDate(userBean);
+                                        ToastUtils.showToast(ResetPwdActivity.this,settingSafetyPwdResponse.getMessage());
+                                        finish();
                                     } catch (ContentException e) {
                                         e.printStackTrace();
                                     }
@@ -115,11 +117,11 @@ public class ResetPwdActivity extends BaseActivity {
                      String et_code = et_phone.getText().toString().trim();
                      OkHttpUtils.post().
                              url(Constant.BASEURL+Constant.GETCODE)
-                             .addHeader("Content-Type","application/json")
                              .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                              .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                              .addParams("account",et_code)
-                             .addParams("type","1")
+                             .addParams("appType",Constant.platform_id)
+                             .addParams("type","0")
                              .build().execute(new StringCallback() {
                          @Override
                          public void onError(Call call, Exception e, int id) {

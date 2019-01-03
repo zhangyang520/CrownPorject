@@ -20,6 +20,10 @@ public class UserInfoResponse {
       String promoteNum; //推广人数
       String lockStatus; //是否绑定推广码  0 未绑定邀请码，1 已绑定邀请码
       String eqCodeUrl; //对应二维码图片链接地址
+      float firstIncome;//一级收益
+      float secondIncome;//二级收益
+      float thirdIncome;//三级收益
+
 
         public float getBalance() {
             return balance;
@@ -51,6 +55,30 @@ public class UserInfoResponse {
 
         public void setEqCodeUrl(String eqCodeUrl) {
             this.eqCodeUrl = eqCodeUrl;
+        }
+
+        public float getFirstIncome() {
+            return firstIncome;
+        }
+
+        public void setFirstIncome(float firstIncome) {
+            this.firstIncome = firstIncome;
+        }
+
+        public float getSecondIncome() {
+            return secondIncome;
+        }
+
+        public void setSecondIncome(float secondIncome) {
+            this.secondIncome = secondIncome;
+        }
+
+        public float getThirdIncome() {
+            return thirdIncome;
+        }
+
+        public void setThirdIncome(float thirdIncome) {
+            this.thirdIncome = thirdIncome;
         }
     }
 

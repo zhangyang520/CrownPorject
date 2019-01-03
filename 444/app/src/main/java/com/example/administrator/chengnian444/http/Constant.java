@@ -95,4 +95,20 @@ public class Constant {
 
     //收益 詳情接口
     public static String incomeDetail="/reder/incomeDetail";
+
+
+    //一些的目录的常量:
+    //目录的常量
+    public static final String ROOTPATH = "chinaPost";
+    public static final String picCache = "picCache";
+    public static final String zipDir = "zipDir";
+    public static final String uploadPic = "uploadPic";
+    public static final String downloadDir = "downloadDir";
+    public static final String recordPathDir = "recordPathDir";
+    public static final String debugPath = "debugPath";
+    public static final String newTaskPath = "newTaskPath";
+
+    public static final String STRING_GAP = "--------";//字符串的分割符
+
+    public static final boolean IS_SD_CAN = true;
 }

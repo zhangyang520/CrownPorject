@@ -53,4 +53,6 @@ public class ConstantTips {
 
     //数据库的版本号
     public static int dbVersion=1;
+
+
 }

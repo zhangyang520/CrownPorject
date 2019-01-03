@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -47,6 +49,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private Fragment mCurrFragment;
     private String vision;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initFragment();
         //版本信息
         getHttpVersion();
+
+        //申请权限
+        requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE","android.permission.ACCESS_NETWORK_STATE"},100);
     }
     private String getVersionName()
     {
@@ -181,6 +187,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
             if(fragment instanceof HomeFragment){
                 ((HomeFragment)fragment).getHomeList();
+            }
+
+            if(fragment instanceof LoanFragment){
+                //展示 数据
+                ((LoanFragment)fragment).showData();
+            }
+
+            if(fragment instanceof MoveFragment){
+                ((MoveFragment)fragment).showData();
             }
         } else {
             mTransaction.add(R.id.main_fragment_container, fragment);

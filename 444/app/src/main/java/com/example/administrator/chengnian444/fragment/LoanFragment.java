@@ -63,6 +63,9 @@ public class LoanFragment extends BaseFragment {
 
 //    @Bind(R.id.scrollView)
 //    JudgeNestedScrollView scrollView;
+    //是否 有对应的网络数据
+    private boolean hasInternetData=false;
+
     private List<BannerBean.DataBean> bannerBeanData;
 
     private List<LiveTypesResponseInfo.LiveTypesResponse> liveTypesResponses;
@@ -75,26 +78,8 @@ public class LoanFragment extends BaseFragment {
     protected void initView(View childView) {
         //获取电影类型
         getBannerMove();
-
         //獲取 類型數據
         getTypeList();
-//        list.add("中文有碼");
-//        list.add("中文無碼");
-//        list.add("日本有碼");
-//        list.add("日本無碼");
-//        list.add("歐美無碼");
-//        list.add("三級劇情");
-//        list.add("卡通動漫");
-//        list.add("偷拍自拍");
-//        list1.add("6");
-//        list1.add("5");
-//        list1.add("7");
-//        list1.add("8");
-//        list1.add("4");
-//        list1.add("1");
-//        list1.add("2");
-//        list1.add("3");
-
         bannerMove.setOnItemClickListener(new FlyBanner.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -103,7 +88,6 @@ public class LoanFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-
 //        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
 //            @Override
 //            public void onScrollChange(NestedScrollView nestedScrollView, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -143,9 +127,16 @@ public class LoanFragment extends BaseFragment {
 //                }
 //            }
 //        });
-
     }
 
+    public void showData(){
+        if(!hasInternetData){
+            //获取电影类型
+            getBannerMove();
+            //獲取 類型數據
+            getTypeList();
+        }
+    }
     /**
      * 獲取 類型的數據
      */
@@ -159,7 +150,7 @@ public class LoanFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        hasInternetData=false;
                     }
 
                     @Override
@@ -172,9 +163,10 @@ public class LoanFragment extends BaseFragment {
                                 list.add(liveTypesResponses.get(i).getType());
                                 list1.add(liveTypesResponses.get(i).getTypeNum());
                             }
-
                             initData();
+                            hasInternetData=true;
                         } else {
+                            hasInternetData=false;
                             ToastUtils.showToast(getActivity(), bannerBean.getMessage());
                         }
                     }
@@ -192,22 +184,24 @@ public class LoanFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        hasInternetData=false;
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         BannerBean bannerBean = JSON.parseObject(response, BannerBean.class);
                         if (bannerBean.getCode() == 200) {
-
-                            bannerBeanData = bannerBean.getData();
-                            for (int i = 0; i < bannerBeanData.size(); i++) {
-                                String image = bannerBeanData.get(i).getImage();
-                                images1.add(image);
+                            if(bannerBean.getData()!=null){
+                                bannerBeanData = bannerBean.getData();
+                                for (int i = 0; i < bannerBeanData.size(); i++) {
+                                    String image = bannerBeanData.get(i).getImage();
+                                    images1.add(image);
+                                }
+                                bannerMove.setImagesUrl(images1);
                             }
-
-                            bannerMove.setImagesUrl(images1);
+                            hasInternetData=true;
                         } else {
+                            hasInternetData=false;
                             ToastUtils.showToast(getActivity(), bannerBean.getMessage());
                         }
                     }

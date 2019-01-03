@@ -81,7 +81,7 @@ public class MineFragment extends BaseFragment {
         try {
             //初始化用户
             UserBean userBean=UserDao.getLocalUser();
-            tv_total_cashl.setText(userBean.totalCash+"");
+            tv_total_cashl.setText(userBean.totalBalance+"");
             tv_extension_count.setText(userBean.extensitionCount+"");
             if(userBean.isExtendistionState){
                 //如果已经绑定
@@ -125,7 +125,8 @@ public class MineFragment extends BaseFragment {
 
             case R.id.rl_share:
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-                    startActivity(new Intent(getActivity(), ShareExtensionActivity.class));
+                    Intent intent=new Intent(getActivity(), ShareExtensionActivity.class);
+                    startActivity(intent);
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -154,7 +155,13 @@ public class MineFragment extends BaseFragment {
 
             case R.id.rl_safety_pwd:
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-                    startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
+                    Intent intent=new Intent(getActivity(),SafetyPwdActivity.class);
+                    try {
+                        intent.putExtra("isSafetyPwd",UserDao.getLocalUser().isSafeLocked);
+                    } catch (ContentException e) {
+                        e.printStackTrace();
+                    }
+                    startActivity(intent);
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -230,10 +237,10 @@ public class MineFragment extends BaseFragment {
      */
     private void   verifyPromoteCode(String userName, String safepwd, final AlertDialog alertDialog){
         OkHttpUtils.post().url(Constant.BASEURL+Constant.verifyPromoteCode)
-                .addHeader("ContentType", "application/json")
                 .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
                 .addParams("promoteCode",safepwd)
+                .addParams("appType",Constant.platform_id)
                 .addParams("account",userName).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -275,9 +282,9 @@ public class MineFragment extends BaseFragment {
      */
     private void validateSecurityPassword(String userName) {
         OkHttpUtils.post().url(Constant.BASEURL+Constant.validateSecurityPwd)
-                .addHeader("ContentType", "application/json")
                 .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
+                .addParams("appType",Constant.platform_id)
                 .addParams("account",userName).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -290,7 +297,6 @@ public class MineFragment extends BaseFragment {
                     IsLockSafetyPwdResponse isLockSafetyPwdResponse=
                             JSON.parseObject(response,IsLockSafetyPwdResponse.class);
                     if(isLockSafetyPwdResponse.getCode()==200){
-                        ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
                         if(isLockSafetyPwdResponse.isData()){
                             //安全密码已经设置
                             UserBean userBean=UserDao.getLocalUser();
@@ -335,12 +341,62 @@ public class MineFragment extends BaseFragment {
 
             //进行访问网络
             getPromoteInfo();
+
+            //进行获取 安全密码是否 已经设置
+            getSecurityStatus();
         } else {
             name.setText("游客");
             ll_mine_cash.setVisibility(View.GONE);
             loginRegister.setVisibility(View.VISIBLE);
         }
     }
+
+
+    /**
+     * 获取 安全密码的状态
+     */
+    private void getSecurityStatus() {
+        try {
+            OkHttpUtils.post().url(Constant.BASEURL+Constant.validateSecurityPwd)
+                    .addHeader("Authorization",SPUtils.getInstance(getActivity()).getString("token"))
+                    .addParams("loginToken",SPUtils.getInstance(getActivity()).getString("loginToken"))
+                    .addParams("appType",Constant.platform_id)
+                    .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    ToastUtils.showToast(getActivity(),"请求验证码失败!");
+                }
+
+                @Override
+                public void onResponse(String response, int id) {
+                    try {
+                        IsLockSafetyPwdResponse isLockSafetyPwdResponse=
+                                JSON.parseObject(response,IsLockSafetyPwdResponse.class);
+                        if(isLockSafetyPwdResponse.getCode()==200){
+                            if(isLockSafetyPwdResponse.isData()){
+                                //安全密码已经设置
+                                UserBean userBean=UserDao.getLocalUser();
+                                userBean.isSafeLocked=true;
+                                UserDao.saveUpDate(userBean);
+                            }else{
+                                UserBean userBean=UserDao.getLocalUser();
+                                userBean.isSafeLocked=false;
+                                UserDao.saveUpDate(userBean);
+                            }
+                        }else{
+                            ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
+                        }
+                    } catch (Exception e) {
+                        ToastUtils.showToast(getActivity(),"请求验证码失败!");
+                    }
+                }
+            });
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * 获取推广信息接口
      */
@@ -348,10 +404,10 @@ public class MineFragment extends BaseFragment {
         try {
             OkHttpUtils.post()
                     .url(Constant.BASEURL+Constant.ACCOUNT_INFO)
-                    .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                     .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))
                     .addParams("account", UserDao.getLocalUser().userName)
+                    .addParams("appType",Constant.platform_id)
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -362,7 +418,7 @@ public class MineFragment extends BaseFragment {
                         @Override
                         public void onResponse(String response, int id) {
                             UserInfoResponse oneBannerBean = JSON.parseObject(response, UserInfoResponse.class);
-                            if (oneBannerBean.getCode() == 200) {
+                            if (oneBannerBean.getCode() == 200 && oneBannerBean.getData()!=null) {
                                 //为 200的响应码
                                 float balance=oneBannerBean.getData().getBalance();
                                 String promoteNum=oneBannerBean.getData().getPromoteNum();
@@ -374,6 +430,11 @@ public class MineFragment extends BaseFragment {
                                     userBean.zcodeImgUrl=eqCodeUrl;
                                     userBean.isExtendistionState=lockStatus;
                                     userBean.extensitionCount=Integer.parseInt(promoteNum);
+
+                                    //获取一级 和 二级推广收益
+                                    userBean.firstPromotionBenfits=oneBannerBean.getData().getFirstIncome();
+                                    userBean.secondPormotionBenfits=oneBannerBean.getData().getSecondIncome();
+                                    userBean.thirdPromotionBenfits=oneBannerBean.getData().getThirdIncome();
                                     UserDao.saveUpDate(userBean);
                                 } catch (Exception e) {
                                     e.printStackTrace();

@@ -116,7 +116,7 @@ public class UserDao {
      * @param userId
      * @return
      */
-    public static UserBean getUserId(String userId) throws ContentException{
+    public static UserBean getUserId(int userId) throws ContentException{
         try {
             List<UserBean> datas = MyApplication.dbUtils.findAll(Selector.from(UserBean.class).where("id", "=", userId));
             if (datas != null && datas.size() > 0) {
@@ -129,23 +129,6 @@ public class UserDao {
         }
     }
 
-    /**
-     * 得到User对象的UserId
-     * @param userToken
-     * @return
-     */
-    public static UserBean getUserToken(String userToken) throws ContentException{
-        try {
-            List<UserBean> datas = MyApplication.dbUtils.findAll(Selector.from(UserBean.class).where("loginToken", "=", userToken));
-            if (datas != null && datas.size() > 0) {
-                return datas.get(0);
-            }
-            throw new ContentException("");
-        } catch (DbException e) {
-            e.printStackTrace();
-            throw new ContentException("");
-        }
-    }
 
     /**
      * 进行更新所有用户的本地身份状态

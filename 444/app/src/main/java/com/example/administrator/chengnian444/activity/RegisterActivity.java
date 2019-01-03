@@ -111,40 +111,67 @@ public class RegisterActivity extends BaseActivity {
                         String pwd1 = password.getText().toString().trim();
                         Integer extentsionCode=0;
                         if(ed_extendition_code.getText().toString().trim().equals("")){
-                            extentsionCode=0;
-                        }else{
-                            extentsionCode=Integer.parseInt(ed_extendition_code.getText().toString().trim());
-                        }
+                            OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
+                                    .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                                    .addParams("account", phone)
+                                    .addParams("password",pwd1)
+                                    .addParams("code",code)
+                                    .addParams("preRememberId",extentsionCode+"")
+                                    .addParams("channel",Constant.channel_id)
+                                    .addParams("appType",Constant.platform_id)
+                                    .build()
+                                    .execute(new StringCallback() {
+                                        @Override
+                                        public void onError(Call call, Exception e, int id) {
 
-                        OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
-                                .addHeader("Content-Type","application/json")
-                                .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
-                                .addParams("account", phone)
-                                .addParams("password",pwd1)
-                                .addParams("code",code)
-                                .addParams("preRememberId",extentsionCode+"")
-                                .addParams("channel",Constant.channel_id)
-                                .addParams("appType","001")
-                                .build()
-                                .execute(new StringCallback() {
-                                    @Override
-                                    public void onError(Call call, Exception e, int id) {
+                                        }
 
-                                    }
-
-                                    @Override
-                                    public void onResponse(String response, int id) {
-                                        Log.d("hcy",response);
-                                        RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
-                                        if (messageCodeBean.getCode()==200){
+                                        @Override
+                                        public void onResponse(String response, int id) {
+                                            Log.d("hcy",response);
+                                            RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
+                                            if (messageCodeBean.getCode()==200){
 //                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
 //                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
-                                            finish();
-                                        }else {
-                                            ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());
+                                                finish();
+                                            }else {
+                                                ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }else{
+                            extentsionCode=Integer.parseInt(ed_extendition_code.getText().toString().trim());
+                            OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
+                                    .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
+                                    .addParams("account", phone)
+                                    .addParams("password",pwd1)
+                                    .addParams("code",code)
+                                    .addParams("preRememberId",extentsionCode+"")
+                                    .addParams("channel",Constant.channel_id)
+                                    .addParams("appType","001")
+                                    .build()
+                                    .execute(new StringCallback() {
+                                        @Override
+                                        public void onError(Call call, Exception e, int id) {
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(String response, int id) {
+                                            Log.d("hcy",response);
+                                            RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
+                                            if (messageCodeBean.getCode()==200){
+//                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
+//                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
+                                                finish();
+                                            }else {
+                                                ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());
+                                            }
+                                        }
+                                    });
+                        }
+
+
                       }
                 break;
         }

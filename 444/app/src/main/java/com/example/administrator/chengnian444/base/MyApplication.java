@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Debug;
 import android.os.Handler;
 
 
@@ -44,14 +45,16 @@ public class MyApplication extends Application {
             String url = applicationInfo.metaData.getString("url");
             String channelId = applicationInfo.metaData.getString("channel_id");
             String platform_id=applicationInfo.metaData.getString("platform_id");
-
+            StringBuilder stringBuilder=new StringBuilder(platform_id);
+            stringBuilder.replace(0,1,"");
+            stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),"");
             //对url重新赋值
             Constant.BASEURL=url;
             //渠道的id
             Constant.channel_id=channelId;
             //平台的id
-            Constant.platform_id=platform_id;
-            System.out.println("url:"+url+"....channelId:"+channelId+"..platform_id:"+platform_id);
+            Constant.platform_id=stringBuilder.toString();
+            System.out.println("url:"+url+"....channelId:"+channelId+"..platform_id:"+stringBuilder.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,6 +67,9 @@ public class MyApplication extends Application {
         initOkHttpClient();
         //初始化数据库的设置
         initDataBase();
+
+        //初始化日志
+        initCrashHandler();
     }
 
 
@@ -103,6 +109,14 @@ public class MyApplication extends Application {
         HttpLoggingInterceptor interceptor= new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
+    }
+
+
+
+    private void initCrashHandler() {
+        CrashHandler crashHandler = new CrashHandler();
+        crashHandler.init(context);
+        Debug.stopMethodTracing();
     }
 
 }

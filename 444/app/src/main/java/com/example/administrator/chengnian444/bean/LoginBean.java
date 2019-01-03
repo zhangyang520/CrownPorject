@@ -47,6 +47,15 @@ public class LoginBean {
         private String account;
         private int status;
         private String loginToken;
+        private int id;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getAccount() {
             return account;
