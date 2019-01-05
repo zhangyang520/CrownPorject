@@ -115,7 +115,7 @@ public class CashWithdrawalActivity extends BaseActivity {
     }
 
     //支付类型 0:微信提现  1:支付宝提现
-    int type=1;
+    int type=5;
 
     @OnClick({R.id.back,R.id.rl_pay_type,R.id.tv_balance_detail,R.id.btn_submit})
      public void onClick(View view) {
@@ -187,7 +187,7 @@ public class CashWithdrawalActivity extends BaseActivity {
             });
 
             final TextView tv_content=contentView.findViewById(R.id.tv_content);
-            if(type==1){
+            if(type==5){
                 //支付宝
                 tv_content.setText("支付宝账号:"+ed_alipay_name.getText().toString());
             }else{
@@ -362,7 +362,7 @@ public class CashWithdrawalActivity extends BaseActivity {
 
                 //提现的金额必须是100的倍数
                 if(Double.parseDouble(ed_cash_withdraw.getText().toString())%withdrawCash!=0){
-                    ToastUtils.showToast(this,"提现金额必须是100的整数倍");
+                    ToastUtils.showToast(this,"提现金额必须是"+withdrawCash+"的整数倍");
                     return false;
                 }
 

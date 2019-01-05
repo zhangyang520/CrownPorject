@@ -22,6 +22,7 @@ import java.io.File;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 
 public class SettingActivity extends BaseActivity {
     @Bind(R.id.back)
@@ -67,6 +68,7 @@ public class SettingActivity extends BaseActivity {
             case R.id.huanchun:
                 FileCacheUtils.deleteFile(getCacheDir(), true);
                 initData();
+                ToastUtils.showToast(this, "清除缓存成功!");
                 break;
             case R.id.btn_exit:
                 SPUtils.getInstance(this).put("isLogin",false);

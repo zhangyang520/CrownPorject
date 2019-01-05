@@ -175,7 +175,7 @@
                             android:layout_height="21.8dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/second_margin_left"
-                            android:src="@mipmap/iv_extendition_left"/>
+                            android:src="@mipmap/iv_share_left"/>
                     <TextView
                             android:id="@+id/et_phone"
                             android:textSize="15.3sp"
@@ -328,7 +328,7 @@
                             android:layout_height="21.8dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/second_margin_left"
-                            android:src="@mipmap/iv_recommend_left"/>
+                            android:src="@mipmap/iv_extendition_left"/>
                     <TextView
                             android:id="@+id/tv_extension"
                             android:textSize="15.3sp"

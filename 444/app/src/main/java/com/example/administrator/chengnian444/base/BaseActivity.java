@@ -1,5 +1,6 @@
 package com.example.administrator.chengnian444.base;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.administrator.chengnian444.dao.UserDao;
+import com.example.administrator.chengnian444.utils.AppManager;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
@@ -23,6 +25,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.addActivity(this);
         dialog = new ZLoadingDialog(this);
         dialog.setLoadingBuilder(Z_TYPE.SINGLE_CIRCLE)//设置类型
                 .setLoadingColor(Color.GRAY)//颜色
@@ -83,6 +86,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        AppManager.removeActivity(this);
     }
 }

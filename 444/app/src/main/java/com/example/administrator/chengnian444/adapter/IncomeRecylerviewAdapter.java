@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.bean.InComeBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class IncomeRecylerviewAdapter extends RecyclerView.Adapter <IncomeRecyle
 
     private Context context;
     private List<InComeBean> incomeBeans;
+    private DecimalFormat decimalFormat=new DecimalFormat("0.00");
     public IncomeRecylerviewAdapter(Context context, List<InComeBean> inComeBeans) {
         super();
         this.context=context;
@@ -55,7 +57,8 @@ public class IncomeRecylerviewAdapter extends RecyclerView.Adapter <IncomeRecyle
 
     @Override
     public void onBindViewHolder(@NonNull IncomeViewHolder incomeViewHolder, int i) {
-        incomeViewHolder.tv_balance.setText("余额："+incomeBeans.get(i).getBalance().toString());
+        //余额的个数
+        incomeViewHolder.tv_balance.setText("余额："+decimalFormat.format(incomeBeans.get(i).getBalance().toString()));
 
         if(incomeBeans.get(i).getIncome()>0){
             incomeViewHolder.tv_income.setText("+"+incomeBeans.get(i).getIncome().toString());

@@ -15,7 +15,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.constant.ConstantTips;
+import com.example.administrator.chengnian444.dao.UserDao;
+import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.utils.AppManager;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
@@ -46,6 +49,12 @@ public class UpdateActivity extends BaseActivity {
         setContentView(R.layout.activity_updata);
         ButterKnife.bind(this);
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
+
+        try {
+            etPhone.setText(UserDao.getLocalUser().userName);
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick({R.id.back, R.id.btn_update})
@@ -71,17 +80,18 @@ public class UpdateActivity extends BaseActivity {
         Log.d("hcy","2222");
         OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.CHANGEPASSWORD)
-                .addHeader("Content-Type","application/json")
                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                 .addParams("account",phone)
                 .addParams("oldPassword",oldPwd)
                 .addParams("newPassword",newPwd)
+                .addParams("appType",Constant.platform_id)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                    Log.d("hcy",e.toString());
+                          Log.d("hcy",e.toString());
+                          ToastUtils.showToast(UpdateActivity.this, "修改密碼失敗!");
                     }
 
                     @Override
@@ -93,10 +103,15 @@ public class UpdateActivity extends BaseActivity {
                             String message = (String) jsonObject.get("message");
                             if (code == 200){
                                 ToastUtils.showToast(UpdateActivity.this,message);
+                                AppManager.finishAll();
+                                UserDao.updateAllUserLocalState(false);
+                                SPUtils.getInstance(UpdateActivity.this).put("isLogin",false);
+                                SPUtils.getInstance(UpdateActivity.this).put("loginToken","");
                                 startActivity(new Intent(UpdateActivity.this,LoginActivity.class));
                                 finish();
                             }else if (code==301){
                                 exitDialog();
+                                ToastUtils.showToast(UpdateActivity.this,message);
                             }else {
                                 ToastUtils.showToast(UpdateActivity.this,message);
                             }

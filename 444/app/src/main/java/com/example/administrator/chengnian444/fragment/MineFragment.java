@@ -291,7 +291,7 @@ public class MineFragment extends BaseFragment {
                 .addParams("account",userName).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showToast(getActivity(),"请求验证码失败!");
+                ToastUtils.showToast(getActivity(),"验证安全密码失败!");
             }
 
             @Override
@@ -316,7 +316,7 @@ public class MineFragment extends BaseFragment {
                         ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
                     }
                 } catch (Exception e) {
-                    ToastUtils.showToast(getActivity(),"请求验证码失败!");
+                    ToastUtils.showToast(getActivity(),"验证安全密码失败!");
                 }
             }
         });
@@ -367,7 +367,7 @@ public class MineFragment extends BaseFragment {
                     .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
-                    ToastUtils.showToast(getActivity(),"请求验证码失败!");
+//                    ToastUtils.showToast(getActivity(),"验证安全密码失败!");
                 }
 
                 @Override
@@ -390,7 +390,7 @@ public class MineFragment extends BaseFragment {
                             ToastUtils.showToast(getActivity(),isLockSafetyPwdResponse.getMessage());
                         }
                     } catch (Exception e) {
-                        ToastUtils.showToast(getActivity(),"请求验证码失败!");
+//                        ToastUtils.showToast(getActivity(),"验证安全密码失败!");
                     }
                 }
             });

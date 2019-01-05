@@ -77,9 +77,11 @@ public class ForgetPwdActivity extends BaseActivity {
                                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                                 .addParams("account",et_code)
                                 .addParams("type","2")
+                                .addParams("appType",Constant.platform_id)
                                 .build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
+                                ToastUtils.showToast(ForgetPwdActivity.this, "发送验证码失败!");
                                 Log.d("hcy",e.toString());
                             }
 
@@ -122,7 +124,7 @@ public class ForgetPwdActivity extends BaseActivity {
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
-
+                                    ToastUtils.showToast(ForgetPwdActivity.this, "忘记密码修改失败!");
                                 }
 
                                 @Override

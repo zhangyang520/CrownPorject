@@ -11,7 +11,7 @@
 
     <TextView
             android:id="@+id/tv_income_name"
-            style="@style/txt_30px_mine"
+            style="@style/txt_36px_mine"
             android:layout_width="wrap_content"
             android:text="一级推广收益"
     />
@@ -19,7 +19,7 @@
     <TextView
             android:id="@+id/tv_balance"
             app:layout_constraintTop_toBottomOf="@+id/tv_income_name"
-            style="@style/txt_25px"
+            style="@style/txt_30px"
             android:textColor="@color/mine_cash_name"
             android:layout_marginTop="@dimen/margin_top_15px"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
     <TextView
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/tv_income_date"
-            style="@style/txt_25px"
+            style="@style/txt_30px"
             android:layout_width="wrap_content"
             android:textColor="@color/mine_cash_name"
             android:text="2018-12-21"
@@ -40,7 +40,7 @@
             android:id="@+id/tv_income"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_income_date"
-            style="@style/txt_30px_mine"
+            style="@style/txt_36px_mine"
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/margin_top_15px"
             android:text="+525.55"

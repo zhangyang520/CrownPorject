@@ -24,6 +24,8 @@ import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
+import com.example.administrator.chengnian444.listener.OnNoDoubleClick;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
@@ -58,6 +60,7 @@ public class LoginActivity extends BaseActivity {
     ImageView iv_top;
     private LoginBean loginBean;
 
+    private NoDoubleClickListener noDoubleClickListener;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,19 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         Glide.with(this).load(R.mipmap.login0).fitCenter().into(iv_top);
         httpIsOpen();
+
+        noDoubleClickListener=new NoDoubleClickListener(){
+            @Override
+            public void onNoDoubleClick(View v) {
+                if(verifyLogin()){
+                    String phone = etPhone.getText().toString().trim();
+                    String pwd = etPwd.getText().toString().trim();
+                    login.setClickable(false);
+                    httpLogin(phone, pwd);
+                }
+            }
+        };
+        login.setOnClickListener(noDoubleClickListener);
     }
 
     private void httpIsOpen() {
@@ -99,17 +115,9 @@ public class LoginActivity extends BaseActivity {
                 });
     }
 
-    @OnClick({R.id.login, R.id.register,R.id.look,R.id.forget_pwd})
+    @OnClick({R.id.register,R.id.look,R.id.forget_pwd})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.login:
-                if(verifyLogin()){
-                    String phone = etPhone.getText().toString().trim();
-                    String pwd = etPwd.getText().toString().trim();
-                    login.setClickable(false);
-                    httpLogin(phone, pwd);
-                }
-                break;
             case R.id.register:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
@@ -187,7 +195,6 @@ public class LoginActivity extends BaseActivity {
                             SPUtils.getInstance(LoginActivity.this).put("isLogin", true);
                             SPUtils.getInstance(LoginActivity.this).put("name", loginBean.getData().getAccount());
                             SPUtils.getInstance(LoginActivity.this).put("loginToken", loginBean.getData().getLoginToken());
-
                             try {
                                 UserBean userBean=UserDao.getUserId(loginBean.getData().getId());
                                 userBean.loginToken=loginBean.getData().getLoginToken();

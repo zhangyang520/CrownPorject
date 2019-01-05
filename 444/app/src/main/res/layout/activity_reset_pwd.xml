@@ -59,6 +59,7 @@
                     android:paddingLeft="@dimen/first_margin_left"
                     android:background="@null"
                     android:maxLength="11"
+                    android:enabled="false"
                     android:inputType="number"
                     android:hint="请输入11位手机号"/>
         </LinearLayout>

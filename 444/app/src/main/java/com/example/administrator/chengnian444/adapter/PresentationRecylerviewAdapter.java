@@ -11,6 +11,7 @@ import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.bean.InComeBean;
 import com.example.administrator.chengnian444.bean.PresentationBalanceBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class PresentationRecylerviewAdapter extends RecyclerView.Adapter <Presen
 
     private Context context;
     private List<PresentationBalanceBean> incomeBeans;
+    private DecimalFormat decimalFormat=new DecimalFormat("0.00");
     public PresentationRecylerviewAdapter(Context context, List<PresentationBalanceBean> inComeBeans) {
         super();
         this.context=context;
@@ -56,7 +58,7 @@ public class PresentationRecylerviewAdapter extends RecyclerView.Adapter <Presen
 
     @Override
     public void onBindViewHolder(@NonNull IncomeViewHolder incomeViewHolder, int i) {
-        incomeViewHolder.tv_balance.setText("余额："+incomeBeans.get(i).getBalance().toString());
+        incomeViewHolder.tv_balance.setText("余额："+decimalFormat.format(incomeBeans.get(i).getBalance()));
         if(incomeBeans.get(i).getIncome()>0){
             incomeViewHolder.tv_income.setText("+"+incomeBeans.get(i).getIncome().toString());
         }else{

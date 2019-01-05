@@ -68,11 +68,11 @@
             android:layout_height="15.2dp"
             android:src="@mipmap/a5"/>
         <EditText
-            android:minLines="6"
             android:maxLength="12"
             android:id="@+id/password"
             android:textSize="@dimen/txt_40px"
             android:paddingLeft="@dimen/first_margin_left"
+            android:inputType="numberPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"

@@ -59,6 +59,12 @@ public class ResetPwdActivity extends BaseActivity {
         setContentView(R.layout.activity_reset_pwd);
         ButterKnife.bind(this);
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
+
+        try {
+            et_phone.setText(UserDao.getLocalUser().userName);
+        } catch (ContentException e) {
+            e.printStackTrace();
+        }
     }
 
 
