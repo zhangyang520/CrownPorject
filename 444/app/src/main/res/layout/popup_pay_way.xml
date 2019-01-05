@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/implicit_color"
-        android:alpha="0.9"
+        android:alpha="0.97"
         android:layout_height="match_parent">
 
     <View
@@ -36,6 +36,8 @@
                     style="@style/layout_ww"
                     android:id="@+id/tv_cacel"
                     android:text="取消"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/txt_40px"
                     android:textColor="@color/mine_cash_name"
             />
 
@@ -46,6 +48,8 @@
                     android:layout_marginBottom="10dp"
                     style="@style/layout_ww"
                     android:text="选择提现方式"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/txt_40px"
                     android:textColor="@color/mine_text_color"
             />
 
@@ -57,6 +61,8 @@
                     style="@style/layout_ww"
                     android:id="@+id/tv_ok"
                     android:text="确认"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/txt_40px"
                     android:textColor="#f6525d"
             />
         </RelativeLayout>
@@ -66,11 +72,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/rl_top"
                 android:layout_width="match_parent"
                 android:text="支付宝"
-                android:textSize="@dimen/txt_30px"
+                android:textSize="@dimen/txt_40px"
                 android:layout_marginTop="15.3dp"
                 android:gravity="center"
                 android:background="@mipmap/iv_mine_rect_gray_cash"
-                android:layout_height="@dimen/third_item_height">
+                android:layout_height="@dimen/sec_item_height">
         </Button>
 
         <Button
@@ -78,11 +84,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_alipay"
                 android:layout_width="match_parent"
                 android:text="微信"
-                android:textSize="@dimen/txt_30px"
+                android:textSize="@dimen/txt_40px"
                 android:layout_marginTop="15.3dp"
                 android:gravity="center"
                 android:background="@mipmap/iv_mine_rect_white_cash"
-                android:layout_height="@dimen/third_item_height">
+                android:layout_height="@dimen/sec_item_height">
         </Button>
 
     </android.support.constraint.ConstraintLayout>

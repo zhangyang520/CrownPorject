@@ -57,7 +57,7 @@ public class ForgetPwdActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
-        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         ButterKnife.bind(this);
     }
 
@@ -73,7 +73,6 @@ public class ForgetPwdActivity extends BaseActivity {
                     String et_code = etPhone.getText().toString().trim();
                     OkHttpUtils.post().
                                 url(Constant.BASEURL+Constant.GETCODE)
-                                .addHeader("Content-Type","application/json")
                                 .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                                 .addParams("loginToken", SPUtils.getInstance(this).getString("loginToken"))
                                 .addParams("account",et_code)
@@ -91,13 +90,18 @@ public class ForgetPwdActivity extends BaseActivity {
                                 String message = (String) jsonObject.get("message");
                                 ToastUtils.showToast(ForgetPwdActivity.this,message);
                                 int code = (int) jsonObject.get("code");
-                                if (code==301){
-                                    exitDialog();
+                                boolean flag=jsonObject.getBoolean("data");
+                                if(flag){
+                                    TimeCount timeCount = new TimeCount(60000, 1000);
+                                    timeCount.start();
+                                }else{
+                                    if (code==301){
+                                        exitDialog();
+                                    }
                                 }
                             }
                         });
-                    TimeCount timeCount = new TimeCount(60000, 1000);
-                    timeCount.start();
+
                 }
                 break;
 
@@ -108,11 +112,12 @@ public class ForgetPwdActivity extends BaseActivity {
                     final String code = etPwd.getText().toString().trim();
                     String pwd1 = password.getText().toString().trim();
                     OkHttpUtils.post().url(Constant.BASEURL+Constant.UPDATAPASSWORD)
-                            .addHeader("Content-Type","application/json")
                             .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                             .addParams("account",phone)
                             .addParams("newPassword",pwd1)
                             .addParams("code",code)
+                            .addParams("channel",Constant.channel_id)
+                            .addParams("appType",Constant.platform_id)
                             .build()
                             .execute(new StringCallback() {
                                 @Override
@@ -191,11 +196,11 @@ public class ForgetPwdActivity extends BaseActivity {
 
        /**
         * 验证 输入的手机号
+        //都不为空
         */
        public boolean  verifyCode(){
            //先进行判断 是否为空
            if(!etPhone.getText().toString().equals("")){
-               //都不为空
                if(!etPhone.getText().toString().matches(ConstantTips.PHONE_REGEX)){
                    //如果手机号 不满足格式
                    ToastUtils.showToast(this,ConstantTips.PHONE_REG_FORMATE_ERROR);

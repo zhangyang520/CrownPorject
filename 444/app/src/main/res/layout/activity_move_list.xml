@@ -18,12 +18,13 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-                android:layout_marginLeft="15.2dp"
-            android:id="@+id/back"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                android:layout_marginLeft="8dp"
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back"
+        />
     </RelativeLayout>
 
     <FrameLayout

@@ -45,7 +45,7 @@ public class UpdateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updata);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
     }
 
     @OnClick({R.id.back, R.id.btn_update})

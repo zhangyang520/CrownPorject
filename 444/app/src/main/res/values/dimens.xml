@@ -58,7 +58,10 @@
     <dimen name="forth_margin_top">3dp</dimen>
      <!-- 文本的字体大小-->
     <dimen name="txt_36px">13.09sp</dimen>
+    <dimen name="txt_42px">14.5sp</dimen>
+    <dimen name="txt_40px">14.00sp</dimen>
     <dimen name="txt_48px">17.45sp</dimen>
+    <dimen name="txt_34px">11.9sp</dimen>
     <dimen name="txt_30px">10.9sp</dimen>
     <dimen name="txt_20px">7.3sp</dimen>
     <dimen name="txt_25px">9.1sp</dimen>

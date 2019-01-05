@@ -58,7 +58,7 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
     }
 
     @OnClick({R.id.back, R.id.get_code, R.id.btn_register})
@@ -89,17 +89,23 @@ public class RegisterActivity extends BaseActivity {
                             Log.d("hcy",response);
                             JSONObject jsonObject = JSON.parseObject(response);
                             String message = (String) jsonObject.get("message");
-                            ToastUtils.showToast(RegisterActivity.this,message);
                             int code = (int) jsonObject.get("code");
-                            if (code==301){
-                                exitDialog();
+                            boolean flag=jsonObject.getBoolean("data");
+                            if(flag){
+                                ToastUtils.showToast(RegisterActivity.this,message);
+                                //时间的定时器
+                                TimeCount timeCount = new TimeCount(60000, 1000);
+                                timeCount.start();
+                            }else{
+                                ToastUtils.showToast(RegisterActivity.this,message);
+                                if (code==301){
+                                    exitDialog();
+                                }else if(code==101){
+
+                                }
                             }
                         }
                     });
-
-                    //时间的定时器
-                    TimeCount timeCount = new TimeCount(60000, 1000);
-                    timeCount.start();
                 }
                 break;
 
@@ -131,8 +137,7 @@ public class RegisterActivity extends BaseActivity {
                                             Log.d("hcy",response);
                                             RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
                                             if (messageCodeBean.getCode()==200){
-//                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
-//                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
+                                                ToastUtils.showToast(RegisterActivity.this, messageCodeBean.getMessage());
                                                 finish();
                                             }else {
                                                 ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());
@@ -148,7 +153,7 @@ public class RegisterActivity extends BaseActivity {
                                     .addParams("code",code)
                                     .addParams("preRememberId",extentsionCode+"")
                                     .addParams("channel",Constant.channel_id)
-                                    .addParams("appType","001")
+                                    .addParams("appType",Constant.platform_id)
                                     .build()
                                     .execute(new StringCallback() {
                                         @Override
@@ -161,8 +166,7 @@ public class RegisterActivity extends BaseActivity {
                                             Log.d("hcy",response);
                                             RegisterBean messageCodeBean = JSON.parseObject(response, RegisterBean.class);
                                             if (messageCodeBean.getCode()==200){
-//                                            SPUtils.getInstance(RegisterActivity.this).put("isLogin",true);
-//                                            SPUtils.getInstance(RegisterActivity.this).put("name", phone);
+                                                 ToastUtils.showToast(RegisterActivity.this, messageCodeBean.getMessage());
                                                 finish();
                                             }else {
                                                 ToastUtils.showToast(RegisterActivity.this,messageCodeBean.getMessage());

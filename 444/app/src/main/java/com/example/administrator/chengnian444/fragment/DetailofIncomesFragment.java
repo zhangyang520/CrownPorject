@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.adapter.IncomeRecylerviewAdapter;
 import com.example.administrator.chengnian444.adapter.PresentationRecylerviewAdapter;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.BannerBean;
 import com.example.administrator.chengnian444.bean.InComeBean;
 import com.example.administrator.chengnian444.bean.IncomeDetailResponse;
@@ -126,7 +127,7 @@ public class DetailofIncomesFragment extends Fragment {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            ToastUtils.showToast(getActivity(),"查看收益明細 失敗!");
+                            ToastUtils.showToast(MyApplication.context,"查看收益明細 失敗!");
                         }
 
                         @Override

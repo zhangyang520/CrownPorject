@@ -21,6 +21,7 @@ import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -57,7 +58,7 @@ public class ResetPwdActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pwd);
         ButterKnife.bind(this);
-
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
     }
 
 
@@ -136,15 +137,18 @@ public class ResetPwdActivity extends BaseActivity {
                              ToastUtils.showToast(ResetPwdActivity.this,message);
                              //todo
                              int code = (int) jsonObject.get("code");
-                             if (code==301){
-                                 exitDialog();
+                             boolean flag=jsonObject.getBoolean("data");
+                             if(flag){
+                                 //时间的定时器
+                                 TimeCount timeCount = new TimeCount(60000, 1000);
+                                 timeCount.start();
+                             }else{
+                                 if (code==301){
+                                     exitDialog();
+                                 }
                              }
                          }
                      });
-
-                     //时间的定时器
-                     TimeCount timeCount = new TimeCount(60000, 1000);
-                     timeCount.start();
                  }
                  break;
          }

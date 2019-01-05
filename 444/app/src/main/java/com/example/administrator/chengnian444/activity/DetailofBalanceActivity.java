@@ -15,8 +15,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.fragment.DetailofPresentationFragment;
 import com.example.administrator.chengnian444.fragment.DetailofIncomesFragment;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.TabUtils;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -39,7 +41,7 @@ import java.util.List;
      * @author zhangyang
      * @date
      */
-public class DetailofBalanceActivity extends AppCompatActivity {
+public class DetailofBalanceActivity extends BaseActivity {
 
       //tab的集合
      private List<String> tabList=new ArrayList<String>();
@@ -60,6 +62,7 @@ public class DetailofBalanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailof_balance);
         ButterKnife.bind(this);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
 
         //初始化标题
         tabList.add("收益明细");

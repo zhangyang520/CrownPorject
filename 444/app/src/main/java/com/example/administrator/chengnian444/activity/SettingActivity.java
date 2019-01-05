@@ -44,7 +44,7 @@ public class SettingActivity extends BaseActivity {
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
         initData();
-        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         if (!SPUtils.getInstance(this).getBoolean("isLogin")){
             btnExit.setVisibility(View.GONE);
         }

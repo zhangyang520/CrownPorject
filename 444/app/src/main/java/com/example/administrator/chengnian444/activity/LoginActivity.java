@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         ButterKnife.bind(this);
         Glide.with(this).load(R.mipmap.login0).fitCenter().into(iv_top);
         httpIsOpen();
@@ -135,14 +135,14 @@ public class LoginActivity extends BaseActivity {
              //都不为空
             if(!etPhone.getText().toString().matches(ConstantTips.LOGIN_USER_NAME_REGEX)){
                 //如果手机号 不满足格式
-                ToastUtils.showToast(this,"登录的账号不能为空");
+                ToastUtils.showToast(this,"账号必须是1-11位数字或字母");
                 return false;
             }
 
             //验证 输入密码格式的正确性
-            if(!etPwd.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX)){
+            if(!etPwd.getText().toString().matches(ConstantTips.LOGIN_PWD_REGEX_1)){
                 //如果手机号 不满足格式
-                ToastUtils.showToast(this,ConstantTips.PWD_FORMATE_ERROR);
+                ToastUtils.showToast(this,ConstantTips.PWD_FORMATE_ERROR_1);
                 return false;
             }
             return true;
@@ -173,6 +173,7 @@ public class LoginActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        ToastUtils.showToast(LoginActivity.this, "登录失败!");
                         login.setClickable(true);
                     }
 
@@ -211,6 +212,7 @@ public class LoginActivity extends BaseActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
+                            login.setClickable(true);
                             ToastUtils.showToast(LoginActivity.this,message);
                         }
                     }

@@ -10,11 +10,11 @@
        android:layout_height="@dimen/title_height">
 
         <ImageView
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/back"
         />
         <TextView
@@ -41,8 +41,8 @@
 
         <ImageView
                 android:id="@+id/iv_edit"
-                android:layout_width="10.9dp"
-                android:layout_height="16dp"
+                android:layout_width="16.7dp"
+                android:layout_height="16.7dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/second_margin_left"
                 android:src="@mipmap/iv_edit"/>
@@ -54,6 +54,7 @@
             android:text="修改密码"
                 android:textColor="@color/black"
             android:layout_marginLeft="@dimen/first_margin_left"
+                android:textSize="@dimen/txt_36px"
             android:layout_centerVertical="true"
             />
         <ImageView
@@ -80,17 +81,18 @@
 
         <ImageView
                 android:id="@+id/iv_copy"
-                android:layout_width="10.9dp"
-                android:layout_height="16dp"
+                android:layout_width="16.7dp"
+                android:layout_height="16.7dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/second_margin_left"
-                android:src="@mipmap/iv_edit"/>
+                android:src="@mipmap/iv_set_clear"/>
 
         <TextView
             android:layout_toRightOf="@+id/iv_copy"
             android:layout_width="wrap_content"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_36px"
             android:text="清除缓存"
             android:layout_marginLeft="@dimen/first_margin_left"
             android:layout_centerVertical="true"
@@ -112,8 +114,8 @@
     <Button
         android:layout_marginTop="36.4dp"
         android:background="@drawable/shape_login"
-        android:textSize="13sp"
         android:text="退出登录"
+        android:textSize="@dimen/txt_40px"
         android:textColor="@color/red"
         android:id="@+id/btn_exit"
         android:layout_width="match_parent"

@@ -230,10 +230,14 @@ public class HomeFragment extends BaseFragment {
                     public void onResponse(String response, int id) {
                         OneBannerBean oneBannerBean = JSON.parseObject(response, OneBannerBean.class);
                         if (oneBannerBean.getCode() == 200) {
-                            String url = oneBannerBean.getData().getUrl();
-                            Intent intent = new Intent(getActivity(), WebActivity.class);
-                            intent.putExtra("url", url);
-                            startActivity(intent);
+                            if(oneBannerBean.getData()!=null && oneBannerBean.getData().getUrl()!=null){
+                                String url = oneBannerBean.getData().getUrl();
+                                Intent intent = new Intent(getActivity(), WebActivity.class);
+                                intent.putExtra("url", url);
+                                startActivity(intent);
+                            }else{
+                                ToastUtils.showToast(getActivity(), "暂无数据!");
+                            }
                         }else if (oneBannerBean.getCode() == 301){
                             exitDialog();
                         }
@@ -813,6 +817,8 @@ public class HomeFragment extends BaseFragment {
         boolean mobileConnected = isNetworkConnected(getActivity());
         if (!mobileConnected) {
             homeIv.setVisibility(View.VISIBLE);
+        }else{
+            homeIv.setVisibility(View.GONE);
         }
     }
 
@@ -823,6 +829,8 @@ public class HomeFragment extends BaseFragment {
             HomeFragment.imageView.setVisibility(View.VISIBLE);
             if (!isNetworkConnected(getActivity())) {
                 homeIv.setVisibility(View.VISIBLE);
+            }else{
+                homeIv.setVisibility(View.GONE);
             }
         }
     }

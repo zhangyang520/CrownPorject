@@ -58,7 +58,7 @@ public class MoveSeriesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_list);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         recyclerList.setLayoutManager(new GridLayoutManager(this, 3));
         moveAdapter = new MoveAdapter(R.layout.test, data, this);
         recyclerList.setAdapter(moveAdapter);

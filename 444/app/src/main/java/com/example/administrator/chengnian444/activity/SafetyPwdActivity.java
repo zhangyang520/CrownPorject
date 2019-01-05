@@ -198,7 +198,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
      * @return
      */
     private boolean verifyOK() {
-        if(!et_safety_pwd.getText().toString().equals("")){
+        if(!et_safety_pwd.getText().toString().trim().equals("")){
             if(!et_safety_pwd.getText().toString().matches(ConstantTips.SAFE_PWD_VERIFY)){
                   ToastUtils.showToast(this,"安全密码必须是6位数字");
                   return false;
@@ -206,7 +206,7 @@ public class SafetyPwdActivity extends AppCompatActivity {
             return true;
         }else{
            ToastUtils.showToast(this,et_safety_pwd.getHint().toString());
+           return false;
         }
-        return true;
     }
 }

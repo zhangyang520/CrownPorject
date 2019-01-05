@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.bean.IsLockSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.bean.UserInfoResponse;
@@ -32,6 +33,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 
+import java.text.DecimalFormat;
+
 /**
   *    提现申请的界面
      * @Title:
@@ -40,7 +43,7 @@ import okhttp3.Call;
      * @author zhangyang
      * @date   
      */
-public class CashWithdrawalActivity extends AppCompatActivity {
+public class CashWithdrawalActivity extends BaseActivity {
 
     @Bind(R.id.cl_root)
     ConstraintLayout constraintLayout;
@@ -123,26 +126,26 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                 break;
 
             case R.id.rl_pay_type:
-                 type=1;
+                 type=5;
                 if(tv_cash_type.getText().equals("支付宝")){
                     //为支付宝的提现方式
-                    type=1;
+                    type=5;
                 }else{
                     //否则为微信 的提现方式
-                    type=0;
+                    type=6;
                 }
                 PopupUtils.showPayType(this, new PopupUtils.ClickOnListener() {
                     @Override
                     public void onOk(int currentCashType) {
                         //如果为支付宝
-                        if(currentCashType==1){
+                        if(currentCashType==5){
                             tv_cash_type.setText("支付宝");
                             tv_cash_user_name.setText("支付宝账号");
                             ed_alipay_name.setHint("请输入支付宝账号");
                         }else{
                             tv_cash_type.setText("微信");
                             tv_cash_user_name.setText("微信账号");
-                            ed_alipay_name.setHint("请输入微信宝账号");
+                            ed_alipay_name.setHint("请输入微信账号");
                         }
                     }
 
@@ -340,12 +343,12 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                     return false;
                 }
                 //判断 用户的余额是否大于100
-                if (userBean.totalBalance < withdrawCash) {
+                if (Float.parseFloat(userBean.totalBalance) < withdrawCash) {
                     ToastUtils.showToast(this,"用户余额必须大于"+withdrawCash);
                     return false;
                 }
                 // 提现金额 不能大于 用户的余额
-                if(Double.parseDouble(ed_cash_withdraw.getText().toString())>userBean.totalBalance){
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())>Float.parseFloat(userBean.totalBalance)){
                     ToastUtils.showToast(this,"提现金额不能大于用户的余额");
                     return false;
                 }
@@ -420,20 +423,21 @@ public class CashWithdrawalActivity extends AppCompatActivity {
                             if (oneBannerBean.getCode() == 200 && oneBannerBean.getData()!=null) {
                                 //为 200的响应码
                                 float balance=oneBannerBean.getData().getBalance();
+                                DecimalFormat decimalFormat=new DecimalFormat("0.00");
                                 String promoteNum=oneBannerBean.getData().getPromoteNum();
                                 String eqCodeUrl=oneBannerBean.getData().getEqCodeUrl();
                                 boolean lockStatus=oneBannerBean.getData().getLockStatus().equals("1")?true:false;
                                 try {
                                     UserBean userBean=UserDao.getLocalUser();
-                                    userBean.totalBalance=balance;
+                                    userBean.totalBalance=decimalFormat.format(balance);
                                     userBean.zcodeImgUrl=eqCodeUrl;
                                     userBean.isExtendistionState=lockStatus;
                                     userBean.extensitionCount=Integer.parseInt(promoteNum);
 
                                     //获取一级 和 二级推广收益
-                                    userBean.firstPromotionBenfits=10f;
-                                    userBean.secondPormotionBenfits=10f;
-                                    userBean.thirdPromotionBenfits=10f;
+                                    userBean.firstPromotionBenfits=decimalFormat.format(oneBannerBean.getData().getFirstIncome());
+                                    userBean.secondPormotionBenfits=decimalFormat.format(oneBannerBean.getData().getSecondIncome());;
+                                    userBean.thirdPromotionBenfits=decimalFormat.format(oneBannerBean.getData().getThirdIncome());;
 
                                     UserDao.saveUpDate(userBean);
                                 } catch (Exception e) {

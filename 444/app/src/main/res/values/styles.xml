@@ -50,9 +50,31 @@
         <item name="android:textColor">@color/mine_text_color</item>
     </style>
 
+
+
+    <style name="txt_42px_mine" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_42px</item>
+        <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
+    <style name="txt_40px_mine" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_40px</item>
+        <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
     <style name="txt_30px_mine" parent="layout_mw">
         <item name="android:textSize">@dimen/txt_30px</item>
         <item name="android:textColor">@color/mine_text_color</item>
+    </style>
+
+    <style name="txt_42px_gray" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_42px</item>
+        <item name="android:textColor">@color/mine_cash_name</item>
+    </style>
+
+    <style name="txt_36px_gray" parent="layout_mw">
+        <item name="android:textSize">@dimen/txt_36px</item>
+        <item name="android:textColor">@color/mine_cash_name</item>
     </style>
 
     <style name="txt_30px" parent="layout_mw">

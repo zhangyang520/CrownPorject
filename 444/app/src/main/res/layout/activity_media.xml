@@ -17,14 +17,13 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:id="@+id/back"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+                android:layout_marginLeft="8dp"
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back"
+        />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -81,7 +81,7 @@ public class MediaActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.main_bg_color));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         String moveUrl = intent.getStringExtra("moveUrl");

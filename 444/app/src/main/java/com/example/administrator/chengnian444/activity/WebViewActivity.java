@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.just.library.AgentWeb;
 
 import butterknife.Bind;
@@ -24,6 +25,7 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web1);
         ButterKnife.bind(this);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         mAgentWeb = AgentWeb.with(this)//传入Activity or Fragment
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .useDefaultIndicator()// 使用默认进度条

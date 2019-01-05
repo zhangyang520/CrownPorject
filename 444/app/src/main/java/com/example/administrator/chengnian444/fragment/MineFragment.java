@@ -31,6 +31,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 public class MineFragment extends BaseFragment {
 
     @Bind(R.id.iv)
@@ -421,20 +424,23 @@ public class MineFragment extends BaseFragment {
                             if (oneBannerBean.getCode() == 200 && oneBannerBean.getData()!=null) {
                                 //为 200的响应码
                                 float balance=oneBannerBean.getData().getBalance();
+                                DecimalFormat bigDecimal=new DecimalFormat("0.00");
+
                                 String promoteNum=oneBannerBean.getData().getPromoteNum();
                                 String eqCodeUrl=oneBannerBean.getData().getEqCodeUrl();
                                 boolean lockStatus=oneBannerBean.getData().getLockStatus().equals("1")?true:false;
                                 try {
                                     UserBean userBean=UserDao.getLocalUser();
-                                    userBean.totalBalance=balance;
+                                    System.out.println("bigDecimal.doubleValue():"+ bigDecimal.format(balance));
+                                    userBean.totalBalance= bigDecimal.format(balance);
                                     userBean.zcodeImgUrl=eqCodeUrl;
                                     userBean.isExtendistionState=lockStatus;
                                     userBean.extensitionCount=Integer.parseInt(promoteNum);
 
                                     //获取一级 和 二级推广收益
-                                    userBean.firstPromotionBenfits=oneBannerBean.getData().getFirstIncome();
-                                    userBean.secondPormotionBenfits=oneBannerBean.getData().getSecondIncome();
-                                    userBean.thirdPromotionBenfits=oneBannerBean.getData().getThirdIncome();
+                                    userBean.firstPromotionBenfits=bigDecimal.format(oneBannerBean.getData().getFirstIncome());
+                                    userBean.secondPormotionBenfits=bigDecimal.format(oneBannerBean.getData().getSecondIncome());
+                                    userBean.thirdPromotionBenfits=bigDecimal.format(oneBannerBean.getData().getThirdIncome());
                                     UserDao.saveUpDate(userBean);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -473,9 +479,6 @@ public class MineFragment extends BaseFragment {
                 alertDialog.dismiss();
                 //点击确定 跳转到 设置安全密码界面
                 if (SPUtils.getInstance(getActivity()).getBoolean("isLogin")){
-                    //todo  以后要修改！
-                    SPUtils.getInstance(getActivity()).put(ConstantTips.isSettingSafePwd,true);
-
                     startActivity(new Intent(getActivity(),SafetyPwdActivity.class));
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));

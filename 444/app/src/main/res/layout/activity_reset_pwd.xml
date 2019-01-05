@@ -13,10 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height">
         <ImageView
-                android:layout_marginLeft="@dimen/first_margin_left"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/back"
         />
         <TextView
@@ -52,7 +53,7 @@
                     android:src="@mipmap/a4"/>
             <EditText
                     android:id="@+id/et_phone"
-                    android:textSize="13.0sp"
+                    android:textSize="@dimen/txt_40px"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/first_margin_left"
@@ -77,10 +78,9 @@
                     android:layout_height="15.2dp"
                     android:src="@mipmap/a5"/>
             <EditText
-                    android:minLines="6"
-                    android:maxLength="12"
+                    android:maxLength="6"
                     android:id="@+id/et_new_safety_pwd"
-                    android:textSize="13.0sp"
+                    android:textSize="@dimen/txt_40px"
                     android:paddingLeft="@dimen/first_margin_left"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -109,12 +109,12 @@
             <EditText
                     android:inputType="number"
                     android:id="@+id/et_verify_code"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/first_margin_left"
-                    android:layout_toRightOf="@id/icon_lock"
+                    android:layout_toRightOf="@+id/icon_lock"
                     android:background="@null"
-                    android:textSize="13.0sp"
+                    android:textSize="@dimen/txt_40px"
                     android:maxLength="6"
                     android:hint="请输入验证码" />
 
@@ -124,6 +124,7 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:text="获取验证码"
+                    android:textSize="@dimen/txt_40px"
                     android:textColor="@color/yellow"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/first_margin_left"

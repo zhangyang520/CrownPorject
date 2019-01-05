@@ -64,7 +64,7 @@
                 android:src="@mipmap/a4"/>
         <EditText
                 android:id="@+id/et_phone"
-                android:textSize="13.0sp"
+                android:textSize="@dimen/txt_40px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/first_margin_left"
@@ -97,7 +97,7 @@
                 android:minLines="6"
                 android:maxLength="12"
                 android:id="@+id/et_pwd"
-                android:textSize="13.0sp"
+                android:textSize="@dimen/txt_40px"
                 android:inputType="textPassword"
                 android:paddingLeft="@dimen/first_margin_left"
                 android:layout_width="match_parent"
@@ -152,7 +152,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="@dimen/margin_top"
         android:orientation="horizontal">
 
@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="13.0sp"
+            android:textSize="@dimen/txt_40px"
             android:textColor="@color/black"
             android:gravity="right"
             android:text="忘记密码?"/>

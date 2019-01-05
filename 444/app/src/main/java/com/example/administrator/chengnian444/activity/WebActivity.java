@@ -37,7 +37,7 @@ public class WebActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web1);
         ButterKnife.bind(this);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.white));
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         //加载网页，并且设置一些属性

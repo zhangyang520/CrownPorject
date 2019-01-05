@@ -22,7 +22,7 @@ public class UserBean {
     public String loginToken;
 
     //余额的总数
-    public  double totalBalance;
+    public  String totalBalance;
 
     //总金额
     public double totalCash;
@@ -31,13 +31,13 @@ public class UserBean {
     public int extensitionCount=0;
 
     //一级推广收益
-    public double firstPromotionBenfits;
+    public String firstPromotionBenfits;
 
     //二级推广收益
-    public double secondPormotionBenfits;
+    public String secondPormotionBenfits;
 
     //三级推广收益
-    public double thirdPromotionBenfits;
+    public String thirdPromotionBenfits;
 
     //用户名  对应的可能是手机号 或者 后端 分配的账号
     public  String userName;

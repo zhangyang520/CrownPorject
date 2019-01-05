@@ -17,6 +17,7 @@ import butterknife.OnClick;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.base.BaseActivity;
 import com.example.administrator.chengnian444.bean.PromotionInfoResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.bean.UserInfoResponse;
@@ -38,7 +39,7 @@ import okhttp3.Call;
      * @author zhangyang
      * @date
      */
-public class ShareExtensionActivity extends AppCompatActivity {
+public class ShareExtensionActivity extends BaseActivity {
 
 
      @Bind(R.id.back)

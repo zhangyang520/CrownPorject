@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height">
         <ImageView
-            android:layout_marginLeft="@dimen/first_margin_left"
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/back"
-            />
+                android:layout_marginLeft="8dp"
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back"
+        />
         <TextView
             android:text="忘记密码"
             android:gravity="center"
@@ -41,7 +42,7 @@
             android:src="@mipmap/a4"/>
         <EditText
             android:id="@+id/et_phone"
-            android:textSize="13.0sp"
+            android:textSize="@dimen/txt_40px"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/first_margin_left"
@@ -70,7 +71,7 @@
             android:minLines="6"
             android:maxLength="12"
             android:id="@+id/password"
-            android:textSize="13.0sp"
+            android:textSize="@dimen/txt_40px"
             android:paddingLeft="@dimen/first_margin_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -97,12 +98,12 @@
         <EditText
             android:inputType="number"
             android:id="@+id/et_pwd"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/first_margin_left"
             android:layout_toRightOf="@id/icon_lock"
             android:background="@null"
-            android:textSize="13.0sp"
+            android:textSize="@dimen/txt_40px"
             android:maxLength="6"
             android:hint="请输入验证码" />
 
@@ -111,6 +112,7 @@
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
+            android:textSize="@dimen/txt_40px"
             android:text="获取验证码"
             android:textColor="@color/yellow"
             android:layout_alignParentRight="true"
@@ -129,7 +131,7 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/shape_login"
         android:textColor="@color/black"
-        android:textSize="13sp"
+        android:textSize="@dimen/txt_40px"
         android:text="完成修改"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"/>

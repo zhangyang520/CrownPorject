@@ -8,6 +8,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 
 
 /**
@@ -18,7 +20,7 @@ import com.example.administrator.chengnian444.R;
      * @author zhangyang
      * @date
      */
-public class ExtenditionIncomeAcActivity extends AppCompatActivity {
+public class ExtenditionIncomeAcActivity extends BaseActivity {
 
     @Bind(R.id.back)
     ImageView back;
@@ -29,6 +31,7 @@ public class ExtenditionIncomeAcActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extendition_income_ac);
         ButterKnife.bind(this);
+        StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
     }
 
     @OnClick({R.id.back})

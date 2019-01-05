@@ -19,7 +19,7 @@
 
       <TextView
               android:id="@+id/tv_origin_pwd"
-              style="@style/txt_36px"
+              style="@style/txt_40px_mine"
               android:text="请输入推广码"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintLeft_toRightOf="@id/iv_input"
@@ -32,11 +32,11 @@
             android:id="@+id/iv_mine_cancel"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_origin_pwd"
-            android:layout_width="8.72dp"
+            android:layout_width="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:src="@mipmap/iv_safe_cancel"
-            android:layout_height="8.72dp"/>
+            android:layout_height="15dp"/>
 
 
     <EditText
@@ -46,7 +46,7 @@
                android:hint="请输入邀请人6位推广码"
                android:layout_marginLeft="15dp"
                android:layout_marginRight="15dp"
-               android:textSize="@dimen/txt_36px"
+               android:textSize="@dimen/txt_40px"
                android:paddingLeft="16.73dp"
                android:layout_marginTop="20dp"
                android:background="@drawable/shape_rectangle_gray"
@@ -57,25 +57,25 @@
             app:layout_constraintRight_toLeftOf="@+id/btn_ok"
             android:id="@+id/btn_cancel"
             android:layout_marginTop="20dp"
-            android:textSize="@dimen/txt_30px"
+            android:textSize="@dimen/txt_40px"
             android:textColor="@color/mine_cash_name"
             android:background="@drawable/shape_rectangle_white"
-            android:layout_width="51dp"
+            android:layout_width="55dp"
             android:layout_marginRight="16.4dp"
             android:text="取消"
-            android:layout_height="23.6dp"/>
+            android:layout_height="28dp"/>
 
     <Button
             android:id="@+id/btn_ok"
-            android:textSize="@dimen/txt_30px"
+            android:textSize="@dimen/txt_40px"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
-            android:layout_width="51dp"
+            android:layout_width="55dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ed_original_safe_pwd"
             android:layout_marginRight="15dp"
             android:text="确认"
             android:background="@drawable/shape_login"
-            android:layout_height="23.6dp"/>
+            android:layout_height="28dp"/>
 
 </android.support.constraint.ConstraintLayout>

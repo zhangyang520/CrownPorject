@@ -16,13 +16,12 @@
             android:background="@color/title_bg_color"
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height">
-
         <ImageView
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/back"
         />
         <TextView
@@ -36,7 +35,7 @@
         <TextView
                 android:id="@+id/tv_balance_detail"
                 android:textColor="@color/mine_cash_name"
-                android:textSize="15.2sp"
+                android:textSize="@dimen/txt_42px"
                 android:text="余额明细"
                 android:layout_marginRight="15dp"
                 android:layout_centerVertical="true"
@@ -82,7 +81,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="提现方式"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
@@ -100,7 +99,7 @@
             <TextView
                     android:id="@+id/tv_cash_type"
                     android:layout_toLeftOf="@+id/iv_arrrow"
-                    style="@style/txt_30px_mine"
+                    style="@style/txt_42px_mine"
                     android:text="支付宝"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
@@ -130,7 +129,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="提现手续费"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
@@ -142,7 +141,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/txt_30px_mine"
+                style="@style/txt_36px_mine"
                 android:text="5%"
                 android:layout_width="wrap_content"
         />
@@ -163,7 +162,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="收款人姓名"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
@@ -175,7 +174,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/txt_30px_mine"
+                style="@style/txt_42px_gray"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入收款人姓名"
                 android:gravity="right"
@@ -186,7 +185,8 @@
 
 
     <!--支付宝账号-->
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/cl_payee_name"
             android:id="@+id/cl_alipay_name"
             android:layout_width="match_parent"
@@ -198,10 +198,12 @@
 
         <TextView
                 android:id="@+id/tv_cash_user_name"
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="支付宝账号"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
         />
 
@@ -210,14 +212,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/txt_30px_mine"
+                style="@style/txt_42px_gray"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入支付宝账号"
-                android:gravity="right"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:gravity="right|center_vertical"
+                android:layout_height="match_parent"
                 android:background="@null"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
         />
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
     <!--提现金额-->
     <android.support.constraint.ConstraintLayout
@@ -231,7 +237,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="提现金额(元)"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
@@ -243,7 +249,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/txt_30px_mine"
+                style="@style/txt_42px_gray"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入提现金额"
                 android:gravity="right"
@@ -264,7 +270,7 @@
             android:layout_height="@dimen/first_item_height">
 
         <TextView
-                style="@style/txt_30px"
+                style="@style/txt_36px_gray"
                 android:text="安全密码"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
@@ -276,10 +282,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/txt_30px_mine"
+                style="@style/txt_42px_gray"
                 android:textColorHint="@color/mine_cash_name"
                 android:hint="请输入安全密码"
+                android:inputType="numberPassword"
                 android:gravity="right"
+                android:maxLength="6"
                 android:background="@null"
                 android:layout_width="wrap_content"
         />

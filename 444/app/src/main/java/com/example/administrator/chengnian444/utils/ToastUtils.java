@@ -1,6 +1,7 @@
 package com.example.administrator.chengnian444.utils;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import android.widget.Toast;
  */
 public class ToastUtils {
 
+    private  static  Toast toast;
     /**
      * todo 以后需要修改 对应的消失的动画
      * 弹出 吐司
@@ -21,7 +23,15 @@ public class ToastUtils {
      * @param msg
      */
     public static void showToast(Context context, String msg) {
-        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+        toast= Toast.makeText(context,msg,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
+    public static void dismissToast(){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+        }
+    }
 }

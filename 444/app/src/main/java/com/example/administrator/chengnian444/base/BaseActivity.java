@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
@@ -70,6 +71,18 @@ public class BaseActivity extends AppCompatActivity {
         //更新所有的 用户的状态为false
         UserDao.updateAllUserLocalState(false);
         Toast.makeText(this,"当前账号在其他设备登录",Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ToastUtils.dismissToast();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
     }
 }

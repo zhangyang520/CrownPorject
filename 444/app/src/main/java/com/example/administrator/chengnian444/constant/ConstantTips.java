@@ -11,6 +11,10 @@ public class ConstantTips {
 
     //手机号 格式 不正确的提示语
     public static final String PHONE_REG_FORMATE_ERROR = "手机号必须是11位数字";
+
+    //登录密码输入格式的提示
+    public static final String PWD_FORMATE_ERROR_1="密码必须是6位以上数字或字母";
+
     //登录密码输入格式的提示
     public static final String PWD_FORMATE_ERROR="密码必须是6位数字或字母";
 
@@ -32,10 +36,11 @@ public class ConstantTips {
      *
      *   格式化的字符串
      */
-    public static final String LOGIN_USER_NAME_REGEX=".+";
+    public static final String LOGIN_USER_NAME_REGEX=" \\d||\\w{1,11}";
     //手机号的 regex的字符串  \d||\w{1,11}  "\\d{11}"
-    public static final String PHONE_REGEX = "\\d||\\w{1,11}";
+    public static final String PHONE_REGEX = "\\d{11}";
 
+    public static final String LOGIN_PWD_REGEX_1="\\d||\\w{6,}";
     //登录密码的regex的字符串
     public static final String LOGIN_PWD_REGEX="\\d||\\w{6}";
 
