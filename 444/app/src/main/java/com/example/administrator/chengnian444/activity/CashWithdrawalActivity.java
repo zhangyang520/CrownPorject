@@ -132,6 +132,11 @@ public class CashWithdrawalActivity extends BaseActivity {
             }else{
                 tv_third_benfit.setText(userBean.thirdPromotionBenfits + "");
             }
+
+            //清空数据:
+            ed_alipay_name.setText("");
+            ed_cash_withdraw.setText("");
+            ed_safety_pass.setText("");
         } catch (ContentException e) {
             e.printStackTrace();
             //初始化用户
@@ -361,6 +366,7 @@ public class CashWithdrawalActivity extends BaseActivity {
 
      //提现的临界金额
      private final int withdrawCash=50;
+     private final int maxDrawCash=500;
     /**
      * 校验其中的内容
      */
@@ -394,6 +400,12 @@ public class CashWithdrawalActivity extends BaseActivity {
                 //提现的金额必须是100的倍数
                 if(Double.parseDouble(ed_cash_withdraw.getText().toString())<withdrawCash){
                     ToastUtils.showToast(this,"提现金额必须大于"+withdrawCash);
+                    return false;
+                }
+
+                //提现的金额必须是100的倍数
+                if(Double.parseDouble(ed_cash_withdraw.getText().toString())>maxDrawCash){
+                    ToastUtils.showToast(this,"提现金额必须小于"+maxDrawCash);
                     return false;
                 }
 

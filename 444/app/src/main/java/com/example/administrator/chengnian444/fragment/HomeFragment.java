@@ -171,7 +171,8 @@ public class HomeFragment extends BaseFragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         chinaOn.setLayoutManager(gridLayoutManager);
-
+        chinaOn.setHasFixedSize(true);
+        chinaOn.setNestedScrollingEnabled(false);
         recycler1.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recycler1.setHasFixedSize(true);
         recycler1.setNestedScrollingEnabled(false);

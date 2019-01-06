@@ -119,10 +119,10 @@ public class RegisterActivity extends BaseActivity {
                                 int code = (int) jsonObject.get("code");
                                 boolean flag=jsonObject.getBoolean("data");
                                 if(flag){
-                                    ToastUtils.showToast(RegisterActivity.this,message);
                                     //时间的定时器
                                     TimeCount timeCount = new TimeCount(60000, 1000);
                                     timeCount.start();
+                                    ToastUtils.showToast(RegisterActivity.this,message);
                                 }else{
                                     ToastUtils.showToast(RegisterActivity.this,message);
                                     if (code==301){

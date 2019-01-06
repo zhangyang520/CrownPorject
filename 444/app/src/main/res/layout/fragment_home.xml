@@ -40,18 +40,18 @@
     </RelativeLayout>
     <ScrollView
         android:fillViewport="true"
-        android:overScrollMode="never"
+        android:overScrollMode="ifContentScrolls"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
             <LinearLayout
-                android:descendantFocusability="blocksDescendants"
+                android:descendantFocusability="afterDescendants"
                 android:background="@color/main_bg_color"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
 
-              <com.recker.flybanner.FlyBanner
+               <com.recker.flybanner.FlyBanner
                       android:id="@+id/home_banner"
                       android:layout_width="match_parent"
                       android:layout_height="196dp"/>
@@ -80,378 +80,363 @@
                        />
                </RelativeLayout>
 
+               <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="15dp"
+                android:id="@+id/china_on"
+                android:paddingRight="15.2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/image1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tv2"
+                        android:layout_width="@dimen/shouye_type_name_width"
+                        android:layout_height="@dimen/shouye_type_name_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        />
+
+                    <ImageView
+                        android:id="@+id/change2"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler1"
+                    android:layout_marginTop="15dp"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/image2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/tv3"
+                        android:layout_width="@dimen/shouye_type_name_width"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/shouye_type_name_height"
+                        android:layout_marginLeft="12dp"
+                        />
+
+                    <ImageView
+                        android:id="@+id/change3"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/recycler2"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                   android:layout_marginTop="10dp"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                            android:id="@+id/tv4"
+                            android:layout_width="@dimen/shouye_type_name_width"
+                            android:layout_height="@dimen/shouye_type_name_height"
+                            android:layout_marginLeft="12dp"
+                            android:layout_centerVertical="true"
+                    />
+
+                    <ImageView
+                        android:id="@+id/change4"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+
+                </RelativeLayout>
 
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/recycler3"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                   android:layout_marginTop="10dp"
+                    />
+                <RelativeLayout
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="15dp"
-        android:id="@+id/china_on"
-        android:paddingRight="15.2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+                    <ImageView
+                            android:id="@+id/tv5"
+                            android:layout_width="@dimen/shouye_type_name_width"
+                            android:layout_height="@dimen/shouye_type_name_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                    />
 
-        <ImageView
-            android:id="@+id/more1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
+                    <ImageView
+                        android:id="@+id/change5"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
 
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/image1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            />
+                </RelativeLayout>
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/recycler4"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image5"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                   android:layout_marginTop="10dp"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/tv6"
+                            android:layout_width="@dimen/shouye_type_name_width"
+                            android:layout_height="@dimen/shouye_type_name_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                    />
 
-            <ImageView
-                android:id="@+id/tv2"
-                android:layout_width="@dimen/shouye_type_name_width"
-                android:layout_height="@dimen/shouye_type_name_height"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                />
+                    <ImageView
+                        android:id="@+id/change6"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_centerVertical="true"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+                </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/change2"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-        </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/recycler5"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image6"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                  android:layout_marginTop="10dp"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler1"
-            android:layout_marginTop="15dp"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                    <ImageView
+                            android:id="@+id/tv7"
+                            android:layout_width="@dimen/shouye_type_name_width"
+                            android:layout_height="@dimen/shouye_type_name_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                    />
+                    <ImageView
+                        android:id="@+id/change7"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+                </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/more2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler6"
+                    android:layout_marginTop="15dp"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image7"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/image2"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            />
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/tv8"
+                            android:layout_width="@dimen/shouye_type_name_width"
+                            android:layout_height="@dimen/shouye_type_name_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                    />
 
-            <ImageView
-                android:id="@+id/tv3"
-                android:layout_width="@dimen/shouye_type_name_width"
-                android:layout_centerVertical="true"
-                android:layout_height="@dimen/shouye_type_name_height"
-                android:layout_marginLeft="12dp"
-                />
+                    <ImageView
+                        android:id="@+id/change8"
+                        android:layout_width="@dimen/huanyipi_width"
+                        android:layout_height="@dimen/huanyipi_height"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_shouye_huanyipi"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        />
+                </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/change3"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="15dp"
-            android:id="@+id/recycler2"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/more3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image3"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-           android:layout_marginTop="10dp"
-            />
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/tv4"
-                    android:layout_width="@dimen/shouye_type_name_width"
-                    android:layout_height="@dimen/shouye_type_name_height"
-                    android:layout_marginLeft="12dp"
-                    android:layout_centerVertical="true"
-            />
-
-            <ImageView
-                android:id="@+id/change4"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-
-        </RelativeLayout>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="15dp"
-            android:id="@+id/recycler3"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/more4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image4"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-           android:layout_marginTop="10dp"
-            />
-        <RelativeLayout
-            android:scaleType="fitXY"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/tv5"
-                    android:layout_width="@dimen/shouye_type_name_width"
-                    android:layout_height="@dimen/shouye_type_name_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-            />
-
-            <ImageView
-                android:id="@+id/change5"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="15dp"
-            android:id="@+id/recycler4"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <ImageView
-            android:id="@+id/more5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image5"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-           android:layout_marginTop="10dp"
-            />
-
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/tv6"
-                    android:layout_width="@dimen/shouye_type_name_width"
-                    android:layout_height="@dimen/shouye_type_name_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-            />
-
-            <ImageView
-                android:id="@+id/change6"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_centerVertical="true"
-                android:layout_height="@dimen/huanyipi_height"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-        </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="15dp"
-            android:id="@+id/recycler5"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <ImageView
-            android:id="@+id/more6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image6"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-          android:layout_marginTop="10dp"
-            />
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/tv7"
-                    android:layout_width="@dimen/shouye_type_name_width"
-                    android:layout_height="@dimen/shouye_type_name_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-            />
-            <ImageView
-                android:id="@+id/change7"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-        </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler6"
-            android:layout_marginTop="15dp"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/more7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image7"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            />
-        <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/tv8"
-                    android:layout_width="@dimen/shouye_type_name_width"
-                    android:layout_height="@dimen/shouye_type_name_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-            />
-
-            <ImageView
-                android:id="@+id/change8"
-                android:layout_width="@dimen/huanyipi_width"
-                android:layout_height="@dimen/huanyipi_height"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/iv_shouye_huanyipi"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="12dp"
-                />
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler7"
-            android:paddingRight="15.2dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/more8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iv_shouye_more"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:id="@+id/image8"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-           android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
-            />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler7"
+                    android:paddingRight="15.2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/more8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/iv_shouye_more"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    />
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image8"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                   android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    />
     </LinearLayout>
-
     </ScrollView>
     </LinearLayout>
     <ImageView
@@ -463,5 +448,4 @@
         android:src="@mipmap/bg1"
         android:visibility="gone"
         />
-
 </FrameLayout>

@@ -42,7 +42,7 @@ public class ConstantTips {
 
     public static final String LOGIN_PWD_REGEX_1="\\d||\\w{6,}";
     //登录密码的regex的字符串
-    public static final String LOGIN_PWD_REGEX="\\d||\\w{6}";
+    public static final String LOGIN_PWD_REGEX="\\d||\\w{6,}";
 
     //验证码的regex的字符串
     public static final String VERIFY_CODE_REGEX="\\d{4,6}";

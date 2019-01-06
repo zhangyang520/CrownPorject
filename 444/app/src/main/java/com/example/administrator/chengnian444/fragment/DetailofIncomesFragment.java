@@ -161,10 +161,10 @@ public class DetailofIncomesFragment extends Fragment {
                                     }
                                     presentationRecylerviewAdapter.notifyDataSetChanged();
                                 }else{
-                                    ToastUtils.showToast(getActivity(),"暂无数据");
+                                    ToastUtils.showToast(MyApplication.context,"暂无数据");
                                 }
                             } else {
-                                ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+                                ToastUtils.showToast(MyApplication.context, bannerBean.getMessage());
                             }
                         }
                     });

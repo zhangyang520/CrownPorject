@@ -72,11 +72,11 @@
             android:id="@+id/password"
             android:textSize="@dimen/txt_40px"
             android:paddingLeft="@dimen/first_margin_left"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:hint="请输入账号密码"/>
+            android:hint="请输入新的密码"/>
     </LinearLayout>
 
 

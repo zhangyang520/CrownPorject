@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.adapter.PresentationRecylerviewAdapter;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.*;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
@@ -127,7 +128,7 @@ public class DetailofPresentationFragment extends Fragment {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            ToastUtils.showToast(getActivity(),"查看提现明細失敗!");
+                            ToastUtils.showToast(MyApplication.context,"查看提现明細失敗!");
                             if((page>1)){
                                 page--;
                             }
@@ -157,10 +158,10 @@ public class DetailofPresentationFragment extends Fragment {
                                         }
                                         presentationRecylerviewAdapter.notifyDataSetChanged();
                                     }else{
-                                        ToastUtils.showToast(getActivity(),"暂无数据");
+                                        ToastUtils.showToast(MyApplication.context,"暂无数据");
                                     }
                                 } else {
-                                    ToastUtils.showToast(getActivity(), bannerBean.getMessage());
+                                    ToastUtils.showToast(MyApplication.context, bannerBean.getMessage());
                                 }
                         }
                     });
