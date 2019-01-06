@@ -146,7 +146,7 @@ public class DetailofIncomesFragment extends Fragment {
                                     ArrayList<InComeBean> inComeBeanArrayList=new ArrayList<InComeBean>();
                                     for (IncomeDetailResponse.IncomeDetailBean.IncomeDetail data : bannerBean.getData().getDataList()) {
                                         InComeBean inComeBean=new InComeBean();
-                                        inComeBean.setName(data.getBlanceName());
+                                        inComeBean.setName(data.getDetailEventName());
                                         inComeBean.setBalance(data.getBalance());
                                         inComeBean.setIncome(data.getMoneyCount());
                                         inComeBean.setDate(DateUtil.getYearOrMonthOrDay(data.getCreateTime()));

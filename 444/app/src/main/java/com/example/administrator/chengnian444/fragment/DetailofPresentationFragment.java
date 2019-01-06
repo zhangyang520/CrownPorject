@@ -142,7 +142,7 @@ public class DetailofPresentationFragment extends Fragment {
                                         ArrayList<PresentationBalanceBean> inComeBeanArrayList=new ArrayList<PresentationBalanceBean>();
                                         for (WithdrawDetailResponse.WithdrawDetailBean.WithdrawDetail data : bannerBean.getData().getDataList()) {
                                             PresentationBalanceBean inComeBean=new PresentationBalanceBean();
-                                            inComeBean.setName(data.getBlanceName());
+                                            inComeBean.setName(data.getDetailEventName());
                                             inComeBean.setBalance(data.getBalance());
                                             inComeBean.setIncome(data.getMoneyCount());
                                             inComeBean.setDate(DateUtil.getYearOrMonthOrDay(data.getCreateTime()));

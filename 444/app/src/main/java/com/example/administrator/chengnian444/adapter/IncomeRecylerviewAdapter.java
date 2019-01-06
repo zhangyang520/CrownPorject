@@ -58,7 +58,7 @@ public class IncomeRecylerviewAdapter extends RecyclerView.Adapter <IncomeRecyle
     @Override
     public void onBindViewHolder(@NonNull IncomeViewHolder incomeViewHolder, int i) {
         //余额的个数
-        incomeViewHolder.tv_balance.setText("余额："+decimalFormat.format(incomeBeans.get(i).getBalance().toString()));
+        incomeViewHolder.tv_balance.setText("余额："+decimalFormat.format(incomeBeans.get(i).getBalance()));
 
         if(incomeBeans.get(i).getIncome()>0){
             incomeViewHolder.tv_income.setText("+"+incomeBeans.get(i).getIncome().toString());

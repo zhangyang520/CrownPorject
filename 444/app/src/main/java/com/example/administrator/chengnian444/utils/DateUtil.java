@@ -71,7 +71,7 @@ public class DateUtil {
 	 * @return 
 	 */
 	public static String getYearOrMonthOrDay(long time){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date(time));
 	}
 	

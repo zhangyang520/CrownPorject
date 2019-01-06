@@ -58,6 +58,7 @@ public class IncomeDetailResponse {
         private int totalRecord;
         private List<IncomeDetail> dataList;
 
+
         public IncomeDetailBean() {
         }
 
@@ -114,7 +115,15 @@ public class IncomeDetailResponse {
             private float moneyCount; //操作金额数
             private float balance; //账户余额
             private long createTime; //交易时间
+            private String detailEventName;
 
+            public String getDetailEventName() {
+                return detailEventName;
+            }
+
+            public void setDetailEventName(String detailEventName) {
+                this.detailEventName = detailEventName;
+            }
             public IncomeDetail() {
             }
 
