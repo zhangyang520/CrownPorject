@@ -21,6 +21,7 @@ import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 
@@ -198,14 +199,14 @@ public class MineFragment extends BaseFragment {
                             final EditText ed_original_safe_pwd=contentView.findViewById(R.id.ed_original_safe_pwd);
 
                             Button btn_ok=contentView.findViewById(R.id.btn_ok);
-                            btn_ok.setOnClickListener(new View.OnClickListener() {
+                            btn_ok.setOnClickListener(new NoDoubleClickListener() {
                                 @Override
-                                public void onClick(View view) {
+                                public void onNoDoubleClick(View v) {
                                     if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
                                         //如果不为空
                                         if(ed_original_safe_pwd.getText().toString()
-                                                        .matches(ConstantTips.EXTENDITION_CODE_REGEX)){
-                                                //满足条件
+                                                .matches(ConstantTips.EXTENDITION_CODE_REGEX)){
+                                            //满足条件
                                             verifyPromoteCode(userBean.userName,ed_original_safe_pwd.getText().toString(),alertDialog);
                                         }else {
                                             ToastUtils.showToast(getActivity(), "推广码必须是6位数字");

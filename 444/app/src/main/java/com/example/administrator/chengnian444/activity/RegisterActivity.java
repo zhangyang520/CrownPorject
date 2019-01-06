@@ -18,10 +18,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.MainActivity;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.MessageCodeBean;
 import com.example.administrator.chengnian444.bean.RegisterBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
@@ -33,6 +35,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 
 public class RegisterActivity extends BaseActivity {
@@ -59,9 +64,23 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
+
+        getCode.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onViewClicked(v);
+            }
+        });
+
+        btnRegister.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onViewClicked(v);
+            }
+        });
     }
 
-    @OnClick({R.id.back, R.id.get_code, R.id.btn_register})
+    @OnClick({R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -81,6 +100,13 @@ public class RegisterActivity extends BaseActivity {
                             .build().execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+                            if(e instanceof ConnectException){
+                                ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                            }else if(e instanceof SocketTimeoutException){
+                                ToastUtils.showToast(MyApplication.context, "请求超时!");
+                            }else{
+                                ToastUtils.showToast(RegisterActivity.this, "获取验证码失败!");
+                            }
                             Log.d("hcy",e.toString());
                         }
 
@@ -88,21 +114,25 @@ public class RegisterActivity extends BaseActivity {
                         public void onResponse(String response, int id) {
                             Log.d("hcy",response);
                             JSONObject jsonObject = JSON.parseObject(response);
-                            String message = (String) jsonObject.get("message");
-                            int code = (int) jsonObject.get("code");
-                            boolean flag=jsonObject.getBoolean("data");
-                            if(flag){
-                                ToastUtils.showToast(RegisterActivity.this,message);
-                                //时间的定时器
-                                TimeCount timeCount = new TimeCount(60000, 1000);
-                                timeCount.start();
-                            }else{
-                                ToastUtils.showToast(RegisterActivity.this,message);
-                                if (code==301){
-                                    exitDialog();
-                                }else if(code==101){
+                            if (!jsonObject.isEmpty()){
+                                String message = (String) jsonObject.get("message");
+                                int code = (int) jsonObject.get("code");
+                                boolean flag=jsonObject.getBoolean("data");
+                                if(flag){
+                                    ToastUtils.showToast(RegisterActivity.this,message);
+                                    //时间的定时器
+                                    TimeCount timeCount = new TimeCount(60000, 1000);
+                                    timeCount.start();
+                                }else{
+                                    ToastUtils.showToast(RegisterActivity.this,message);
+                                    if (code==301){
+                                        exitDialog();
+                                    }else if(code==101){
 
+                                    }
                                 }
+                            }else{
+                                ToastUtils.showToast(RegisterActivity.this,"发送验证码数据为空!");
                             }
                         }
                     });
@@ -129,7 +159,13 @@ public class RegisterActivity extends BaseActivity {
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onError(Call call, Exception e, int id) {
-
+                                            if(e instanceof ConnectException){
+                                                ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                                            }else if(e instanceof SocketTimeoutException){
+                                                ToastUtils.showToast(MyApplication.context, "请求超时!");
+                                            }else{
+                                                ToastUtils.showToast(RegisterActivity.this, "注册失败!");
+                                            }
                                         }
 
                                         @Override

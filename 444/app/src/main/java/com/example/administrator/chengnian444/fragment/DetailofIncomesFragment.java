@@ -52,6 +52,8 @@ public class DetailofIncomesFragment extends Fragment {
 
     @Bind(R.id.recycler)
     RecyclerView recycler;
+
+    private final int PAGE_SIZE=20;
     public DetailofIncomesFragment(){
     }
 
@@ -123,11 +125,16 @@ public class DetailofIncomesFragment extends Fragment {
                     .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                     .addParams("account", UserDao.getLocalUser().userName)
                     .addParams("appType",Constant.platform_id)
+                    .addParams("currentPage",page+"")
+                    .addParams("pageSize",PAGE_SIZE+"")
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             ToastUtils.showToast(MyApplication.context,"查看收益明細 失敗!");
+                            if((page>1)){
+                                page--;
+                            }
                         }
 
                         @Override
@@ -135,9 +142,9 @@ public class DetailofIncomesFragment extends Fragment {
                             IncomeDetailResponse bannerBean = JSON.parseObject(response, IncomeDetailResponse.class);
                             if (bannerBean.getCode() == 200) {
                                 //進行轉換
-                                if(bannerBean.getData()!=null && bannerBean.getData().size()>0){
+                                if(bannerBean.getData()!=null && bannerBean.getData().getDataList()!=null && bannerBean.getData().getDataList().size()>0){
                                     ArrayList<InComeBean> inComeBeanArrayList=new ArrayList<InComeBean>();
-                                    for (IncomeDetailResponse.IncomeDetail data : bannerBean.getData()) {
+                                    for (IncomeDetailResponse.IncomeDetailBean.IncomeDetail data : bannerBean.getData().getDataList()) {
                                         InComeBean inComeBean=new InComeBean();
                                         inComeBean.setName(data.getBlanceName());
                                         inComeBean.setBalance(data.getBalance());

@@ -780,9 +780,8 @@ public class HomeFragment extends BaseFragment {
 
     private void getHomeChange(String typenum, final RecyclerView view) {
         dialogShow();
-        OkHttpUtils.get()
+        OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.HOMECHANGE)
-                .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                 .addParams("loginToken", SPUtils.getInstance(getActivity()).getString("loginToken"))
                 .addParams("typeNum", typenum)

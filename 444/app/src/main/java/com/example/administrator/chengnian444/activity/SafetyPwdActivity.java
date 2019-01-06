@@ -15,18 +15,23 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.SettingSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 
 /**
@@ -64,6 +69,13 @@ public class SafetyPwdActivity extends AppCompatActivity {
 
         //初始化数据
         initData();
+
+        btn_ok_safe_pwd.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onDoClick(v);
+            }
+        });
     }
 
 
@@ -88,8 +100,8 @@ public class SafetyPwdActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.tv_choengzhi,R.id.back,R.id.tv_edit_pwd,R.id.btn_ok_safe_pwd})
-     public void onClick(View view) {
+    @OnClick({R.id.tv_choengzhi,R.id.back,R.id.tv_edit_pwd})
+     public void onDoClick(View view) {
 
         switch (view.getId()) {
             case R.id.tv_choengzhi:
@@ -134,9 +146,9 @@ public class SafetyPwdActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         if(!ed_original_safe_pwd.getText().toString().trim().equals("")){
                             //如果不为空
-                            ToastUtils.showToast(SafetyPwdActivity.this,"输入安全吗");
+                            ToastUtils.showToast(SafetyPwdActivity.this,"输入安全码");
                         }else{
-                            ToastUtils.showToast(SafetyPwdActivity.this,"请输入安全吗");
+                            ToastUtils.showToast(SafetyPwdActivity.this,"请输入安全码");
                         }
                     }
                 });
@@ -159,7 +171,14 @@ public class SafetyPwdActivity extends AppCompatActivity {
                                   .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                ToastUtils.showToast(SafetyPwdActivity.this,"安全密码设置失败");
+                                if(e instanceof ConnectException){
+                                    ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                                }else if(e instanceof SocketTimeoutException){
+                                    ToastUtils.showToast(MyApplication.context, "请求超时!");
+                                }else{
+                                    ToastUtils.showToast(SafetyPwdActivity.this,"安全密码设置失败");
+                                }
+
                             }
 
                             @Override

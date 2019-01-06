@@ -85,7 +85,7 @@
                     android:paddingLeft="@dimen/first_margin_left"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="textPassword"
+                    android:inputType="numberPassword"
                     android:background="@null"
                     android:hint="请输入新的安全密码"/>
         </LinearLayout>

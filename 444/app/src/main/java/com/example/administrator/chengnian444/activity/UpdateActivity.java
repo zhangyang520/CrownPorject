@@ -14,10 +14,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.AppManager;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
@@ -29,6 +31,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 
 public class UpdateActivity extends BaseActivity {
@@ -55,9 +60,16 @@ public class UpdateActivity extends BaseActivity {
         } catch (ContentException e) {
             e.printStackTrace();
         }
+
+        btnUpdate.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onViewClicked(v);
+            }
+        });
     }
 
-    @OnClick({R.id.back, R.id.btn_update})
+    @OnClick({R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -91,7 +103,13 @@ public class UpdateActivity extends BaseActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                           Log.d("hcy",e.toString());
-                          ToastUtils.showToast(UpdateActivity.this, "修改密碼失敗!");
+                        if(e instanceof ConnectException){
+                            ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                        }else if(e instanceof SocketTimeoutException){
+                            ToastUtils.showToast(MyApplication.context, "请求超时!");
+                        }else{
+                            ToastUtils.showToast(UpdateActivity.this,"修改密码失败!");
+                        }
                     }
 
                     @Override

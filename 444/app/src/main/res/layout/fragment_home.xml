@@ -86,6 +86,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="15dp"
         android:id="@+id/china_on"
+        android:paddingRight="15.2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -136,6 +137,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler1"
             android:layout_marginTop="15dp"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -185,6 +187,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="15dp"
             android:id="@+id/recycler2"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
@@ -233,6 +236,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="15dp"
             android:id="@+id/recycler3"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -282,6 +286,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="15dp"
             android:id="@+id/recycler4"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -330,6 +335,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="15dp"
             android:id="@+id/recycler5"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -377,6 +383,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler6"
             android:layout_marginTop="15dp"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
@@ -422,6 +429,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler7"
+            android:paddingRight="15.2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView

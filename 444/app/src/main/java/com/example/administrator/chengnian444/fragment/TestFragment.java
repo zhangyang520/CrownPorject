@@ -8,11 +8,14 @@ import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
+import com.example.administrator.chengnian444.activity.MoveSeriesActivity;
 import com.example.administrator.chengnian444.adapter.MoveAdapter;
 import com.example.administrator.chengnian444.base.BaseFragment;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.MoveListBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -21,6 +24,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.List;
 
 import butterknife.Bind;
@@ -79,7 +84,6 @@ public class TestFragment extends BaseFragment {
     }
 
     private void httpgetDate() {
-        dialogShow();
         OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.MOVELIST)
                 .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
@@ -91,24 +95,37 @@ public class TestFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        dialogDismiss();
                         homeIv.setVisibility(View.GONE);
+                        if(page>1){
+                            page--;
+                        }
+                        if(e instanceof ConnectException){
+                            ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                        }else if(e instanceof SocketTimeoutException){
+                            ToastUtils.showToast(MyApplication.context, "请求超时!");
+                        }
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        dialogDismiss();
+                        homeIv.setVisibility(View.GONE);
                         MoveListBean homeBean = JSON.parseObject(response, MoveListBean.class);
                         if (homeBean.getCode() == 200) {
-
                             data = homeBean.getData().getDataList();
-                            //list.addAll(data);
-                            Log.d("hcy", page + "");
-                            if (page == 1) {
-
-                                moveAdapter.setNewData(data);
-                            } else {
-                                moveAdapter.addData(data);
+                            if(data!=null && data.size()>0) {
+                                Log.d("hcy", page + "");
+                                if (page == 1) {
+                                    moveAdapter.setNewData(data);
+                                } else {
+                                    moveAdapter.addData(data);
+                                }
+                            }else{
+                                if(page>1){
+                                    ToastUtils.showToast(MyApplication.context, "暂无更多的数据");
+                                    page--;
+                                }else{
+                                    ToastUtils.showToast(MyApplication.context, "暂无数据");
+                                }
                             }
                         } else if (homeBean.getCode() == 301){
                             exitDialog();

@@ -13,7 +13,7 @@ import java.util.Calendar;
  * @date 2019/1/519:56
  */
 public abstract class NoDoubleClickListener implements View.OnClickListener {
-    public static final int MIN_CLICK_DELAY_TIME = 3000;
+    public static final int MIN_CLICK_DELAY_TIME = 2000;
     private long lastClickTime = 0;
     boolean isCanClick=false;
     @Override

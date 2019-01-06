@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.chengnian444.MainActivity;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.LoginBean;
 import com.example.administrator.chengnian444.bean.RegisterIsOpen;
 import com.example.administrator.chengnian444.bean.UserBean;
@@ -36,6 +37,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 
 /**
@@ -181,7 +185,14 @@ public class LoginActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        ToastUtils.showToast(LoginActivity.this, "登录失败!");
+
+                        if(e instanceof ConnectException){
+                            ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                        }else if(e instanceof SocketTimeoutException){
+                            ToastUtils.showToast(MyApplication.context, "请求超时!");
+                        }else{
+                            ToastUtils.showToast(LoginActivity.this, "登录失败!");
+                        }
                         login.setClickable(true);
                     }
 

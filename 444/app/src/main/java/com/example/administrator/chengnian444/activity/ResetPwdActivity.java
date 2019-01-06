@@ -14,18 +14,23 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.SettingSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 
 /**
@@ -65,10 +70,24 @@ public class ResetPwdActivity extends BaseActivity {
         } catch (ContentException e) {
             e.printStackTrace();
         }
+
+        btn_ok_reset.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onClickView(v);
+            }
+        });
+
+        get_code.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onClickView(v);
+            }
+        });
     }
 
 
-     @OnClick({R.id.back,R.id.get_code,R.id.btn_ok_reset})
+     @OnClick({R.id.back})
      public void onClickView(View view) {
          switch (view.getId()) {
              case R.id.back:
@@ -89,7 +108,13 @@ public class ResetPwdActivity extends BaseActivity {
                                 .addParams("account",et_phone.getText().toString()).build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                ToastUtils.showToast(ResetPwdActivity.this,"安全密码重置失败");
+                                if(e instanceof ConnectException){
+                                    ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                                }else if(e instanceof SocketTimeoutException){
+                                    ToastUtils.showToast(MyApplication.context, "请求超时!");
+                                }else{
+                                    ToastUtils.showToast(ResetPwdActivity.this,"安全密码重置失败");
+                                }
                             }
 
                             @Override
@@ -133,6 +158,13 @@ public class ResetPwdActivity extends BaseActivity {
                          @Override
                          public void onError(Call call, Exception e, int id) {
                              Log.d("hcy",e.toString());
+                             if(e instanceof ConnectException){
+                                 ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                             }else if(e instanceof SocketTimeoutException){
+                                 ToastUtils.showToast(MyApplication.context, "请求超时!");
+                             }else{
+                                 ToastUtils.showToast(ResetPwdActivity.this,"获取验证码失败");
+                             }
                          }
 
                          @Override

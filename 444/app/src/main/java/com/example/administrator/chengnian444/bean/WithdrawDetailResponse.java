@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class WithdrawDetailResponse {
     private int code;
-    private List<WithdrawDetail> data;
+    private WithdrawDetailBean data;
     private String message;
 
     public WithdrawDetailResponse() {
     }
 
-    public WithdrawDetailResponse(int code, List<WithdrawDetail> data, String message) {
+    public WithdrawDetailResponse(int code, WithdrawDetailBean data, String message) {
         this.code = code;
         this.data = data;
         this.message = message;
@@ -32,11 +32,11 @@ public class WithdrawDetailResponse {
         this.code = code;
     }
 
-    public List<WithdrawDetail> getData() {
+    public WithdrawDetailBean getData() {
         return data;
     }
 
-    public void setData(List<WithdrawDetail> data) {
+    public void setData(WithdrawDetailBean data) {
         this.data = data;
     }
 
@@ -48,52 +48,118 @@ public class WithdrawDetailResponse {
         this.message = message;
     }
 
-    public class  WithdrawDetail{
-        private String blanceName; //余额操作名称
-        private float moneyCount; //操作金额数
-        private float balance; //账户余额
-        private long createTime; //交易时间
+    /**
+     * 返回的数据集合
+     */
+    public class WithdrawDetailBean{
+        private int currentPage;
+        private List<WithdrawDetail> dataList;
+        private int pageSize;
+        private int totalPage;
+        private int totalRecord;
 
-        public WithdrawDetail() {
+        public WithdrawDetailBean() {
         }
 
-        public WithdrawDetail(String blanceName, float moneyCount, float balance, long createTime) {
-            this.blanceName = blanceName;
-            this.moneyCount = moneyCount;
-            this.balance = balance;
-            this.createTime = createTime;
+        public WithdrawDetailBean(int currentPage, List<WithdrawDetail> dataList, int pageSize, int totalPage, int totalRecord) {
+            this.currentPage = currentPage;
+            this.dataList = dataList;
+            this.pageSize = pageSize;
+            this.totalPage = totalPage;
+            this.totalRecord = totalRecord;
         }
 
-        public String getBlanceName() {
-            return blanceName;
+        public int getCurrentPage() {
+            return currentPage;
         }
 
-        public void setBlanceName(String blanceName) {
-            this.blanceName = blanceName;
+        public void setCurrentPage(int currentPage) {
+            this.currentPage = currentPage;
         }
 
-        public float getMoneyCount() {
-            return moneyCount;
+        public List<WithdrawDetail> getDataList() {
+            return dataList;
         }
 
-        public void setMoneyCount(float moneyCount) {
-            this.moneyCount = moneyCount;
+        public void setDataList(List<WithdrawDetail> dataList) {
+            this.dataList = dataList;
         }
 
-        public float getBalance() {
-            return balance;
+        public int getPageSize() {
+            return pageSize;
         }
 
-        public void setBalance(float balance) {
-            this.balance = balance;
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
         }
 
-        public long getCreateTime() {
-            return createTime;
+        public int getTotalPage() {
+            return totalPage;
         }
 
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
+        public void setTotalPage(int totalPage) {
+            this.totalPage = totalPage;
+        }
+
+        public int getTotalRecord() {
+            return totalRecord;
+        }
+
+        public void setTotalRecord(int totalRecord) {
+            this.totalRecord = totalRecord;
+        }
+
+
+        public class  WithdrawDetail{
+            private String blanceName; //余额操作名称
+            private float moneyCount; //操作金额数
+            private float balance; //账户余额
+            private long createTime; //交易时间
+            private String detailEventName;
+
+            public WithdrawDetail() {
+            }
+
+            public String getDetailEventName() {
+                return detailEventName;
+            }
+
+            public void setDetailEventName(String detailEventName) {
+                this.detailEventName = detailEventName;
+            }
+
+            public String getBlanceName() {
+                return blanceName;
+            }
+
+            public void setBlanceName(String blanceName) {
+                this.blanceName = blanceName;
+            }
+
+            public float getMoneyCount() {
+                return moneyCount;
+            }
+
+            public void setMoneyCount(float moneyCount) {
+                this.moneyCount = moneyCount;
+            }
+
+            public float getBalance() {
+                return balance;
+            }
+
+            public void setBalance(float balance) {
+                this.balance = balance;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
         }
     }
+
 }

@@ -19,6 +19,7 @@ import com.example.administrator.chengnian444.bean.MoveListBean;
 import com.example.administrator.chengnian444.http.Constant;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
+import com.example.administrator.chengnian444.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -94,7 +95,7 @@ public class MoveListActivity extends BaseActivity {
     }
 
     private void httpgetDate() {
-        dialogShow();
+//        dialogShow();
         OkHttpUtils.post()
                 .url(Constant.BASEURL+Constant.MOVELIST)
                 .addHeader("Content-Type", "application/json")
@@ -107,25 +108,32 @@ public class MoveListActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        dialogDismiss();
-                        homeIv.setVisibility(View.VISIBLE);
+                        if(page>1){
+                            page--;
+                        }else{
+                          homeIv.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        dialogDismiss();
                         MoveListBean homeBean = JSON.parseObject(response, MoveListBean.class);
+                        homeIv.setVisibility(View.GONE);
                         if (homeBean.getCode() == 200) {
-
                             data = homeBean.getData().getDataList();
-                            if (data==null){
-                                homeIv.setVisibility(View.VISIBLE);
-                            }
-                            if (page == 1) {
-
-                                moveAdapter.setNewData(data);
-                            } else {
-                                moveAdapter.addData(data);
+                            if(data!=null && data.size()>0){
+                                if (page == 1) {
+                                    moveAdapter.setNewData(data);
+                                } else {
+                                    moveAdapter.addData(data);
+                                }
+                            }else{
+                                if(page>1){
+                                    ToastUtils.showToast(MoveListActivity.this, "暂无更多的数据");
+                                    page--;
+                                }else{
+                                    ToastUtils.showToast(MoveListActivity.this, "暂无数据");
+                                }
                             }
                         } else if (homeBean.getCode() == 301){
                             exitDialog();

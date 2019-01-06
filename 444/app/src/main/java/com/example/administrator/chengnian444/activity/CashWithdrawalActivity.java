@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import com.alibaba.fastjson.JSON;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.bean.IsLockSafetyPwdResponse;
 import com.example.administrator.chengnian444.bean.UserBean;
 import com.example.administrator.chengnian444.bean.UserInfoResponse;
@@ -25,6 +26,7 @@ import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.dao.UserDao;
 import com.example.administrator.chengnian444.exception.ContentException;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.PopupUtils;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
@@ -33,6 +35,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Call;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.text.DecimalFormat;
 
 /**
@@ -85,6 +89,8 @@ public class CashWithdrawalActivity extends BaseActivity {
     @Bind(R.id.tv_rate)
     TextView tv_rate;
 
+    @Bind(R.id.btn_submit)
+    Button btn_submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +100,13 @@ public class CashWithdrawalActivity extends BaseActivity {
 
         //初始化数据
         initData();
+
+        btn_submit.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                ondoClick(v);
+            }
+        });
     }
 
     /**
@@ -104,9 +117,21 @@ public class CashWithdrawalActivity extends BaseActivity {
             //初始化用户
             UserBean userBean=UserDao.getLocalUser();
             tv_balance.setText("当前余额："+userBean.totalBalance+"");
-            tv_first_benfit.setText(userBean.firstPromotionBenfits + "");
-            tv_second_benfit.setText(userBean.secondPormotionBenfits + "");
-            tv_third_benfit.setText(userBean.thirdPromotionBenfits+"");
+            if(userBean.firstPromotionBenfits.equals("-1.00")){
+                tv_first_benfit.setText("暂不开放");
+            }else{
+               tv_first_benfit.setText(userBean.firstPromotionBenfits + "");
+            }
+            if(userBean.secondPormotionBenfits.equals("-1.00")){
+                tv_second_benfit.setText("暂不开放");
+            }else{
+                tv_second_benfit.setText(userBean.secondPormotionBenfits + "");
+            }
+            if(userBean.thirdPromotionBenfits.equals("-1.00")){
+                tv_third_benfit.setText("暂不开放");
+            }else{
+                tv_third_benfit.setText(userBean.thirdPromotionBenfits + "");
+            }
         } catch (ContentException e) {
             e.printStackTrace();
             //初始化用户
@@ -117,8 +142,8 @@ public class CashWithdrawalActivity extends BaseActivity {
     //支付类型 0:微信提现  1:支付宝提现
     int type=5;
 
-    @OnClick({R.id.back,R.id.rl_pay_type,R.id.tv_balance_detail,R.id.btn_submit})
-     public void onClick(View view) {
+    @OnClick({R.id.back,R.id.rl_pay_type,R.id.tv_balance_detail})
+     public void ondoClick(View view) {
 
         switch (view.getId()) {
             case R.id.back:
@@ -195,9 +220,9 @@ public class CashWithdrawalActivity extends BaseActivity {
                 tv_content.setText("微信账号:"+ed_alipay_name.getText().toString());
             }
             Button btn_ok=contentView.findViewById(R.id.btn_ok);
-            btn_ok.setOnClickListener(new View.OnClickListener() {
+            btn_ok.setOnClickListener(new NoDoubleClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onNoDoubleClick(View v) {
                     //提交接口
                     cashWithdraw(alertDialog);
                 }
@@ -224,7 +249,13 @@ public class CashWithdrawalActivity extends BaseActivity {
                     .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
-                    ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                    if(e instanceof ConnectException){
+                        ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                    }else if(e instanceof SocketTimeoutException){
+                        ToastUtils.showToast(MyApplication.context, "请求超时!");
+                    }else{
+                        ToastUtils.showToast(CashWithdrawalActivity.this, "提现请求失败!");
+                    }
                 }
 
                 @Override
@@ -273,7 +304,13 @@ public class CashWithdrawalActivity extends BaseActivity {
                     .addParams("account",UserDao.getLocalUser().userName).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
-                    ToastUtils.showToast(CashWithdrawalActivity.this,"提交申请提现失败!");
+                    if(e instanceof ConnectException){
+                        ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                    }else if(e instanceof SocketTimeoutException){
+                        ToastUtils.showToast(MyApplication.context, "请求超时!");
+                    }else{
+                        ToastUtils.showToast(CashWithdrawalActivity.this,"申请提现提交失败!");
+                    }
                 }
 
                 @Override

@@ -15,8 +15,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.administrator.chengnian444.R;
 import com.example.administrator.chengnian444.base.BaseActivity;
+import com.example.administrator.chengnian444.base.MyApplication;
 import com.example.administrator.chengnian444.constant.ConstantTips;
 import com.example.administrator.chengnian444.http.Constant;
+import com.example.administrator.chengnian444.listener.NoDoubleClickListener;
 import com.example.administrator.chengnian444.utils.SPUtils;
 import com.example.administrator.chengnian444.utils.StatusBarCompat.StatusBarCompat;
 import com.example.administrator.chengnian444.utils.ToastUtils;
@@ -29,7 +31,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-   /**
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+
+/**
      * 忘记密码界面
      * @Title:
      * @ProjectName
@@ -59,9 +64,23 @@ public class ForgetPwdActivity extends BaseActivity {
         setContentView(R.layout.activity_forget);
         StatusBarCompat.setStatusBarColor(this,getResources().getColor(R.color.black));
         ButterKnife.bind(this);
+
+        btnRegister.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onViewClicked(v);
+            }
+        });
+
+        getCode.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                onViewClicked(v);
+            }
+        });
     }
 
-    @OnClick({R.id.back, R.id.get_code, R.id.btn_register})
+    @OnClick({R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -81,7 +100,14 @@ public class ForgetPwdActivity extends BaseActivity {
                                 .build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                ToastUtils.showToast(ForgetPwdActivity.this, "发送验证码失败!");
+                                if(e instanceof ConnectException){
+                                    ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                                }else if(e instanceof SocketTimeoutException){
+                                    ToastUtils.showToast(MyApplication.context, "请求超时!");
+                                }else{
+                                    ToastUtils.showToast(ForgetPwdActivity.this, "发送验证码失败!");
+                                }
+
                                 Log.d("hcy",e.toString());
                             }
 
@@ -124,7 +150,13 @@ public class ForgetPwdActivity extends BaseActivity {
                             .execute(new StringCallback() {
                                 @Override
                                 public void onError(Call call, Exception e, int id) {
-                                    ToastUtils.showToast(ForgetPwdActivity.this, "忘记密码修改失败!");
+                                    if(e instanceof ConnectException){
+                                        ToastUtils.showToast(MyApplication.context, "请检查网络!");
+                                    }else if(e instanceof SocketTimeoutException){
+                                        ToastUtils.showToast(MyApplication.context, "请求超时!");
+                                    }else{
+                                        ToastUtils.showToast(ForgetPwdActivity.this, "忘记密码修改失败!");
+                                    }
                                 }
 
                                 @Override

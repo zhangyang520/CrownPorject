@@ -12,16 +12,24 @@ import java.util.List;
  */
 public class IncomeDetailResponse {
     private int code;
-    private List<IncomeDetail> data;
+    private IncomeDetailBean data;
     private String message;
 
     public IncomeDetailResponse() {
     }
 
-    public IncomeDetailResponse(int code, List<IncomeDetail> data, String message) {
+    public IncomeDetailResponse(int code, IncomeDetailBean data, String message) {
         this.code = code;
         this.data = data;
         this.message = message;
+    }
+
+    public IncomeDetailBean getData() {
+        return data;
+    }
+
+    public void setData(IncomeDetailBean data) {
+        this.data = data;
     }
 
     public int getCode() {
@@ -32,14 +40,6 @@ public class IncomeDetailResponse {
         this.code = code;
     }
 
-    public List<IncomeDetail> getData() {
-        return data;
-    }
-
-    public void setData(List<IncomeDetail> data) {
-        this.data = data;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -48,52 +48,115 @@ public class IncomeDetailResponse {
         this.message = message;
 }
 
-   public  class IncomeDetail{
-        private String blanceName; //余额操作名称
-        private float moneyCount; //操作金额数
-        private float balance; //账户余额
-        private long createTime; //交易时间
+    /**
+     * 收入的bean
+     */
+   public class IncomeDetailBean{
+        private int currentPage;
+        private int pageSize;
+        private int totalPage;
+        private int totalRecord;
+        private List<IncomeDetail> dataList;
 
-        public IncomeDetail() {
+        public IncomeDetailBean() {
         }
 
-        public IncomeDetail(String blanceName, float moneyCount, float balance, long createTime) {
-            this.blanceName = blanceName;
-            this.moneyCount = moneyCount;
-            this.balance = balance;
-            this.createTime = createTime;
+        public IncomeDetailBean(int currentPage, int pageSize, int totalPage, int totalRecord, List<IncomeDetail> dataList) {
+            this.currentPage = currentPage;
+            this.pageSize = pageSize;
+            this.totalPage = totalPage;
+            this.totalRecord = totalRecord;
+            this.dataList = dataList;
         }
 
-        public String getBlanceName() {
-            return blanceName;
+        public int getCurrentPage() {
+            return currentPage;
         }
 
-        public void setBlanceName(String blanceName) {
-            this.blanceName = blanceName;
+        public void setCurrentPage(int currentPage) {
+            this.currentPage = currentPage;
         }
 
-        public float getMoneyCount() {
-            return moneyCount;
+        public int getPageSize() {
+            return pageSize;
         }
 
-        public void setMoneyCount(float moneyCount) {
-            this.moneyCount = moneyCount;
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
         }
 
-        public float getBalance() {
-            return balance;
+        public int getTotalPage() {
+            return totalPage;
         }
 
-        public void setBalance(float balance) {
-            this.balance = balance;
+        public void setTotalPage(int totalPage) {
+            this.totalPage = totalPage;
         }
 
-        public long getCreateTime() {
-            return createTime;
+        public int getTotalRecord() {
+            return totalRecord;
         }
 
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
+        public void setTotalRecord(int totalRecord) {
+            this.totalRecord = totalRecord;
+        }
+
+        public List<IncomeDetail> getDataList() {
+            return dataList;
+        }
+
+        public void setDataList(List<IncomeDetail> dataList) {
+            this.dataList = dataList;
+        }
+
+        public  class IncomeDetail{
+            private String blanceName; //余额操作名称
+            private float moneyCount; //操作金额数
+            private float balance; //账户余额
+            private long createTime; //交易时间
+
+            public IncomeDetail() {
+            }
+
+            public IncomeDetail(String blanceName, float moneyCount, float balance, long createTime) {
+                this.blanceName = blanceName;
+                this.moneyCount = moneyCount;
+                this.balance = balance;
+                this.createTime = createTime;
+            }
+
+            public String getBlanceName() {
+                return blanceName;
+            }
+
+            public void setBlanceName(String blanceName) {
+                this.blanceName = blanceName;
+            }
+
+            public float getMoneyCount() {
+                return moneyCount;
+            }
+
+            public void setMoneyCount(float moneyCount) {
+                this.moneyCount = moneyCount;
+            }
+
+            public float getBalance() {
+                return balance;
+            }
+
+            public void setBalance(float balance) {
+                this.balance = balance;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
         }
     }
+
 }

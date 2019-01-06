@@ -48,6 +48,8 @@ public class DetailofPresentationFragment extends Fragment {
     RecyclerView recycler;
 
     private View contentView;
+
+    private final int PAGE_SIZE=20;
     public DetailofPresentationFragment() {
     }
 
@@ -119,11 +121,16 @@ public class DetailofPresentationFragment extends Fragment {
                     .addHeader("Authorization", SPUtils.getInstance(getActivity()).getString("token"))
                     .addParams("account", UserDao.getLocalUser().userName)
                     .addParams("appType",Constant.platform_id)
+                    .addParams("currentPage",page+"")
+                    .addParams("pageSize",PAGE_SIZE+"")
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             ToastUtils.showToast(getActivity(),"查看提现明細失敗!");
+                            if((page>1)){
+                                page--;
+                            }
                         }
 
                         @Override
@@ -131,9 +138,9 @@ public class DetailofPresentationFragment extends Fragment {
                                 WithdrawDetailResponse bannerBean = JSON.parseObject(response, WithdrawDetailResponse.class);
                                 if (bannerBean.getCode() == 200) {
                                     //進行轉換
-                                    if(bannerBean.getData()!=null && bannerBean.getData().size()>0){
+                                    if(bannerBean.getData()!=null && bannerBean.getData().getDataList()!=null && bannerBean.getData().getDataList().size()>0){
                                         ArrayList<PresentationBalanceBean> inComeBeanArrayList=new ArrayList<PresentationBalanceBean>();
-                                        for (WithdrawDetailResponse.WithdrawDetail data : bannerBean.getData()) {
+                                        for (WithdrawDetailResponse.WithdrawDetailBean.WithdrawDetail data : bannerBean.getData().getDataList()) {
                                             PresentationBalanceBean inComeBean=new PresentationBalanceBean();
                                             inComeBean.setName(data.getBlanceName());
                                             inComeBean.setBalance(data.getBalance());
