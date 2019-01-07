@@ -116,6 +116,7 @@ public class WithdrawDetailResponse {
             private float balance; //账户余额
             private long createTime; //交易时间
             private String detailEventName;
+            private int status; // 0 成功 , 1 失败,  2 拒绝
 
             public WithdrawDetail() {
             }
@@ -158,6 +159,14 @@ public class WithdrawDetailResponse {
 
             public void setCreateTime(long createTime) {
                 this.createTime = createTime;
+            }
+
+            public int getStatus() {
+                return status;
+            }
+
+            public void setStatus(int status) {
+                this.status = status;
             }
         }
     }

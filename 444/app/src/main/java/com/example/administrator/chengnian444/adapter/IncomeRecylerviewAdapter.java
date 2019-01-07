@@ -61,9 +61,9 @@ public class IncomeRecylerviewAdapter extends RecyclerView.Adapter <IncomeRecyle
         incomeViewHolder.tv_balance.setText("余额："+decimalFormat.format(incomeBeans.get(i).getBalance()));
 
         if(incomeBeans.get(i).getIncome()>0){
-            incomeViewHolder.tv_income.setText("+"+incomeBeans.get(i).getIncome().toString());
+            incomeViewHolder.tv_income.setText("+"+decimalFormat.format(incomeBeans.get(i).getIncome()));
         }else{
-            incomeViewHolder.tv_income.setText("-"+incomeBeans.get(i).getIncome().toString());
+            incomeViewHolder.tv_income.setText("-"+decimalFormat.format(incomeBeans.get(i).getIncome()));
         }
         incomeViewHolder.tv_income_date.setText(incomeBeans.get(i).getDate());
         incomeViewHolder.tv_income_name.setText(incomeBeans.get(i).getName());

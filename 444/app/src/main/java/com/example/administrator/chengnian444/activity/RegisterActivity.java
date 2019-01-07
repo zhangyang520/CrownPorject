@@ -90,6 +90,7 @@ public class RegisterActivity extends BaseActivity {
                 //获取短信验证码
                 if(verifyCode()){
                     String et_code = etPhone.getText().toString().trim();
+                    System.out.println("et_code:"+et_code);
                     OkHttpUtils.post().
                             url(Constant.BASEURL+Constant.GETCODE)
                             .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
@@ -145,14 +146,13 @@ public class RegisterActivity extends BaseActivity {
                         phone = etPhone.getText().toString().trim();
                         String code = etPwd.getText().toString().trim();
                         String pwd1 = password.getText().toString().trim();
-                        Integer extentsionCode=0;
                         if(ed_extendition_code.getText().toString().trim().equals("")){
                             OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
                                     .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                                     .addParams("account", phone)
                                     .addParams("password",pwd1)
                                     .addParams("code",code)
-                                    .addParams("preRememberId",extentsionCode+"")
+                                    .addParams("preRememberId",ed_extendition_code.getText().toString())
                                     .addParams("channel",Constant.channel_id)
                                     .addParams("appType",Constant.platform_id)
                                     .build()
@@ -181,13 +181,12 @@ public class RegisterActivity extends BaseActivity {
                                         }
                                     });
                         }else{
-                            extentsionCode=Integer.parseInt(ed_extendition_code.getText().toString().trim());
                             OkHttpUtils.post().url(Constant.BASEURL+Constant.REGISTER)
                                     .addHeader("Authorization", SPUtils.getInstance(this).getString("token"))
                                     .addParams("account", phone)
                                     .addParams("password",pwd1)
                                     .addParams("code",code)
-                                    .addParams("preRememberId",extentsionCode+"")
+                                    .addParams("preRememberId",ed_extendition_code.getText().toString())
                                     .addParams("channel",Constant.channel_id)
                                     .addParams("appType",Constant.platform_id)
                                     .build()

@@ -161,7 +161,12 @@ public class DetailofIncomesFragment extends Fragment {
                                     }
                                     presentationRecylerviewAdapter.notifyDataSetChanged();
                                 }else{
-                                    ToastUtils.showToast(MyApplication.context,"暂无数据");
+                                    if(page>1){
+                                        page--;
+                                        ToastUtils.showToast(MyApplication.context,"暂无更多数据");
+                                    }else{
+                                        ToastUtils.showToast(MyApplication.context,"暂无刷新数据");
+                                    }
                                 }
                             } else {
                                 ToastUtils.showToast(MyApplication.context, bannerBean.getMessage());

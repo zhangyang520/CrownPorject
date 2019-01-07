@@ -77,8 +77,9 @@ public class SplashActivity extends BaseActivity {
         if (isEnterMain) {
             startActivity(new Intent(this, MainActivity.class));
         } else {
-            startActivity(new Intent(this, GuideActivity.class));
-            SPUtils.getInstance(this).put("isEnterMain", true);
+            startActivity(new Intent(this, MainActivity.class));
+//            startActivity(new Intent(this, GuideActivity.class));
+//            SPUtils.getInstance(this).put("isEnterMain", true);
         }
         finish();
     }

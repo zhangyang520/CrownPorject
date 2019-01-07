@@ -13,12 +13,21 @@ public class PresentationBalanceBean {
     double balance; //余额
     String date; //日期
     double income;//收入
+    int status; //0 成功 ，1 失败， 2 拒绝
 
     public PresentationBalanceBean(String name, Double balance, String date, Double income) {
         this.name = name;
         this.balance = balance;
         this.date = date;
         this.income = income;
+    }
+
+    public PresentationBalanceBean(String name, double balance, String date, double income, int status) {
+        this.name = name;
+        this.balance = balance;
+        this.date = date;
+        this.income = income;
+        this.status = status;
     }
 
     public PresentationBalanceBean() {
@@ -56,6 +65,14 @@ public class PresentationBalanceBean {
         this.income = income;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "PresentationBalanceBean{" +
@@ -63,6 +80,7 @@ public class PresentationBalanceBean {
                 ", balance=" + balance +
                 ", date='" + date + '\'' +
                 ", income=" + income +
+                ", status=" + status +
                 '}';
     }
 }

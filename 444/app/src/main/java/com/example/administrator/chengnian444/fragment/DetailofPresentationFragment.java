@@ -147,6 +147,7 @@ public class DetailofPresentationFragment extends Fragment {
                                             inComeBean.setBalance(data.getBalance());
                                             inComeBean.setIncome(data.getMoneyCount());
                                             inComeBean.setDate(DateUtil.getYearOrMonthOrDay(data.getCreateTime()));
+                                            inComeBean.setStatus(data.getStatus());
                                             inComeBeanArrayList.add(inComeBean);
                                         }
                                         if(page==1){
@@ -158,7 +159,12 @@ public class DetailofPresentationFragment extends Fragment {
                                         }
                                         presentationRecylerviewAdapter.notifyDataSetChanged();
                                     }else{
-                                        ToastUtils.showToast(MyApplication.context,"暂无数据");
+                                        if(page>1){
+                                            page--;
+                                            ToastUtils.showToast(MyApplication.context,"暂无更多数据");
+                                        }else{
+                                            ToastUtils.showToast(MyApplication.context,"暂无刷新数据");
+                                        }
                                     }
                                 } else {
                                     ToastUtils.showToast(MyApplication.context, bannerBean.getMessage());
