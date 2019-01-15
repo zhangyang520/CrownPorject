@@ -242,9 +242,11 @@ public class LoanFragment extends BaseFragment {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
                 indicator.setColors(context.getResources().getColor(R.color.yellow));
+//                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);  //包含内容的长度
                 indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
                 //设置indicator的宽度
                 indicator.setLineWidth(TabUtils.Dp2Px(context,29));
+//                indicator.setLineWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
                 indicator.setLineHeight(TabUtils.Dp2Px(context,4));
                 return indicator;
             }
