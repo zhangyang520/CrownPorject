@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPrimary">#d22018</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#d22018</color>
+    <color name="colorf3f5f5">#f3f5f5</color>
+    <color name="lightgrey">#f0f0f0</color><!--亮灰色 -->
+    <!-- springview  text -->
+    <color name="springview_text_color">#999999</color>
+    <!--主体颜色-->
+    <color name="mainColor">#d22018</color>
+    <color name="color444">#444</color>
+    <color name="colorEEE">#eee</color>
+    <color name="colorBlue">#00f</color>
+
+    <color name="XFrame_darker_gray">#aaaaaa</color>
+    <color name="XFrame_white">#ffffff</color>
+    <color name="XFrame_text_gray">#8a8a8a</color>
+
+    <color name="XFrame_loading_dialog_message">#595959</color>
+</resources>

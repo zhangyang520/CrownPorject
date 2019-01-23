@@ -44,7 +44,6 @@ public class MainActivity extends ReactActivity {
         super.onResume();
         MobclickAgent.onResume(this);
         ErrorManager.getInstance().checkAndUpdateErrorLogIfNeed();
-
     }
 
     @Override

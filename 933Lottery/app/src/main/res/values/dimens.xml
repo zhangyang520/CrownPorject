@@ -1,0 +1,31 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- springview -->
+    <dimen name="ali_header_logo_padding">80dp</dimen>
+    <dimen name="ali_frame_height">60dp</dimen>
+    <dimen name="ali_header_progressbar">20dp</dimen>
+    <dimen name="ali_header_progressbar_w">15dp</dimen>
+    <dimen name="ali_header_text_padding">10dp</dimen>
+    <dimen name="default_footer_progressbar">30dp</dimen>
+    <dimen name="default_text_size">12sp</dimen>
+    <dimen name="default_header_text_layout">70dp</dimen>
+    <dimen name="default_header_title_padding">3dp</dimen>
+    <dimen name="default_header_arrow_height">40dp</dimen>
+    <dimen name="default_header_arrow_padding">-35dp</dimen>
+    <dimen name="default_header_progressbar_padding">-40dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="XFrame_spacing_small">8dp</dimen>
+    <dimen name="XFrame_spacing">15dp</dimen>
+    <dimen name="XFrame_spacing_large">16dp</dimen>
+
+    <dimen name="XFrame_text_size_small">13sp</dimen>
+    <dimen name="XFrame_text_size">15sp</dimen>
+
+    <dimen name="XFrame_adapter_icon_size">24dp</dimen>
+    <dimen name="XFrame_progressbar_size">24dp</dimen>
+    <dimen name="XFrame_radius">6dp</dimen>
+</resources>

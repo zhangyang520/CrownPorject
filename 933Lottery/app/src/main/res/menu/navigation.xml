@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tabBar_home"
+        android:icon="@mipmap/tabbar_home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/tabBar_news"
+        android:icon="@mipmap/tabbar_history"
+        android:title="@string/title_news" />
+
+    <!--<item-->
+        <!--android:id="@+id/tabbar_shopping"-->
+        <!--android:icon="@mipmap/tabbar_shopping"-->
+        <!--android:title="@string/title_shopping" />-->
+    <item
+        android:id="@+id/tabbar_recommend"
+        android:icon="@mipmap/tabbar_shopping"
+        android:title="@string/title_recommend" />
+
+    <item
+        android:id="@+id/tabbar_vip"
+        android:icon="@mipmap/tabbar_vip"
+        android:title="@string/title_vip" />
+</menu>

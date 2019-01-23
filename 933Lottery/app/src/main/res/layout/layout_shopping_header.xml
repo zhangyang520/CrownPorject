@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="#f6b652"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/score"
+            android:layout_marginRight="3dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:id="@+id/score"
+            android:text="我的积分"
+            android:textColor="@color/colorWhite"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/history"
+            android:src="@mipmap/score_history"
+            android:layout_width="60dp"
+            android:layout_height="25dp" />
+    </LinearLayout>
+    <com.youth.banner.Banner
+        android:background="#ddd"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <ImageView
+        android:src="@mipmap/new_user"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="85dp" />
+    <LinearLayout
+        android:visibility="gone"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/luck"
+            android:clickable="true"
+            android:src="@mipmap/score_luck"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp" />
+        <ImageView
+            android:id="@+id/game"
+            android:clickable="true"
+            android:src="@mipmap/game"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp" />
+    </LinearLayout>
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:textColor="#444"
+        android:text="礼品兑换"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
