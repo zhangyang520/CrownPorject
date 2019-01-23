@@ -38,7 +38,6 @@ public class LaunchActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
         Boolean isUPdate = (Boolean) SPUtils.get(getApplicationContext(),SPUtils.UPADTE_FLAG,false);
         if (isUPdate == true){
             JumpToActivity(MainActivity.class);

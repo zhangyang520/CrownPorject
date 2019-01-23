@@ -17,7 +17,7 @@ android {
         cp_release  {
             applicationId APP_ID
             versionName APP_VERSION
-            resValue "string", "app_name", "好彩分析大师"
+            resValue "string", "app_name", "955娱乐"
             manifestPlaceholders = [CHANNEL_AFFCODE: AFF_CODE,JPUSH_KEY:JPUSH_KEY,UMENG_KEY:UMENG_KEY,APP_VERSION:APP_VERSION]
         }
     }

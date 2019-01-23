@@ -1,1 +1,1 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":1},"path":"app-cp_release-release.apk","properties":{"packageId":"com.hcfxds.qd569","split":"","minSdkVersion":"16"}}]
+[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0.0","enabled":true,"outputFile":"app-cp_release-release.apk","fullName":"cp_releaseRelease","baseName":"cp_release-release"},"path":"app-cp_release-release.apk","properties":{}}]
