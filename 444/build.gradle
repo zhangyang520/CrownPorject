@@ -16,9 +16,17 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url "https://jitpack.io" }
+        jcenter{
+            url "http://jcenter.bintray.com/"
+        }
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
     }
+
+
+
 }
 
 task clean(type: Delete) {
